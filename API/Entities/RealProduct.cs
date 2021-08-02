@@ -12,7 +12,7 @@ namespace API.Entities
 
         public string SerialNumber { get; set; }
 
-        public decimal RentPrice { get; set; }
+        public Decimal RentPrice { get; set; }
 
         public DateTime DateAvaible { get; set; }
     }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace API.Entities
 {
     public class Category
@@ -6,6 +8,7 @@ namespace API.Entities
 
         public int ParentCategoryId { get; set; }
         public Category ParentCategory { get; set; }
+        public ICollection<Category> ChildCategories { get; set; }
 
         public string Name { get; set; }
 
