@@ -2,7 +2,7 @@ namespace API.Entities
 {
     public class ProductFeature
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int FeatureId { get; set; }
         public Feature Feature { get; set; }
         public int ProductId { get; set; }

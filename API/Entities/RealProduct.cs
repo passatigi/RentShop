@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace API.Entities
 {
@@ -15,5 +16,8 @@ namespace API.Entities
         public Decimal RentPrice { get; set; }
 
         public DateTime DateAvaible { get; set; }
+
+        public ICollection<OrderProduct> OrderProducts { get; set; }
+
     }
 }
