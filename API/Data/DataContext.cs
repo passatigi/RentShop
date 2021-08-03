@@ -45,7 +45,7 @@ namespace API.Data
             builder.Entity<Category>()
             .HasOne(c => c.ParentCategory)
             .WithMany(c => c.ChildCategories)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.Entity<ProductFeature>()
             .HasKey(k => new {k.ProductId, k.FeatureId});
