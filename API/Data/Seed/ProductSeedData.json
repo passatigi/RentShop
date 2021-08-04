@@ -45,7 +45,25 @@
             "FeatureId": 7,
             "Value": "camouflage"
           }
-        ]
+        ],
+        "RealProducts": [
+            {
+              "SerialNumber": "xxxx111",
+              "RentPrice": 3.25,
+              "Condition": "As new"
+            },
+            {
+                "SerialNumber": "xxxx112",
+                "RentPrice": 3.0,
+                "Condition": "As new"
+            },
+            {
+                "SerialNumber": "xxxx113",
+                "RentPrice": 2.9,
+                "Condition": "the lock is sewn up"
+            }
+          ]
+        
     },
     {
         "Name": "Backpack Turlan Peak-20",
@@ -92,6 +110,23 @@
             "FeatureId": 7,
             "Value": "khaki"
           }
-        ]
+        ],
+        "RealProducts": [
+            {
+              "SerialNumber": "xxxx211",
+              "RentPrice": 5.25,
+              "Condition": "As new"
+            },
+            {
+                "SerialNumber": "xxxx312",
+                "RentPrice": 5.0,
+                "Condition": "As new"
+            },
+            {
+                "SerialNumber": "xxxx213",
+                "RentPrice": 4.9,
+                "Condition": "the lock is sewn up"
+            }
+          ]
     }
 ]

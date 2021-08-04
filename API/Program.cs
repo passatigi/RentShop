@@ -20,22 +20,12 @@ namespace API
         public static async Task Main(string[] args)
         {
            
-            // Product clsInfo = new Product(){ Name = "img", Vendor = "Category", Description = "blabla", CategoryId = 9 };
-	        // ProductImg productImg1 = new ProductImg() {Link = "https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
             
-            // };
-            // ProductImg productImg2 = new ProductImg() {Link = "https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-            
-            // };
-            // clsInfo.ProductImgs = new List<ProductImg>{ productImg1, productImg2};
 
-            // ProductFeature productFeature1 = new ProductFeature() { FeatureId = 1, ProductId = 1, Value = "haha" };
-            // ProductFeature productFeature2 = new ProductFeature() { FeatureId = 3, ProductId = 4, Value = "haha" };
+            RealProduct clsInfo = new RealProduct();
 
-            // clsInfo.ProductFeatures = new List<ProductFeature> { productFeature1, productFeature2};
-
-		    // String jsonOutput = JsonConvert.SerializeObject(clsInfo);
-		    // Console.WriteLine(jsonOutput);
+            String jsonOutput = JsonConvert.SerializeObject(clsInfo);
+		    Console.WriteLine(jsonOutput);
 
             
             

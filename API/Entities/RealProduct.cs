@@ -12,10 +12,9 @@ namespace API.Entities
         public Product Product { get; set; }
 
         public string SerialNumber { get; set; }
+        public string Condition { get; set; }
 
         public Decimal RentPrice { get; set; }
-
-        public DateTime DateAvaible { get; set; }
 
         public ICollection<OrderProduct> OrderProducts { get; set; }
 

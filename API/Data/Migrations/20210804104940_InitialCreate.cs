@@ -373,8 +373,8 @@ namespace API.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RentPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DateAvaible = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Condition = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RentPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
