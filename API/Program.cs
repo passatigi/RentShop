@@ -6,12 +6,12 @@ using API.Data;
 using API.Data.Seed;
 using API.Entities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace API
 {
@@ -19,26 +19,17 @@ namespace API
     {
         public static async Task Main(string[] args)
         {
-           
-            
-
-            RealProduct clsInfo = new RealProduct();
-
-            String jsonOutput = JsonConvert.SerializeObject(clsInfo);
-		    Console.WriteLine(jsonOutput);
-
-            
-            
             var host = CreateHostBuilder(args).Build();
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
             try {
                 var context = services.GetRequiredService<DataContext>();
-                // var userManager = services.GetRequiredService<UserManager<AppUser>>();
-                // var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                 await context.Database.MigrateAsync();
                 Seeder seeder = new Seeder();
                 await seeder.SeedData(context);
+                await seeder.SeedUsers(userManager, roleManager);
             }
             catch(Exception ex){
                 var logger = services.GetRequiredService<ILogger<Program>>();

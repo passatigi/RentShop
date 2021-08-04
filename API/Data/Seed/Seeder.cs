@@ -33,23 +33,6 @@ namespace API.Data.Seed
         }
 
         
-        // public  async Task SeedCategories(DataContext dataContext)
-        // {
-        //     if(await dataContext.Categories.AnyAsync()) return;
-
-        //     var categoryData = await File.ReadAllTextAsync(folderPath + "CategorySeedData.json");
-        //     var categories = JsonSerializer.Deserialize<List<Category>>(categoryData);
-        //     if(categories == null) return;
-
-            
-
-        //     foreach(var category in categories){
-        //         dataContext.Categories.Add(category);
-        //     }
-
-        //     //await dataContext.SaveChangesAsync();
-        // }
-        
         private async Task<List<T>> GetObjectsFromJson<T>(string fileName)
         {
             var data = await File.ReadAllTextAsync(folderPath + fileName);
@@ -73,40 +56,49 @@ namespace API.Data.Seed
             return objects;
         }
 
-        
+        public async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager){
+            if(await userManager.Users.AnyAsync()) return;
 
-        // public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager){
-        //     if(await userManager.Users.AnyAsync()) return;
+            
+            var users = await GetObjectsFromJson<AppUser>("AppUsersSeedData.json");
+            if(users == null) return;
 
-        //     var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
-        //     var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
-        //     if(users == null) return;
+            var roles = new List<AppRole>
+            {
+                new AppRole{ Name = "Customer"},
+                new AppRole{ Name = "Admin"},
+                new AppRole{ Name = "Deliveryman"},
+            };
 
-        //     var roles = new List<AppRole>
-        //     {
-        //         new AppRole{ Name = "Member"},
-        //         new AppRole{ Name = "Admin"},
-        //         new AppRole{ Name = "Moderator"},
-        //     };
+            foreach(var role in roles){
+                await roleManager.CreateAsync(role);
+            }
 
-        //     foreach(var role in roles){
-        //         await roleManager.CreateAsync(role);
-        //     }
+            foreach(var user in users)
+            {
+                user.UserName = user.UserName.ToLower();
+                await userManager.CreateAsync(user, "password");
+                await userManager.AddToRoleAsync(user, "Customer");
+            }
 
-        //     foreach(var user in users)
-        //     {
-        //         user.UserName = user.UserName.ToLower();
-        //         await userManager.CreateAsync(user, "password");
-        //         await userManager.AddToRoleAsync(user, "Member");
-        //     }
+            var admin = new AppUser
+            {
+                UserName = "admin",
+                FullName = "admin",
+                PhoneNumber = "+374 29 855 99 99"
+            };
+            var deliveryman = new AppUser
+            {
+                UserName = "deliveryman",
+                FullName = "deliveryman",
+                PhoneNumber = "+374 29 222 99 99"
+            };
 
-        //     var admin = new AppUser
-        //     {
-        //         UserName = "admin"
-        //     };
+            await userManager.CreateAsync(admin, "password");
+            await userManager.AddToRolesAsync(admin,new[] {"Admin"});
 
-        //     await userManager.CreateAsync(admin, "password");
-        //     await userManager.AddToRolesAsync(admin,new[] {"Admin", "Moderator"});
-        // }
+            await userManager.CreateAsync(deliveryman, "password");
+            await userManager.AddToRolesAsync(deliveryman,new[] {"Deliveryman"});
+        }
     }
 }

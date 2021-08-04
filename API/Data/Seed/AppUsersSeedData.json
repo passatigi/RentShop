@@ -1,0 +1,44 @@
+[
+    {
+    "FullName": "Kashayed Ivan",
+    "Addresses": [
+        {
+            "Country": "Belarus",
+            "City": "Minsk",
+            "HouseAddress": "lake Korsgenevskogo 3 km",
+            "PostalCode": "220024"
+        }
+    ],
+    "UserName": "KashayedIvan",
+    "Email": "vanya2akak@gmail.com",
+    "PhoneNumber": "+375 29 234 23 23"
+  },
+  {
+    "FullName": "Alexei Putik",
+    "Addresses": [
+        {
+            "Country": "Belarus",
+            "City": "Minsk",
+            "HouseAddress": "street Pobeditelei 4 km",
+            "PostalCode": "240045"
+        }
+    ],
+    "UserName": "AlexeiPutik",
+    "Email": "alexeiputik@gmail.com",
+    "PhoneNumber": "+375 29 345 43 23"
+  },
+  {
+    "FullName": "User",
+    "Addresses": [
+        {
+            "Country": "Belarus",
+            "City": "Minsk",
+            "HouseAddress": "street Pobeditelei 5 km",
+            "PostalCode": "240045"
+        }
+    ],
+    "UserName": "User",
+    "Email": "useruser@gmail.com",
+    "PhoneNumber": "+375 29 222 23 23"
+  }
+]
