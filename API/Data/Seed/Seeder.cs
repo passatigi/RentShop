@@ -18,13 +18,16 @@ namespace API.Data.Seed
             //await SeedCategories(dataContext);
 
             var categories = await SeedEntities<Category>(dataContext, "CategorySeedData.json");
-            foreach(var category in categories){
+            foreach(var category in categories)
+            {
                 if(category.ParentCategoryId != null)
                     category.ParentCategory = categories.FirstOrDefault(c => c.Id == category.ParentCategoryId);
             }
 
 
-            await SeedEntities<Product>(dataContext, "ProductSeedData.json");
+            var features = await SeedEntities<Feature>(dataContext, "FeatureSeedData.json");
+            var products = await SeedEntities<Product>(dataContext, "ProductSeedData.json");
+
 
             await dataContext.SaveChangesAsync();
         }

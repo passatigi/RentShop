@@ -19,10 +19,25 @@ namespace API
     {
         public static async Task Main(string[] args)
         {
-            Category clsInfo = new Category(){Id = 1, ParentCategoryId = 0, ImgLink = "img", Name = "Category" };
-	
-		    String jsonOutput = JsonConvert.SerializeObject(clsInfo);
-		    Console.WriteLine(jsonOutput);
+           
+            // Product clsInfo = new Product(){ Name = "img", Vendor = "Category", Description = "blabla", CategoryId = 9 };
+	        // ProductImg productImg1 = new ProductImg() {Link = "https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            
+            // };
+            // ProductImg productImg2 = new ProductImg() {Link = "https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            
+            // };
+            // clsInfo.ProductImgs = new List<ProductImg>{ productImg1, productImg2};
+
+            // ProductFeature productFeature1 = new ProductFeature() { FeatureId = 1, ProductId = 1, Value = "haha" };
+            // ProductFeature productFeature2 = new ProductFeature() { FeatureId = 3, ProductId = 4, Value = "haha" };
+
+            // clsInfo.ProductFeatures = new List<ProductFeature> { productFeature1, productFeature2};
+
+		    // String jsonOutput = JsonConvert.SerializeObject(clsInfo);
+		    // Console.WriteLine(jsonOutput);
+
+            
             
             var host = CreateHostBuilder(args).Build();
             using var scope = host.Services.CreateScope();
@@ -32,7 +47,8 @@ namespace API
                 // var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 // var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                 await context.Database.MigrateAsync();
-                await Seeder.SeedData(context);
+                Seeder seeder = new Seeder();
+                await seeder.SeedData(context);
             }
             catch(Exception ex){
                 var logger = services.GetRequiredService<ILogger<Program>>();
