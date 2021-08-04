@@ -1,0 +1,132 @@
+[
+
+    {
+        "Name": "Turlan Backpack Pathfinder-40",
+        "Vendor": "ab123-123",
+        "Description": "tourist, hiking, unisex; 40 l",
+        "CategoryId": 9,
+        "ProductImgs": [
+          {
+            "Link": "https://content2.onliner.by/catalog/device/main/2e7aed0ee9851f5abec2245e1d757626.jpg"
+          },
+          {
+            "Link": "https://content2.onliner.by/catalog/device/main/bbb28d29a19b9cf47e16c07a64725e63.jpg"
+          },
+          {
+            "Link": "https://content2.onliner.by/catalog/device/main/c78cbacef05cb1af3c88cab96a827823.jpg"
+          }
+        ],
+        "ProductFeatures": [
+          {
+            "FeatureId": 1,
+            "Value": "44 cm"
+          },
+          {
+            "FeatureId": 2,
+            "Value": "19 cm"
+          },
+          {
+            "FeatureId": 3,
+            "Value": "53 cm"
+          },
+          {
+            "FeatureId": 4,
+            "Value": "tourist"
+          },
+          {
+            "FeatureId": 5,
+            "Value": "unisex"
+          },
+          {
+            "FeatureId": 6,
+            "Value": "40 l"
+          },
+          {
+            "FeatureId": 7,
+            "Value": "camouflage"
+          }
+        ],
+        "RealProducts": [
+            {
+              "SerialNumber": "xxxx111",
+              "RentPrice": 3.25,
+              "Condition": "As new"
+            },
+            {
+                "SerialNumber": "xxxx112",
+                "RentPrice": 3.0,
+                "Condition": "As new"
+            },
+            {
+                "SerialNumber": "xxxx113",
+                "RentPrice": 2.9,
+                "Condition": "the lock is sewn up"
+            }
+          ]
+        
+    },
+    {
+        "Name": "Backpack Turlan Peak-20",
+        "Vendor": "ab123-124",
+        "Description": "urban / tourist, hunting and fishing, unisex; 20 l",
+        "CategoryId": 9,
+        "ProductImgs": [
+          {
+            "Link": "https://content2.onliner.by/catalog/device/main/8f6ecc856099b4e0fe0d8c5dc4395cec.jpg"
+          },
+          {
+            "Link": "https://content2.onliner.by/catalog/device/main/4616ef30861a14a9c65f32ead442a2d8.jpg"
+          },
+          {
+            "Link": "https://content2.onliner.by/catalog/device/main/75a583500562f77c909aea4073c6e85c.jpg"
+          }
+        ],
+        "ProductFeatures": [
+          {
+            "FeatureId": 1,
+            "Value": "30 cm"
+          },
+          {
+            "FeatureId": 2,
+            "Value": "18 cm"
+          },
+          {
+            "FeatureId": 3,
+            "Value": "41 cm"
+          },
+          {
+            "FeatureId": 4,
+            "Value": "urban, tourist"
+          },
+          {
+            "FeatureId": 5,
+            "Value": "unisex"
+          },
+          {
+            "FeatureId": 6,
+            "Value": "20 l"
+          },
+          {
+            "FeatureId": 7,
+            "Value": "khaki"
+          }
+        ],
+        "RealProducts": [
+            {
+              "SerialNumber": "xxxx211",
+              "RentPrice": 5.25,
+              "Condition": "As new"
+            },
+            {
+                "SerialNumber": "xxxx312",
+                "RentPrice": 5.0,
+                "Condition": "As new"
+            },
+            {
+                "SerialNumber": "xxxx213",
+                "RentPrice": 4.9,
+                "Condition": "the lock is sewn up"
+            }
+          ]
+    }
+]

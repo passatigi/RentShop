@@ -1,0 +1,14 @@
+[ 
+    {"ParentCategoryId":null,"Name":"Tourism and rest","ImgLink":"img"},
+    {"ParentCategoryId":null,"Name":"Photo and video","ImgLink":"img"},
+    {"ParentCategoryId":null,"Name":"Construction and repair","ImgLink":"img"},
+    {"ParentCategoryId":null,"Name":"Sports equipment","ImgLink":"img"},
+    {"ParentCategoryId":null,"Name":"Equipment for holidays","ImgLink":"img"},
+    {"ParentCategoryId":null,"Name":"Auto and moto","ImgLink":"img"},
+    {"ParentCategoryId":null,"Name":"Entertainments","ImgLink":"img"},
+    {"ParentCategoryId":1,"Name":"Tents","ImgLink":"img"},
+    {"ParentCategoryId":1,"Name":"Backpacks and bags","ImgLink":"img"},
+    {"ParentCategoryId":1,"Name":"Kayaks","ImgLink":"img"},
+    {"ParentCategoryId":1,"Name":"Sleeping bags","ImgLink":"img"},
+    {"ParentCategoryId":1,"Name":"Mountaineering equipment","ImgLink":"img"}
+]
