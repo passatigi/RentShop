@@ -28,12 +28,15 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll()
         {
-            var allCategories = await _dataContext.Categories.Include(c => c.ParentCategory)
-                                    .Where(c => c.ParentCategory == null)
-                                    .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
-                                    .ToListAsync();
-
-            return Ok(allCategories);
+            var mainCategories = (await _dataContext.Categories
+                                    .Include(c => c.ParentCategory)
+                                    .ToListAsync())
+                                    .Where(c => c.ParentCategory == null);
+                                    
+                                    
+            var dtos = _mapper.Map<IEnumerable<CategoryDto>>(mainCategories);
+            return Ok(dtos);
+            //
         }
 
         [HttpPost]

@@ -38,7 +38,10 @@ namespace API
                 string connStr = _config.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connStr);
             });
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             services.AddIdentityServices(_config);
 
