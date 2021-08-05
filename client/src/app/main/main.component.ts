@@ -8,6 +8,7 @@ import { CategoryService } from '../_services/category.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  isCollapsed = true;
   categories?: Category[]; 
   childCategories?:  Category[]; 
 
@@ -24,6 +25,10 @@ export class MainComponent implements OnInit {
     if(this.categories){
       this.childCategories = this.categories.find(x => x.id === id)?.childCategories;
     }
+  }
+
+  addCategory(){
+
   }
 
 }

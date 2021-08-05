@@ -28,8 +28,24 @@
     }
 </style>
 
+
+
+<button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Add category
+</button>
+<div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+  <div class="well well-lg card card-block card-header">
+    <form action="" class="m-3">
+        <input type="text">
+    </form>
+  </div>
+  
+</div>
+
+
+
 <div class="mainCategoriesBox">
-        <div class="categoryBox" *ngFor="let category of categories" (click)="openCategory(category.id)">
+        <div style="cursor: pointer;" class="categoryBox" *ngFor="let category of categories" (click)="openCategory(category.id)">
             <div>
                 <img class="categoryImg center" 
                 src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
@@ -43,7 +59,7 @@
         </div>
 </div>
 <div class="secondaryCategoriesBox">
-    <div class="category" *ngFor="let category of childCategories">
+    <div style="cursor: pointer;" class="category" *ngFor="let category of childCategories">
         <img class="categoryImg" src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
         {{category.name}}</div>
 </div>
