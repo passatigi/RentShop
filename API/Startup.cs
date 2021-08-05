@@ -43,6 +43,9 @@ namespace API
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
 
+            services.AddCors();
+
+
             services.AddIdentityServices(_config);
 
 
@@ -61,6 +64,8 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200"));
 
             app.UseAuthorization();
 

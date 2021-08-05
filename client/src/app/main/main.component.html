@@ -1,0 +1,49 @@
+<style>
+    .mainCategoriesBox {
+            display: flex;
+            justify-content: space-between;
+            font-size: 17px;
+    }
+    .secondaryCategoriesBox {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        font-size: 17px;
+    }
+    .categoryBox{
+        margin: 5px;
+    }
+    .categoryImg{
+        width: 50px;
+        height: 50px;
+    }
+    .category{
+        margin: 10px;
+    }
+    .center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<div class="mainCategoriesBox">
+        <div class="categoryBox" *ngFor="let category of categories" (click)="openCategory(category.id)">
+            <div>
+                <img class="categoryImg center" 
+                src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
+            </div>
+            <div>
+                <span>
+                    {{category.name}}
+                </span>
+            </div>
+            
+        </div>
+</div>
+<div class="secondaryCategoriesBox">
+    <div class="category" *ngFor="let category of childCategories">
+        <img class="categoryImg" src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
+        {{category.name}}</div>
+</div>
