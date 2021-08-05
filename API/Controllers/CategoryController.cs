@@ -28,9 +28,10 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll()
         {
-            var allCategories = await _dataContext.Categories.Include(c => c.ParentCategory).Where(c => c.ParentCategory == null)
-            .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider).ToListAsync();
-            
+            var allCategories = await _dataContext.Categories.Include(c => c.ParentCategory)
+                                    .Where(c => c.ParentCategory == null)
+                                    .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
+                                    .ToListAsync();
 
             return Ok(allCategories);
         }
@@ -39,12 +40,21 @@ namespace API.Controllers
         public async Task<ActionResult<CategoryDto>> AddCategory(CreateCategoryDto categoryDto)
         {
             Category category = new Category 
-            { ParentCategoryId = categoryDto.ParentCategoryId, ImgLink = categoryDto.ImgLink, Name = categoryDto.Name };
+            { 
+                 ParentCategoryId = categoryDto.ParentCategoryId, 
+                 ImgLink = categoryDto.ImgLink, 
+                 Name = categoryDto.Name 
+            };
             _dataContext.Categories.Add(category);
             
             await _dataContext.SaveChangesAsync();
 
-            return Ok(new CategoryDto(){ Name = category.Name, ImgLink = category.ImgLink, Id = category.Id});
+            return Ok(
+                new CategoryDto(){ 
+                    Name = category.Name, 
+                    ImgLink = category.ImgLink, 
+                    Id = category.Id
+                });
         }
 
         [HttpDelete]
@@ -73,7 +83,5 @@ namespace API.Controllers
 
             return Ok();
         }
-
-
     }
 }
