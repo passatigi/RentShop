@@ -9,12 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { CategoryAdminComponent } from './admin/category-admin/category-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    TextInputComponent
+    TextInputComponent,
+    CategoryAdminComponent
   ],
   imports: [
     BrowserModule,
