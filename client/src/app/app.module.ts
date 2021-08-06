@@ -7,17 +7,22 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    TextInputComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     CollapseModule.forRoot()
   ],
   providers: [],

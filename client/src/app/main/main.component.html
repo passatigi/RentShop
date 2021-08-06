@@ -29,20 +29,98 @@
 </style>
 
 
-
-<button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
-        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Add category
+<ng-container *ngIf="isAdmin && addCategoryForm && updateCategoryForm">
+<button type="button" class="btn btn-primary" (click)="isAddCategoryCollapsed = !isAddCategoryCollapsed; isUpdateCategoryCollapsed = true"
+        [attr.aria-expanded]="!isAddCategoryCollapsed" aria-controls="collapseBasic">Add category
 </button>
-<div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
-  <div class="well well-lg card card-block card-header">
-    <form action="" class="m-3">
-        <input type="text">
-    </form>
-  </div>
-  
+<button type="button" class="btn btn-primary" (click)="isUpdateCategoryCollapsed = !isUpdateCategoryCollapsed; isAddCategoryCollapsed = true"
+        [attr.aria-expanded]="!isUpdateCategoryCollapsed" aria-controls="collapseBasic">Edit category
+</button>
+<div class="row">
+    <div class="col-6 offset-3" id="collapseBasic" [collapse]="isAddCategoryCollapsed" [isAnimated]="true">
+        <div class="well well-lg card card-block card-header">
+          
+              <form [formGroup]='addCategoryForm' (ngSubmit)="addCategoryForm.valid && addCategory()" autocomplete="off">
+                  <h2 class="text-center text-dark">Add category</h2>
+                  <hr>
+                  <div class="form-group">
+                      <select class="custom-select" formControlName="parentCategoryId">
+                          <option value="" disabled>Choose parent category</option>
+                          <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+                       </select>
+                  </div>
+                  <app-text-input formControlName='name' [label]='"Category name"'></app-text-input> 
+                  <app-text-input formControlName='imgLink' [label]='"Image link"'></app-text-input> 
+                  
+                  
+          
+                  <div class="row" *ngIf="validationErrors.length > 0">
+                      <ul class="text-danger">
+                          <li *ngFor="let error of validationErrors">{{error}}</li>
+                      </ul>
+                  </div>
+          
+                  <div class="form-group text-center mt-3">
+                      <button [disabled]='!addCategoryForm.valid' class="btn btn-dark mr-2" type="submit">Add category</button>
+                      <button class="btn btn-secondary mr-2" type="button" (click)="isAddCategoryCollapsed = true">Cancel</button>
+                  </div>
+
+          <p>Form value: {{addCategoryForm.value | json}}</p>
+          <p>Form status: {{addCategoryForm.status | json}}</p>
+              </form>
+          
+        </div>
+        
+      </div>
+</div>
+
+<div class="row" >
+    <div class="col-6 offset-3" id="collapseBasic" [collapse]="isUpdateCategoryCollapsed" [isAnimated]="true">
+        <div class="well well-lg card card-block card-header">
+
+              <form [formGroup]='updateCategoryForm' (ngSubmit)="updateCategoryForm.valid && updateCategory()" autocomplete="off">
+                  <h2 class="text-center text-dark">Edit category</h2>
+                  <hr>
+                  <label for="">You wants change {{categoryForUpdate?.name}}</label>
+                  <div class="form-group">
+                      <select class="custom-select" formControlName="parentCategoryId">
+                          <option value="" disabled>Choose parent category</option>
+                          <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+                       </select>
+                  </div>
+                  <div class="form-group">
+                    <select class="custom-select" formControlName="childCategoryId">
+                        <option value="" disabled>Choose child category</option>
+                        <option *ngFor="let category of childCategories" [ngValue]="category.id">{{category.name}}</option>
+                     </select>
+                    </div>
+                  <app-text-input formControlName='name' [label]='"Category name"'></app-text-input> 
+                  <app-text-input formControlName='imgLink' [label]='"Image link"'></app-text-input> 
+                  
+                  
+          
+                  <div class="row" *ngIf="validationErrors.length > 0">
+                      <ul class="text-danger">
+                          <li *ngFor="let error of validationErrors">{{error}}</li>
+                      </ul>
+                  </div>
+          
+                  <div class="form-group text-center mt-3">
+                      <button [disabled]='!updateCategoryForm.valid' class="btn btn-dark mr-2" type="submit">Update category</button>
+                      <button class="btn btn-secondary mr-2" type="button" (click)="isUpdateCategoryCollapsed = true">Cancel</button>
+                  </div>
+
+          <p>Form value: {{updateCategoryForm.value | json}}</p>
+          <p>Form status: {{updateCategoryForm.status | json}}</p>
+              </form>
+          
+        </div>
+        
+      </div>
 </div>
 
 
+</ng-container>
 
 <div class="mainCategoriesBox">
         <div style="cursor: pointer;" class="categoryBox" *ngFor="let category of categories" (click)="openCategory(category.id)">
