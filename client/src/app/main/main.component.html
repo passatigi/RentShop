@@ -28,9 +28,7 @@
     }
 </style>
 
-<ng-container *ngIf="isAdmin">
-    <app-category-admin [categories]='categories' [childCategories]='childCategories'></app-category-admin>
-</ng-container>
+
 
 
 
@@ -54,3 +52,8 @@
         <img class="categoryImg" src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
         {{category.name}}</div>
 </div>
+
+
+<ng-container *ngIf="isAdmin">
+    <app-category-admin [categories]='categories' [childCategories]='childCategories'></app-category-admin>
+</ng-container>

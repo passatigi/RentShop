@@ -1,10 +1,13 @@
 <ng-container *ngIf="addCategoryForm && updateCategoryForm">
-    <button type="button" class="btn btn-primary" (click)="isAddCategoryCollapsed = !isAddCategoryCollapsed; isUpdateCategoryCollapsed = true"
+    <div class="btn-group btn-block mb-5" role="group">
+        <button type="button" class="btn  btn-outline-primary" (click)="isAddCategoryCollapsed = !isAddCategoryCollapsed; isUpdateCategoryCollapsed = true"
             [attr.aria-expanded]="!isAddCategoryCollapsed" aria-controls="collapseBasic">Add category
     </button>
-    <button type="button" class="btn btn-primary" (click)="isUpdateCategoryCollapsed = !isUpdateCategoryCollapsed; isAddCategoryCollapsed = true"
+    <button type="button" class="btn btn-outline-primary" (click)="isUpdateCategoryCollapsed = !isUpdateCategoryCollapsed; isAddCategoryCollapsed = true"
             [attr.aria-expanded]="!isUpdateCategoryCollapsed" aria-controls="collapseBasic">Edit category
     </button>
+    </div>
+    
     <div class="row">
         <div class="col-6 offset-3" id="collapseBasic" [collapse]="isAddCategoryCollapsed" [isAnimated]="true">
             <div class="well well-lg card card-block card-header">

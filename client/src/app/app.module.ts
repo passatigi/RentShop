@@ -10,22 +10,29 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { CategoryAdminComponent } from './admin/category-admin/category-admin.component';
+import { NavComponent } from './nav/nav.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     TextInputComponent,
-    CategoryAdminComponent
+    CategoryAdminComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    TooltipModule.forRoot()
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
