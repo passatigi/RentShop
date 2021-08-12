@@ -1,0 +1,37 @@
+<div class="text-center d-flex justify-content-center">
+    <div *ngIf="registerForm" class="bg-light p-3" style="max-width: 500px;">
+    <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" autocomplete="off" >
+        <h2 class="text-center text-dark">Sign up</h2>
+        <hr>
+
+        <app-text-input formControlName='fullName' [label]='"Full name"'></app-text-input> 
+
+        <app-text-input formControlName='email' [label]='"Email"'></app-text-input>
+
+        <app-text-input formControlName='phoneNumber' [label]='"Phone number"'></app-text-input>
+
+        <!-- <app-text-input formControlName='city' [label]='"City"'></app-text-input>
+        <app-text-input formControlName='country' [label]='"Country"'></app-text-input> -->
+
+        <app-text-input formControlName='password' [label]='"Password"' [type]='"password"'></app-text-input>
+
+        <app-text-input formControlName='confirmPassword' [label]='"Confirm password"' [type]='"password"'></app-text-input>
+
+        <div class="row" *ngIf="validationErrors.length > 0">
+            <ul class="text-danger">
+                <li *ngFor="let error of validationErrors">{{error}}</li>
+            </ul>
+        </div>
+
+        <div class="form-group text-center mt-3">
+            <button [disabled]='!registerForm.valid' class="btn btn-dark mr-2" type="submit">Register</button>
+            <button class="btn btn-secondary mr-2" type="button" routerLink='/'>Cancel</button>
+        </div>
+    </form>
+
+
+
+    <p>Form value: {{registerForm.value | json}}</p>
+    <p>Form status: {{registerForm.status | json}}</p>
+</div>
+</div>

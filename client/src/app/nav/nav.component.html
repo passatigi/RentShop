@@ -33,16 +33,17 @@
                class="nav-link" alt="Home" href="#"><img class="nav-img" src="assets/home.png" ></a>
             </li>
             <li class="nav-item">
-              <a tooltip="Messages" placement="bottom"
-                class="nav-link" href="#"><img class="nav-img" src="assets/chat.png" alt="Messages"></a>
-            </li>
-            <li class="nav-item">
               <a tooltip="Shopping cart" placement="bottom"
                 class="nav-link" href="#"><img class="nav-img" src="assets/shopping-cart.png" alt="Shopping cart"></a>
             </li>
+            <ng-container *ngIf="accountService.currentUser$ | async">
             <li class="nav-item">
               <a  tooltip="Orders" placement="bottom"
               class="nav-link" href="#"><img class="nav-img" src="assets/orders.png" alt="Orders"></a>
+            </li>
+            <li class="nav-item">
+              <a tooltip="Messages" placement="bottom"
+                class="nav-link" href="#"><img class="nav-img" src="assets/chat.png" alt="Messages"></a>
             </li>
             <li class="nav-item">
                 <a tooltip="Profile" placement="bottom"
@@ -59,10 +60,16 @@
                   <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
                   <li role="menuitem"><a class="dropdown-item" href="#">Another action</a>
                   </li>
-                  <li role="menuitem"><a class="dropdown-item" href="#">Something else
-                    here</a></li>
+                  <li role="menuitem"><a class="dropdown-item"  (click)='accountService.logout()'>Log out</a></li>
                 </ul>
               </div>
+            </ng-container>
+            <ng-container *ngIf="!(accountService.currentUser$ | async)">
+              <li class="nav-item">
+                <a tooltip="Login" placement="bottom"
+                  class="nav-link" routerLink="/login"><img class="nav-img" src="assets/profile.png" alt="Profile"></a>
+              </li>
+            </ng-container>
           </ul>
         <form class="d-flex">
           <input class="form-control " type="text" placeholder="Search">

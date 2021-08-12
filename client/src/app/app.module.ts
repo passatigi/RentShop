@@ -13,6 +13,8 @@ import { CategoryAdminComponent } from './admin/category-admin/category-admin.co
 import { NavComponent } from './nav/nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { RegistrationComponent } from './login_register/registration/registration.component';
+import { LoginComponent } from './login_register/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     MainComponent,
     TextInputComponent,
     CategoryAdminComponent,
-    NavComponent
+    NavComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
