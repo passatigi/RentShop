@@ -1,7 +1,7 @@
 <style>
     .mainCategoriesBox {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             font-size: 17px;
     }
     .secondaryCategoriesBox {
@@ -12,7 +12,8 @@
         font-size: 17px;
     }
     .categoryBox{
-        margin: 5px;
+        border: 1px solid black ;
+        padding: 5px;
     }
     .categoryImg{
         width: 50px;
@@ -30,11 +31,19 @@
 
 
 
+<!-- style="filter: invert()" -->
+<h1 class="m-3">Choose product category</h1>
+<div class="btn-group btn-block">
+    
+    <button type="button" class="btn  btn-outline-dark" *ngFor="let category of categories" (click)="openCategory(category.id)">
+        <span>
+            {{category.name}}
+        </span>
+    </button>
+</div>
 
-
-
-<div class="mainCategoriesBox">
-        <div style="cursor: pointer;" class="" *ngFor="let category of categories" (click)="openCategory(category.id)">
+<!-- <div class="mainCategoriesBox">
+        <div style="cursor: pointer;" class="categoryBox" *ngFor="let category of categories" (click)="openCategory(category.id)">
             <div>
                 <img class="categoryImg center" 
                 src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
@@ -46,7 +55,7 @@
             </div>
             
         </div>
-</div>
+</div> -->
 <div class="secondaryCategoriesBox">
     <div style="cursor: pointer;" class="category" *ngFor="let category of childCategories">
         <img class="categoryImg" src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
