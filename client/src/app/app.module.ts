@@ -18,6 +18,8 @@ import { LoginComponent } from './login_register/login/login.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -39,12 +41,15 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     FormsModule,
     ReactiveFormsModule,
     CollapseModule.forRoot(),
-    TooltipModule.forRoot()
-    
+    TooltipModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right' 
+    }),
+    FontAwesomeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
