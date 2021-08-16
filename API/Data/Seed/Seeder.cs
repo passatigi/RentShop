@@ -85,12 +85,14 @@ namespace API.Data.Seed
             {
                 UserName = "admin",
                 FullName = "admin",
+                Email = "admin@",
                 PhoneNumber = "+374 29 855 99 99"
             };
             var deliveryman = new AppUser
             {
                 UserName = "deliveryman",
                 FullName = "deliveryman",
+                Email = "delivery@",
                 PhoneNumber = "+374 29 222 99 99"
             };
 

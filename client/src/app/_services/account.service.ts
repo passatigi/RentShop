@@ -36,6 +36,7 @@ export class AccountService {
         //console.log(user);
         if(user){
           this.setCurrentUser(user);
+          console.log(user);
         }
       })
     )
