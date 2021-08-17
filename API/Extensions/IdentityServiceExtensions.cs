@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using API.Interfaces;
+using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -53,7 +55,7 @@ namespace API.Extensions
                     }
                 }; 
             });
-            // services.AddScoped<IAccountService,AccountService>(); 
+            services.AddScoped<IAccountService, AccountService>(); 
 
             // services.AddAuthorization(opt => {
             //     opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));

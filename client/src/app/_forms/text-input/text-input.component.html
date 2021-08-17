@@ -1,0 +1,25 @@
+<ng-container *ngIf="ngControl.control">
+    <div class="form-group">
+        <input 
+        [class.is-invalid]='ngControl.touched && ngControl.invalid'
+        type="{{type}}" 
+        class="form-control" 
+        [formControl]="control"
+        placeholder="{{label}}">
+        <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback ml-2">
+            Please enter a {{label}}
+        </div>
+
+        <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback ml-2">
+            {{label}} must be at least {{ngControl.control.errors?.minlength['requiredLength']}}
+        </div>
+
+        <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback ml-2">
+            {{label}} must be at most {{ngControl.control.errors?.maxlength['requiredLength']}}
+        </div>
+        
+        <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback ml-2">
+            {{label}}s do not match</div>
+
+    </div>
+</ng-container>

@@ -1,14 +1,14 @@
 [ 
-    {"ParentCategoryId":null,"Name":"Tourism and rest","ImgLink":"img"},
-    {"ParentCategoryId":null,"Name":"Photo and video","ImgLink":"img"},
-    {"ParentCategoryId":null,"Name":"Construction and repair","ImgLink":"img"},
-    {"ParentCategoryId":null,"Name":"Sports equipment","ImgLink":"img"},
-    {"ParentCategoryId":null,"Name":"Equipment for holidays","ImgLink":"img"},
-    {"ParentCategoryId":null,"Name":"Auto and moto","ImgLink":"img"},
-    {"ParentCategoryId":null,"Name":"Entertainments","ImgLink":"img"},
-    {"ParentCategoryId":1,"Name":"Tents","ImgLink":"img"},
-    {"ParentCategoryId":1,"Name":"Backpacks and bags","ImgLink":"img"},
-    {"ParentCategoryId":1,"Name":"Kayaks","ImgLink":"img"},
-    {"ParentCategoryId":1,"Name":"Sleeping bags","ImgLink":"img"},
-    {"ParentCategoryId":1,"Name":"Mountaineering equipment","ImgLink":"img"}
+    {"ParentCategoryId":null,"Name":"Tourism and rest","ImgLink":"https://res.cloudinary.com/passah/image/upload/v1628175093/rentapp/category%20imgs/Tourism_and_rest_xmh0o9.png"},
+    {"ParentCategoryId":null,"Name":"Photo and video","ImgLink":"https://res.cloudinary.com/passah/image/upload/v1628176598/rentapp/category%20imgs/Photo_and_video_ufzp3x.png"},
+    {"ParentCategoryId":null,"Name":"Construction and repair","ImgLink":null},
+    {"ParentCategoryId":null,"Name":"Sports equipment","ImgLink":null},
+    {"ParentCategoryId":null,"Name":"Equipment for holidays","ImgLink":null},
+    {"ParentCategoryId":null,"Name":"Auto and moto","ImgLink":null},
+    {"ParentCategoryId":null,"Name":"Entertainments","ImgLink":null},
+    {"ParentCategoryId":1,"Name":"Tents","ImgLink":null},
+    {"ParentCategoryId":1,"Name":"Backpacks and bags","ImgLink":null},
+    {"ParentCategoryId":1,"Name":"Kayaks","ImgLink":null},
+    {"ParentCategoryId":1,"Name":"Sleeping bags","ImgLink":null},
+    {"ParentCategoryId":1,"Name":"Mountaineering equipment","ImgLink":null}
 ]

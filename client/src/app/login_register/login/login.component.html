@@ -1,0 +1,19 @@
+<div class="text-center d-flex justify-content-center">
+  <div *ngIf="loginForm" class="bg-light p-3" style="max-width: 500px;">
+    <h2>Login to start rent</h2>
+    <div>
+      <form [formGroup]='loginForm' (ngSubmit)="loginForm.valid && login()" autocomplete="off" >
+        <app-text-input formControlName='email' [label]='"Email"'></app-text-input> 
+        <app-text-input formControlName='password' [label]='"Password"' [type]='"password"'></app-text-input>
+
+        <button  [disabled]='!loginForm.valid'  style="width: 120px;"
+        class="btn btn-primary btn-lg mr-2 mt-2" 
+        type="submit">Sign in</button>
+        <button routerLink='/register'
+          type= "button"  class="btn btn-outline-secondary btn-lg mr-2 mt-2" style="width: 120px;">Register</button>
+        <button routerLink='/about'
+          type= "button" class="btn btn-sm btn-link btn-lg mt-2"  >Learn more</button>
+      </form>
+    </div>
+</div>
+</div>
