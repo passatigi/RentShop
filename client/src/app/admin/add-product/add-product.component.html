@@ -1,32 +1,65 @@
 <div>
     <div class="row" style="max-width: 1600px; margin: 0 auto;">
         <div class="col-4">
-            <div class="form-group">
-                <label for="select-category" class="form-label">Choose product category</label>
-                <select class="custom-select" id='select-category' [(ngModel)]="newProduct.categoryId">
-                    <option value="" disabled>Choose product category</option>
-                    <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
-                 </select>
-            </div>
+            
         </div>
-        <div class="col-8 text-center">
+        <div class="col-8 text-center p-3 bg-light">
             <div class="form-group">
                 <label for="select-category" class="form-label">Choose product category</label>
-                <select class="custom-select" id='select-category' [(ngModel)]="newProduct.categoryId">
+                <select class="custom-select" id='select-category' [(ngModel)]="newProduct.categoryId"  (ngModelChange)='onSelectCategory($event)'>
                     <option value="" disabled>Choose product category</option>
                     <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
                  </select>
             </div>
+            <hr>
+            <div class="form-group mt-2">
+                <label class="form-label">Product name</label>
+                <input class="form-control " type="text" placeholder="Product name" [(ngModel)]="newProduct.name">
+            </div>
+            <div class="form-group mt-2">
+                <label class="form-label">Vendor</label>
+                <input class="form-control " type="text" placeholder="Vendor" [(ngModel)]="newProduct.vendor">
+            </div>
+            <div class="form-group mt-2">
+                <label class="form-label">Description</label>
+                <textarea class="form-control " type="text" placeholder="Description" [(ngModel)]="newProduct.description"></textarea>
+            </div>
+
+
+            <div>
+                <table class="table table-hover" style="cursor: pointer;" >
+                    <tr>
+                        <th style="width: 40%;">Feature</th>
+                        <th style="width: 40%;">Value</th>
+                        <th style="width: 20%;"></th>
+                    </tr>
+                    <tr *ngFor="let feature of newProduct.productFeatures" >
+                        <td>{{feature.name}}</td>
+                        <td>{{feature.value}}</td>
+                        <td>
+                            <div><button (click)="$event.stopPropagation()" class="btn btn-block btn-danger" (click)="deleteFeature(feature)"> Delete</button></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <div class="form-group">
-                <label for="select-category" class="form-label">Choose product category</label>
-                <select class="custom-select" id='select-category' [(ngModel)]="newProduct.categoryId">
-                    <option value="" disabled>Choose product category</option>
-                    <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+                <label class="form-label">Choose feature</label>
+                <select class="custom-select"  [(ngModel)]="addProductFeature">
+                    <option value="" disabled>Choose feature</option>
+                    <option *ngFor="let feature of features" [ngValue]="feature">{{feature.name}}</option>
                  </select>
+            </div>
+            <div class="d-flex mt-3 form-group">
+                <input class="form-control " type="text" placeholder="Value" [(ngModel)]="addProductFeature.value">
+                <button (click)='addFeature()'
+                    type="button" style="width: 200px;" class="btn btn-primary">Add feature</button>
             </div>
         </div>
     </div>
 </div>
 <div>
     {{toString(newProduct)}}
+</div>
+<div>
+    {{toString(addProductFeature)}}
 </div>

@@ -11,11 +11,11 @@ export interface AdminProduct {
 }
 
 export interface ProductFeature {
-  featureId: number
-  name: string
-  explanation: any
-  groupName: string
-  value: string
+  featureId?: number
+  name?: string
+  explanation?: any
+  groupName?: string
+  value?: string
 }
 
 export interface RealProduct {

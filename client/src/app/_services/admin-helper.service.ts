@@ -14,4 +14,8 @@ export class AdminHelperService {
     return this.http.get(this.baseUrl + 'adminhelper/categories');
   }
 
+  getFeatures(categoryId: number){
+    return this.http.get(this.baseUrl + 'adminhelper/features/' + categoryId);
+  }
+
 }

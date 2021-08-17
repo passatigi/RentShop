@@ -21,7 +21,7 @@ namespace API.Helpers
                 .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(p => p.Category.Id))
                 .ForMember(dest => dest.ProductImgsLinks, opt => opt.MapFrom(p => p.ProductImgs.Select(p => p.Link)));
 
-            CreateMap<ProductFeature, FeatureDto>()
+            CreateMap<ProductFeature, ProductFeatureDto>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(f => f.Feature.Name))
             .ForMember(dest => dest.Explanation, opt => opt.MapFrom(f => f.Feature.Explanation))
             .ForMember(dest => dest.GroupName, opt => opt.MapFrom(f => f.Feature.GroupName))
@@ -39,6 +39,8 @@ namespace API.Helpers
                         })));
             
             CreateMap<AddProductDto, Product>();
+
+            CreateMap<Feature, FeatureDto>();
         }
     }
 }

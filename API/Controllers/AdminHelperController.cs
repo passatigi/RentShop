@@ -27,5 +27,12 @@ namespace API.Controllers
             return await _dataContext.Categories.Where(c => c.ParentCategoryId != null)
                 .ProjectTo<CategoryDto>(__mapper.ConfigurationProvider).ToListAsync();
         }
+
+        [HttpGet("features/{id}")]
+        public async Task<ActionResult<IEnumerable<FeatureDto>>> GetFeatures(int id)
+        {
+            return await _dataContext.Features.Where(f => f.CategoryId == id)
+                .ProjectTo<FeatureDto>(__mapper.ConfigurationProvider).ToListAsync();
+        }
     }
 }
