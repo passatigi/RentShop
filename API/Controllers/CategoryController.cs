@@ -12,10 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    //[ServiceFilter(typeof(LogUserActivity))]
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CategoryController : ControllerBase
+    public class CategoryController : BaseApiController
     {
         private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
