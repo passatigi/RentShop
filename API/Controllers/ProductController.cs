@@ -21,12 +21,23 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory(GetCategoryPageDto categoryPageDto)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory([FromQuery] GetCategoryPageDto categoryPageDto)
         {
-            return await _dataContext.Products.Include(x => x.ProductImgs)
+            return await _dataContext.Products.Include(p => p.ProductImgs)
                 .Where(p => p.CategoryId == categoryPageDto.CategoryId)
                 .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<DetailedProductDto>> GetById(int id)
+        {
+            return await _dataContext.Products.Include(p => p.ProductImgs)
+                .Include(p => p.ProductFeatures).ThenInclude(f => f.Feature)
+                .Include(p => p.RealProducts)
+                .Where(p => p.Id == id)
+                .ProjectTo<DetailedProductDto>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
         }
     }
 }
