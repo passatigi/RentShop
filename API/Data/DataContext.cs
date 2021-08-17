@@ -47,6 +47,11 @@ namespace API.Data
             .WithMany(c => c.ChildCategories)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
+            builder.Entity<Feature>()
+            .HasOne(f => f.Category)
+            .WithMany(c => c.Features)
+            .OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<ProductFeature>()
             .HasKey(k => new {k.ProductId, k.FeatureId});
 
@@ -56,11 +61,6 @@ namespace API.Data
             .HasForeignKey(s => s.ProductId)
             .OnDelete(DeleteBehavior.NoAction);
 
-            // builder.Entity<ProductFeature>()
-            // .HasOne(s => s.LikedUser)
-            // .WithMany(l => l.LikedByUsers)
-            // .HasForeignKey(s => s.LikedUserId)
-            // .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<OrderProduct>()
             .HasKey(k => new {k.RealProductId, k.OrderId});
@@ -97,8 +97,7 @@ namespace API.Data
             .WithMany(m => m.MessagesSent)
             .OnDelete(DeleteBehavior.Restrict);
 
-            // builder.Entity<RealProduct>()
-            // .
+
 
         }
     }

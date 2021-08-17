@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210804104940_InitialCreate")]
+    [Migration("20210817135918_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,6 +211,9 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Explanation")
                         .HasColumnType("nvarchar(max)");
 
@@ -221,6 +224,8 @@ namespace API.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Features");
                 });
@@ -546,6 +551,17 @@ namespace API.Data.Migrations
                     b.Navigation("DeliveryMan");
                 });
 
+            modelBuilder.Entity("API.Entities.Feature", b =>
+                {
+                    b.HasOne("API.Entities.Category", "Category")
+                        .WithMany("Features")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "Recipient")
@@ -713,6 +729,8 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Category", b =>
                 {
                     b.Navigation("ChildCategories");
+
+                    b.Navigation("Features");
                 });
 
             modelBuilder.Entity("API.Entities.Order", b =>
