@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
+using API.Entities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
@@ -48,5 +49,18 @@ namespace API.Controllers
                 .Include(rp => rp.OrderProducts).ThenInclude(op => op.Order)
                 .ProjectTo<RealProductSchedule>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
         }
+
+        // [HttpPost("addproduct")]
+        // public async Task<ActionResult> AddProduct(AddProductDto productDto)
+        // {
+        //     var product  = new Product();
+        //     _mapper.Map(productDto, product);
+
+        //     _dataContext.Products.Add(product);
+
+        //     await _dataContext.SaveChangesAsync();
+
+        //     return Ok();
+        // }
     }
 }

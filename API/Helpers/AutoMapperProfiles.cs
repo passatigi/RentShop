@@ -38,6 +38,7 @@ namespace API.Helpers
                             RentEnd = o.RequiredReturnDate 
                         })));
             
+            CreateMap<AddProductDto, Product>();
         }
     }
 }
