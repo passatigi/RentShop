@@ -29,7 +29,7 @@ namespace API.Controllers
                 .ToListAsync();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("detail/{id}")]
         public async Task<ActionResult<DetailedProductDto>> GetById(int id)
         {
             return await _dataContext.Products.Include(p => p.ProductImgs)
@@ -38,6 +38,15 @@ namespace API.Controllers
                 .Where(p => p.Id == id)
                 .ProjectTo<DetailedProductDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
+        }
+
+        [HttpGet("shedule/{id}")]
+        public async Task<ActionResult<RealProductSchedule>> GetRealProductShedule(int id)
+        {
+            //would test it later
+            return await _dataContext.RealProducts
+                .Include(rp => rp.OrderProducts).ThenInclude(op => op.Order)
+                .ProjectTo<RealProductSchedule>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
         }
     }
 }

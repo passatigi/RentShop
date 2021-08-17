@@ -28,6 +28,16 @@ namespace API.Helpers
             .ForMember(dest => dest.FeatureId, opt => opt.MapFrom(f => f.Feature.Id));
 
             CreateMap<RealProduct, RealProductDto>();
+
+            CreateMap<RealProduct, RealProductSchedule>()
+            .ForMember(dest => dest.RealProductId, opt => opt.MapFrom(p => p.Id))
+            .ForMember(dest => dest.Segments, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.Order)
+                        .Select(o => new ProductScheduleSegmentsDto 
+                        { 
+                            RentStart = o.RequiredDate,
+                            RentEnd = o.RequiredReturnDate 
+                        })));
+            
         }
     }
 }
