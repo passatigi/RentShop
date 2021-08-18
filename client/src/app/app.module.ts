@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -15,6 +15,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { RegistrationComponent } from './login_register/registration/registration.component';
 import { LoginComponent } from './login_register/login/login.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HasRoleDirective } from './_directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,9 @@ import { LoginComponent } from './login_register/login/login.component';
     CategoryAdminComponent,
     NavComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent,
+    HasRoleDirective
   ],
   imports: [
     BrowserModule,
@@ -35,10 +43,16 @@ import { LoginComponent } from './login_register/login/login.component';
     FormsModule,
     ReactiveFormsModule,
     CollapseModule.forRoot(),
-    TooltipModule.forRoot()
-    
+    TooltipModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right' 
+    }),
+    FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

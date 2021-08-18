@@ -63,7 +63,15 @@
                   <li role="menuitem"><a class="dropdown-item"  (click)='accountService.logout()'>Log out</a></li>
                 </ul>
               </div>
+
+              <ng-container *appHasRole='["Admin"]'>
+                <li class="nav-item">
+                  <a tooltip="Admin page" placement="bottom"
+                    class="nav-link" routerLink='admin/main'><img class="nav-img" src="assets/admin.png" alt="Admin page"></a>
+                </li>
+              </ng-container>
             </ng-container>
+            
             <ng-container *ngIf="!(accountService.currentUser$ | async)">
               <li class="nav-item">
                 <a tooltip="Login" placement="bottom"

@@ -1,5 +1,5 @@
 <div class="text-center d-flex justify-content-center">
-  <div *ngIf="loginForm" class="bg-light p-3" style="max-width: 500px;">
+  <div *ngIf="loginForm" class="bg-light p-3 " style="max-width: 500px;">
     <h2>Login to start rent</h2>
     <div>
       <form [formGroup]='loginForm' (ngSubmit)="loginForm.valid && login()" autocomplete="off" >
@@ -15,5 +15,5 @@
           type= "button" class="btn btn-sm btn-link btn-lg mt-2"  >Learn more</button>
       </form>
     </div>
-</div>
+  </div>
 </div>
