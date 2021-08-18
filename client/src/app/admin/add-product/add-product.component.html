@@ -1,17 +1,54 @@
-<div>
-    <div class="row" style="max-width: 1600px; margin: 0 auto;">
-        <div class="col-4">
+<div style="max-width: 1600px; margin: 0 auto;">
+    <h2>Add product page</h2>
+    <div class="row" >
+        <div class=" col-12 bg-light p-3 border-bottom text-center">
             
-        </div>
-        <div class="col-8 text-center p-3 bg-light">
-            <div class="form-group">
-                <label for="select-category" class="form-label">Choose product category</label>
-                <select class="custom-select" id='select-category' [(ngModel)]="newProduct.categoryId"  (ngModelChange)='onSelectCategory($event)'>
-                    <option value="" disabled>Choose product category</option>
-                    <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
-                 </select>
+            <div class="row">
+                <label  class="form-label col-8">Choose product category</label>
+                <label  class="form-label col-4">Choose category and add</label>
+                <div class="col-8">
+                    
+                    <select class="custom-select" id='select-category' [(ngModel)]="newProduct.categoryId"  (ngModelChange)='onSelectCategory($event)'>
+                        <option value="" disabled>Choose product category</option>
+                        <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+                     </select>
+                </div>
+                <div class="col-4">
+                    <button (click)="isAddNewFeatureCollapsed = !isAddNewFeatureCollapsed"
+                    [attr.aria-expanded]="!isAddNewFeatureCollapsed" aria-controls="collapseBasic"
+                    type="button" class="btn btn-block btn-outline-primary">{{isAddNewFeatureCollapsed ? 'Add' : 'Hide'}} feature</button>
+                </div>
             </div>
-            <hr>
+                
+                 
+        </div>
+        <div id="collapseBasic" [collapse]="isAddNewFeatureCollapsed" 
+            class="col-12 text-center p-3 border border-light">
+            <div>
+                <h2>Add feature to {{selectedCategory?.name}}</h2>
+                <div class="form-group mt-2">
+                    <label class="form-label">Feature name</label>
+                    <input class="form-control " type="text" placeholder="Feature name" [(ngModel)]="newCategoryFeature.name">
+                </div>
+                <div class="form-group mt-2">
+                    <label class="form-label">Explanation</label>
+                    <textarea class="form-control " type="text" placeholder="Explanation" [(ngModel)]="newCategoryFeature.explanation"></textarea>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="form-label">Group name</label>
+                    <input class="form-control " type="text" placeholder="Group name" [(ngModel)]="newCategoryFeature.groupName">
+                </div>
+                <button (click)='addNewFeature()'
+                    type="button" class="btn btn-block btn-outline-primary mt-2">Add feature</button>
+            </div>
+        </div>
+        <div class="col-12 text-center p-3 bg-light">
+
+            <div class="row">
+
+            <h2>Add product to {{selectedCategory?.name}}</h2>
+            <div class="col-7">
+            
             <div class="form-group mt-2">
                 <label class="form-label">Product name</label>
                 <input class="form-control " type="text" placeholder="Product name" [(ngModel)]="newProduct.name">
@@ -25,41 +62,58 @@
                 <textarea class="form-control " type="text" placeholder="Description" [(ngModel)]="newProduct.description"></textarea>
             </div>
 
+            </div>
 
-            <div>
-                <table class="table table-hover" style="cursor: pointer;" >
-                    <tr>
-                        <th style="width: 40%;">Feature</th>
-                        <th style="width: 40%;">Value</th>
-                        <th style="width: 20%;"></th>
-                    </tr>
-                    <tr *ngFor="let feature of newProduct.productFeatures" >
-                        <td>{{feature.name}}</td>
-                        <td>{{feature.value}}</td>
-                        <td>
-                            <div><button (click)="$event.stopPropagation()" class="btn btn-block btn-danger" (click)="deleteFeature(feature)"> Delete</button></div>
-                        </td>
-                    </tr>
-                </table>
+            <div class="col-5">
+                <div>
+                    <table *ngIf="newProduct.productFeatures?.length ?? 0 > 0" class="table border" style="cursor: pointer;" >
+                        <tr>
+                            <th style="width: 40%;">Feature</th>
+                            <th style="width: 40%;">Value</th>
+                            <th style="width: 20%;"></th>
+                        </tr>
+                        <tr *ngFor="let feature of newProduct.productFeatures" >
+                            <td>{{feature.name}}</td>
+                            <td>{{feature.value}}</td>
+                            <td>
+                                <div><button (click)="$event.stopPropagation()" class="btn btn-block btn-danger" (click)="deleteFeature(feature)">Delete</button></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Choose feature</label>
+                    <select class="custom-select"  [(ngModel)]="addProductFeature">
+                        <option value="" disabled>Choose feature</option>
+                        <option *ngFor="let feature of features" [ngValue]="feature">{{feature.name}}</option>
+                     </select>
+                </div>
+                <div class="d-flex mt-3 form-group">
+                    <input class="form-control " type="text" placeholder="Value" [(ngModel)]="addProductFeature.value">
+                    <button (click)='addFeatureToProduct()'
+                        type="button" style="width: 200px;" class="btn btn-primary">Add feature</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="form-label">Choose feature</label>
-                <select class="custom-select"  [(ngModel)]="addProductFeature">
-                    <option value="" disabled>Choose feature</option>
-                    <option *ngFor="let feature of features" [ngValue]="feature">{{feature.name}}</option>
-                 </select>
+            
+            <div class="col-12">
+                <h3>Edit real products {{newProduct.name}}</h3>
+                <div>
+                    
+                </div>
             </div>
-            <div class="d-flex mt-3 form-group">
-                <input class="form-control " type="text" placeholder="Value" [(ngModel)]="addProductFeature.value">
-                <button (click)='addFeature()'
-                    type="button" style="width: 200px;" class="btn btn-primary">Add feature</button>
+            
             </div>
         </div>
+
+        
     </div>
 </div>
-<div>
+<div>newProduct:
     {{toString(newProduct)}}
 </div>
-<div>
+<div>addProductFeature:
     {{toString(addProductFeature)}}
+</div>
+<div>newCategoryFeature:
+    {{toString(newCategoryFeature)}}
 </div>

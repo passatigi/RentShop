@@ -41,6 +41,7 @@ namespace API.Helpers
             CreateMap<AddProductDto, Product>();
 
             CreateMap<Feature, FeatureDto>();
+            CreateMap<AddFeatureDto, Feature>();
         }
     }
 }
