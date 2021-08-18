@@ -34,7 +34,6 @@
 <!-- style="filter: invert()" -->
 <h1 class="m-3">Choose product category</h1>
 <div class="btn-group btn-block">
-    
     <button type="button" class="btn  btn-outline-dark" *ngFor="let category of categories" (click)="openCategory(category.id)">
         <span>
             {{category.name}}
@@ -56,12 +55,28 @@
             
         </div>
 </div> -->
+
+
+
 <div class="secondaryCategoriesBox">
     <div style="cursor: pointer;" class="category" *ngFor="let category of childCategories">
-        <img class="categoryImg" src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
-        {{category.name}}</div>
+        <!-- <button 
+            type="button" 
+            class="btn  btn-outline-dark" 
+            style="width: 20%" 
+            routerLink='category' 
+            [queryParams]='{categoryid:category.id}'>
+            <div>
+                <img 
+                    class="categoryImg" 
+                    src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" 
+                    alt="{{category.name}}">
+                {{category.name}}
+            </div>
+        </button> -->
+        <app-category-card [category]='category'></app-category-card>
+    </div>
 </div>
-
 
 <ng-container *ngIf="isAdmin">
     <app-category-admin [categories]='categories' [childCategories]='childCategories'></app-category-admin>
