@@ -22,6 +22,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { MemberDetailComponent } from './_products/member-detail/member-detail.component';
+import { ProductDetailComponent } from './_products/product-detail/product-detail.component';
+import { ProductListComponent } from './_products/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { MemberDetailComponent } from './_products/member-detail/member-detail.c
     LoginComponent,
     AdminComponent,
     HasRoleDirective,
-    MemberDetailComponent
+    MemberDetailComponent,
+    ProductDetailComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
