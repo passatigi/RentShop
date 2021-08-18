@@ -44,5 +44,52 @@ namespace API.Controllers
             await _dataContext.SaveChangesAsync();
             return Ok(_mapper.Map<FeatureDto>(feature));
         }
+
+        [HttpPost("products")]
+        public async Task<ActionResult<int>> AddProduct(AddProductDto productDto)
+        {
+            var product  = new Product();
+            _mapper.Map(productDto, product);
+
+            _dataContext.Products.Add(product);
+
+            await _dataContext.SaveChangesAsync();
+
+            return Ok(product.Id);
+        }
+
+        // [HttpPost("photos")]
+        // [HttpPost("add-photo")]
+        // public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
+        // {
+        //     var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(User.GetUserName());
+
+        //     var result = await _photoService.AddPhotoAsync(file);
+
+        //     if (result.Error != null) return BadRequest(result.Error.Message);
+
+        //     var photo = new Photo
+        //     {
+        //         Url = result.SecureUrl.AbsoluteUri,
+        //         PublicId = result.PublicId
+        //     };
+
+        //     // if (user.Photos.Count == 0)
+        //     // {
+        //     //     photo.IsMain = true;
+        //     // }
+
+        //     user.Photos.Add(photo);
+
+        //     if (await _unitOfWork.Complete())
+        //     {
+
+        //         return CreatedAtRoute("GetUser", new { userName = user.UserName }, _mapper.Map<PhotoDto>(photo));
+
+        //     }
+
+
+        //     return BadRequest("Problem additing photo");
+        // }
     }
 }

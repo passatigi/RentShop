@@ -76,6 +76,13 @@ toString(object:any){
     }
   }
 
+  addNewProduct(){
+    console.log(this.newProduct)
+    this.helperService.addProduct(this.newProduct).subscribe((product) => {
+      console.log(product)
+    })
+  }
+
   isFull(object: any){
     return !Object.values(this.newCategoryFeature).every(o => o === undefined);
   }

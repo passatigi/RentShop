@@ -40,8 +40,12 @@ namespace API.Helpers
             
             CreateMap<AddProductDto, Product>();
 
-            CreateMap<Feature, FeatureDto>();
+            CreateMap<Feature, FeatureDto>()
+            .ForMember(dest => dest.FeatureId, opt => opt.MapFrom(f => f.Id));
+
             CreateMap<AddFeatureDto, Feature>();
+
+            CreateMap<AddProductFeatureDto, ProductFeature>();
         }
     }
 }
