@@ -21,6 +21,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HasRoleDirective } from './_directives/has-role.directive';
+import { MemberDetailComponent } from './_products/member-detail/member-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HasRoleDirective } from './_directives/has-role.directive';
     RegistrationComponent,
     LoginComponent,
     AdminComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    MemberDetailComponent
   ],
   imports: [
     BrowserModule,
