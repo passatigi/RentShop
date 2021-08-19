@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminProduct } from 'src/app/_models/adminModels/adminProduct';
+import { ProductFeature } from 'src/app/_models/productFeature';
 import { ProductsService } from 'src/app/_services/products.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { ProductsService } from 'src/app/_services/products.service';
 })
 export class EditProductComponent implements OnInit {
   product?: AdminProduct;
+  features: ProductFeature[] = [];
 
   constructor(private route: ActivatedRoute, private productService: ProductsService) { }
 

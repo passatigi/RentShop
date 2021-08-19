@@ -14,6 +14,10 @@
     </div>
     <div class="col-1"></div>
     <div class="col-4">
+        <div>
+            <button routerLink="/admin/edit-product" [queryParams]="{'id': product.id}"
+                    type="button" class="btn btn-block btn-outline-danger" >Edit product</button>
+        </div>
         <p>
             <strong>Vendor: </strong>{{product.vendor}}
         </p>
