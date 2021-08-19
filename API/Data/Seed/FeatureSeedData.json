@@ -1,10 +1,10 @@
 [ 
-    {"Name":"Width","Explanation":null,"GroupName":"Size and weight"},
-    {"Name":"Depth","Explanation":null,"GroupName":"Size and weight"},
-    {"Name":"Height","Explanation":null,"GroupName":"Size and weight"},
-    {"Name":"A type","Explanation":null,"GroupName":"The main"},
-    {"Name":"For whom","Explanation":null,"GroupName":"The main"},
-    {"Name":"Main material","Explanation":null,"GroupName":"The main"},
-    {"Name":"Colour","Explanation":null,"GroupName":"The main"}
+    {"Name":"Width","Explanation":null,"GroupName":"Size and weight", "CategoryId": 4},
+    {"Name":"Depth","Explanation":null,"GroupName":"Size and weight", "CategoryId": 4},
+    {"Name":"Height","Explanation":null,"GroupName":"Size and weight", "CategoryId": 4},
+    {"Name":"A type","Explanation":null,"GroupName":"The main", "CategoryId": 4},
+    {"Name":"For whom","Explanation":null,"GroupName":"The main", "CategoryId": 4},
+    {"Name":"Main material","Explanation":null,"GroupName":"The main", "CategoryId": 4},
+    {"Name":"Colour","Explanation":null,"GroupName":"The main", "CategoryId": 4}
 
 ]

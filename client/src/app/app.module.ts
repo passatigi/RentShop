@@ -21,6 +21,10 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HasRoleDirective } from './_directives/has-role.directive';
+import { AddProductComponent } from './admin/product/add-product/add-product.component';
+import { AddFeatureComponent } from './admin/feature/add-feature/add-feature.component';
+import { FeatureFormComponent } from './admin/feature/feature-form/feature-form.component';
+import { ProductFormComponent } from './admin/product/product-form/product-form.component';
 import { ProductDetailComponent } from './_products/product-detail/product-detail.component';
 import { ProductListComponent } from './_products/product-list/product-list.component';
 import { ProductCardComponent } from './_products/product-card/product-card.component';
@@ -38,6 +42,10 @@ import { CategoryCardComponent } from './_categories/category-card/category-card
     LoginComponent,
     AdminComponent,
     HasRoleDirective,
+    AddProductComponent,
+    AddFeatureComponent,
+    FeatureFormComponent,
+    ProductFormComponent
     ProductDetailComponent,
     ProductListComponent,
     ProductCardComponent,

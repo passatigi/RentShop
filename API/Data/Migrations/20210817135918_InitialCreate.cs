@@ -71,21 +71,6 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Features",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Explanation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GroupName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Features", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -300,6 +285,27 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Features",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Explanation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Features", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Features_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -462,6 +468,11 @@ namespace API.Data.Migrations
                 name: "IX_DeliverymanSchedules_DeliveryManId",
                 table: "DeliverymanSchedules",
                 column: "DeliveryManId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Features_CategoryId",
+                table: "Features",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_RecipientId",

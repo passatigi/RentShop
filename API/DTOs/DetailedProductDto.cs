@@ -13,7 +13,7 @@ namespace API.DTOs
         public string CategoryName { get; set; }
 
         public ICollection<string> ProductImgsLinks { get; set; }
-        public ICollection<FeatureDto> ProductFeatures { get; set; }
+        public ICollection<ProductFeatureDto> ProductFeatures { get; set; }
         public ICollection<RealProductDto> RealProducts { get; set; }
     }
 }

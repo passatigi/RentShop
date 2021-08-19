@@ -50,17 +50,6 @@ namespace API.Controllers
                 .ProjectTo<RealProductSchedule>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
         }
 
-        // [HttpPost("addproduct")]
-        // public async Task<ActionResult> AddProduct(AddProductDto productDto)
-        // {
-        //     var product  = new Product();
-        //     _mapper.Map(productDto, product);
-
-        //     _dataContext.Products.Add(product);
-
-        //     await _dataContext.SaveChangesAsync();
-
-        //     return Ok();
-        // }
+        
     }
 }

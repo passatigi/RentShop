@@ -1,0 +1,81 @@
+<div style="max-width: 1600px; margin: 0 auto;">
+    <h2>Add product page</h2>
+    <div class="row" >
+        <div class=" col-12 bg-light px-md-5 py-2 border-bottom text-center">
+            
+            <div class="row">
+                <h3 class="form-label col-8">Choose product category</h3>
+                <label class="form-label col-4">Choose category and add</label>
+                <div class="col-8">
+                    <select class="custom-select" 
+                            id='select-category' 
+                            [(ngModel)]="newProduct.categoryId"  
+                            (ngModelChange)='onSelectCategory($event)'>
+
+                        <option value="" disabled>Choose product category</option>
+                        <option *ngFor="let category of categories" 
+                                [ngValue]="category.id">
+                                {{category.name}}
+                        </option>
+                     </select>
+                </div>
+                <div class="col-4">
+                    <button (click)="isAddNewFeatureCollapsed = !isAddNewFeatureCollapsed"
+                            [attr.aria-expanded]="!isAddNewFeatureCollapsed" 
+                            aria-controls="collapseBasic"
+                            type="button" 
+                            class="btn btn-block btn-outline-primary">
+
+                                {{isAddNewFeatureCollapsed ? 'Add' : 'Hide'}} feature
+                    </button>
+                </div>
+            </div>
+                
+                 
+        </div>
+
+        <div id="collapseBasic" 
+             [collapse]="isAddNewFeatureCollapsed" 
+             class="col-12 text-center p-3 border border-light">
+            <div class="row">
+                <app-add-feature 
+                    class="col-12 col-md-6 offset-md-3" 
+                    [category]="selectedCategory" 
+                    [features]="features">
+                </app-add-feature>
+            </div>
+            
+        </div>
+
+        <div class="col-12 text-center  p-md-5  p-2 bg-light mt-4">
+
+            <h2>Add product to {{selectedCategory?.name}}</h2>
+            
+            <app-product-form
+                [product]='newProduct'
+                [features]='features'
+            ></app-product-form>
+
+            <div class="row">
+                <div class="col-12 col-md-6 p-2">
+                    <button (click)='addNewProduct()'
+                        type="button" 
+                        class="btn btn-block  btn-primary">
+                        Add product</button>
+                </div>
+                <div class="col-12 col-md-6 p-2" *ngIf="isSuccessfullyAdded">
+                    <button routerLink='/admin/edit-product/{{newProduct.id}}'
+                        type="button" 
+                        class="btn btn-block btn-outline-primary">
+                        Edit currently added product</button>
+                </div> 
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div>newProduct:
+    {{devHelp.toString(newProduct)}}
+</div>
+
