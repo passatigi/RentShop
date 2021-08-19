@@ -45,7 +45,7 @@ import { CategoryCardComponent } from './_categories/category-card/category-card
     AddProductComponent,
     AddFeatureComponent,
     FeatureFormComponent,
-    ProductFormComponent
+    ProductFormComponent,
     ProductDetailComponent,
     ProductListComponent,
     ProductCardComponent,
