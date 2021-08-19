@@ -30,6 +30,8 @@ import { ProductListComponent } from './_products/product-list/product-list.comp
 import { ProductCardComponent } from './_products/product-card/product-card.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { CategoryCardComponent } from './_categories/category-card/category-card.component';
+import { EditProductComponent } from './admin/product/edit-product/edit-product.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { CategoryCardComponent } from './_categories/category-card/category-card
     ProductDetailComponent,
     ProductListComponent,
     ProductCardComponent,
-    CategoryCardComponent
+    CategoryCardComponent,
+    EditProductComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -33,12 +33,16 @@ namespace API.Controllers
         [HttpGet("detail/{id}")]
         public async Task<ActionResult<DetailedProductDto>> GetById(int id)
         {
-            return await _dataContext.Products.Include(p => p.ProductImgs)
+            var product = await _dataContext.Products.Include(p => p.ProductImgs)
                 .Include(p => p.ProductFeatures).ThenInclude(f => f.Feature)
                 .Include(p => p.RealProducts)
                 .Where(p => p.Id == id)
                 .ProjectTo<DetailedProductDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
+            
+            if(product == null) return NotFound();
+
+            return Ok(product);
         }
 
         [HttpGet("shedule/{id}")]

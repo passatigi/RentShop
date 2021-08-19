@@ -64,7 +64,7 @@
                         Add product</button>
                 </div>
                 <div class="col-12 col-md-6 p-2" *ngIf="isSuccessfullyAdded">
-                    <button routerLink='/admin/edit-product/{{newProduct.id}}'
+                    <button routerLink='/admin/edit-product?id={{newProduct.id}}'
                         type="button" 
                         class="btn btn-block btn-outline-primary">
                         Edit currently added product</button>
