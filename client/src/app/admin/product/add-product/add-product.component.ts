@@ -13,6 +13,7 @@ import { DeveloperHelpService } from 'src/app/_services/developer-help.service';
 })
 export class AddProductComponent implements OnInit {
   isAddNewFeatureCollapsed =  true;
+  isSuccessfullyAdded = false;
  
   newProduct: AdminProduct = {};
   categories: Category[] = [];
@@ -41,8 +42,12 @@ export class AddProductComponent implements OnInit {
 
   addNewProduct(){
     console.log(this.newProduct)
-    this.helperService.addProduct(this.newProduct).subscribe((product) => {
-      console.log(product)
+    this.helperService.addProduct(this.newProduct).subscribe((id) => {
+      this.isSuccessfullyAdded = true;
+      if(this.newProduct)
+        this.newProduct.id = <number>id;
+      console.log(id)
+      this.toastr.success("Product successfully added!")
     })
   }
 
