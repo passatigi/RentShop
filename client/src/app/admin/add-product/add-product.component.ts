@@ -13,16 +13,11 @@ import { DeveloperHelpService } from 'src/app/_services/developer-help.service';
 })
 export class AddProductComponent implements OnInit {
   isAddNewFeatureCollapsed =  true;
-
-
- newProduct: AdminProduct = {};
- addProductFeature: ProductFeature = {};
-
- categories: Category[] = [];
- features: ProductFeature[] = [];
-
- selectedCategory?: Category;
-
+ 
+  newProduct: AdminProduct = {};
+  categories: Category[] = [];
+  features: ProductFeature[] = [];
+  selectedCategory?: Category;
 
   constructor(private helperService: AdminHelperService, private toastr: ToastrService, 
     
@@ -35,8 +30,6 @@ export class AddProductComponent implements OnInit {
     })
   }
 
-
-  
   onSelectCategory(event:any){
     console.log(this.newProduct.categoryId)
     this.selectedCategory = this.categories.find(x => x.id == this.newProduct.categoryId);
@@ -46,30 +39,11 @@ export class AddProductComponent implements OnInit {
         })
   }
 
-  addFeatureToProduct(){
-    console.log(this.addProductFeature)
-
-    if(this.newProduct.productFeatures?.includes(this.addProductFeature) 
-        || !this.addProductFeature.name 
-        || !this.addProductFeature.value) return;
-
-    this.newProduct.productFeatures?.push(this.addProductFeature)
-    //this.addProductFeature = {};
-  }
-
-  deleteFeature(feature?: ProductFeature){
-    if(this.newProduct.productFeatures && feature)
-      this.newProduct.productFeatures = this.newProduct.productFeatures.filter(x => x !== feature)
-  }
-
-
   addNewProduct(){
     console.log(this.newProduct)
     this.helperService.addProduct(this.newProduct).subscribe((product) => {
       console.log(product)
     })
   }
-
-  
 
 }

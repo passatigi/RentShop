@@ -24,6 +24,7 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { AddFeatureComponent } from './admin/feature/add-feature/add-feature.component';
 import { FeatureFormComponent } from './admin/feature/feature-form/feature-form.component';
+import { ProductFormComponent } from './admin/product/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FeatureFormComponent } from './admin/feature/feature-form/feature-form.
     HasRoleDirective,
     AddProductComponent,
     AddFeatureComponent,
-    FeatureFormComponent
+    FeatureFormComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
