@@ -1,0 +1,57 @@
+<div class="row mb-4">
+    <div style="margin-left: 40%; margin-bottom: 15px;">
+        <h3>{{product.name}}</h3>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-3">
+        <div class="card">
+            <ngx-gallery 
+            [options]="galleryOptions" 
+            [images]="galleryImages" 
+            style="display: inline-block; margin-bottom: 20px;">
+            </ngx-gallery>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-4">
+        <p>
+            <strong>Vendor: </strong>{{product.vendor}}
+        </p>
+        <p>
+            <strong>Description: </strong>{{product.description}}
+        </p>
+        <p>
+            <strong>Category name: </strong>{{product.categoryName}}
+        </p>
+        <div *ngFor='let feature of product.productFeatures'>
+            <p>
+                <strong>{{feature.name}}: </strong>{{feature.value}}
+            </p>
+        </div>
+        <div *ngFor='let realProduct of product.realProducts'>
+            <div class="card mb-3">
+                <div class="row mb-4">
+                    <div class="col-9 ml-3">
+                        <p>
+                            <strong>SerialNumber: </strong>{{realProduct.serialNumber}}
+                        </p>
+                        <p>
+                            <strong>Condition: </strong>{{realProduct.condition}}
+                        </p>
+                        <h4>
+                            <strong>Rent Price: </strong>{{realProduct.rentPrice}}
+                        </h4>
+                    </div>
+                    <div class="col" style="margin-right: 2%;">
+                        <div>
+                            <button type="button" class="btn btn-success mt-3 mb-3">Buy it now</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-info">Add to cart</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

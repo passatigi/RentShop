@@ -25,6 +25,11 @@ import { AddProductComponent } from './admin/product/add-product/add-product.com
 import { AddFeatureComponent } from './admin/feature/add-feature/add-feature.component';
 import { FeatureFormComponent } from './admin/feature/feature-form/feature-form.component';
 import { ProductFormComponent } from './admin/product/product-form/product-form.component';
+import { ProductDetailComponent } from './_products/product-detail/product-detail.component';
+import { ProductListComponent } from './_products/product-list/product-list.component';
+import { ProductCardComponent } from './_products/product-card/product-card.component';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { CategoryCardComponent } from './_categories/category-card/category-card.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,10 @@ import { ProductFormComponent } from './admin/product/product-form/product-form.
     AddFeatureComponent,
     FeatureFormComponent,
     ProductFormComponent
+    ProductDetailComponent,
+    ProductListComponent,
+    ProductCardComponent,
+    CategoryCardComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +64,11 @@ import { ProductFormComponent } from './admin/product/product-form/product-form.
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right' 
     }),
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxGalleryModule
+  ],
+  exports: [
+    NgxGalleryModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

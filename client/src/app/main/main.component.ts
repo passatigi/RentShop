@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { Category } from '../_models/category';
 import { CategoryService } from '../_services/category.service';
 
@@ -11,11 +13,12 @@ import { CategoryService } from '../_services/category.service';
 })
 export class MainComponent implements OnInit {
   isAdmin = true;
-
+  id: number ;
   categories?: Category[]; 
   childCategories?:  Category[]; 
+  isCategoryChoose = false;
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe(categories => {
@@ -27,12 +30,6 @@ export class MainComponent implements OnInit {
   openCategory(id: number){
     if(this.categories){
       this.childCategories = this.categories.find(x => x.id === id)?.childCategories;
-      console.log("openCategory " + id)
     }
   }
-
- 
-
-
-
 }
