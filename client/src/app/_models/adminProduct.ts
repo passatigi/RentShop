@@ -16,6 +16,7 @@ export interface ProductFeature {
   explanation?: any
   groupName?: string
   value?: string
+  categoryId?: number
 }
 
 export interface RealProduct {

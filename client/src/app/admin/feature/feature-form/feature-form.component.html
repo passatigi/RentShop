@@ -1,0 +1,14 @@
+<ng-container *ngIf="feature">
+    <div class="form-group mt-2">
+        <label class="form-label">Feature name</label>
+        <input class="form-control " type="text" placeholder="Feature name" [(ngModel)]="feature.name">
+    </div>
+    <div class="form-group mt-2">
+        <label class="form-label">Explanation</label>
+        <textarea class="form-control " type="text" placeholder="Explanation" [(ngModel)]="feature.explanation"></textarea>
+    </div>
+    <div class="form-group mt-2">
+        <label class="form-label">Group name</label>
+        <input class="form-control " type="text" placeholder="Group name" [(ngModel)]="feature.groupName">
+    </div>
+</ng-container>

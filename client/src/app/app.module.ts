@@ -22,6 +22,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { AddProductComponent } from './admin/add-product/add-product.component';
+import { AddFeatureComponent } from './admin/feature/add-feature/add-feature.component';
+import { FeatureFormComponent } from './admin/feature/feature-form/feature-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { AddProductComponent } from './admin/add-product/add-product.component';
     LoginComponent,
     AdminComponent,
     HasRoleDirective,
-    AddProductComponent
+    AddProductComponent,
+    AddFeatureComponent,
+    FeatureFormComponent
   ],
   imports: [
     BrowserModule,

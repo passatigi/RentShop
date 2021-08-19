@@ -4,6 +4,7 @@ import { AdminProduct, ProductFeature } from 'src/app/_models/adminProduct';
 import { Category } from 'src/app/_models/category';
 import { NewFeature } from 'src/app/_models/newFeature';
 import { AdminHelperService } from 'src/app/_services/admin-helper.service';
+import { DeveloperHelpService } from 'src/app/_services/developer-help.service';
 
 @Component({
   selector: 'app-add-product',
@@ -12,9 +13,7 @@ import { AdminHelperService } from 'src/app/_services/admin-helper.service';
 })
 export class AddProductComponent implements OnInit {
   isAddNewFeatureCollapsed =  true;
-toString(object:any){
-  return JSON.stringify(object)
-}
+
 
  newProduct: AdminProduct = {};
  addProductFeature: ProductFeature = {};
@@ -23,9 +22,11 @@ toString(object:any){
  features: ProductFeature[] = [];
 
  selectedCategory?: Category;
- newCategoryFeature: NewFeature = {};
 
-  constructor(private helperService: AdminHelperService, private toastr: ToastrService) { }
+
+  constructor(private helperService: AdminHelperService, private toastr: ToastrService, 
+    
+    public devHelp: DeveloperHelpService) { }
 
   ngOnInit(): void {
     this.newProduct.productFeatures = [];
@@ -61,20 +62,6 @@ toString(object:any){
       this.newProduct.productFeatures = this.newProduct.productFeatures.filter(x => x !== feature)
   }
 
-  addNewFeature(){
-    console.log(this.selectedCategory)
-    this.newCategoryFeature.categoryId = this.selectedCategory?.id;
-
-    if(this.isFull(this.newCategoryFeature))
-    this.helperService.addFeature(this.newCategoryFeature).subscribe((feature) => {
-      this.newCategoryFeature = {};
-      this.toastr.success("Successfully added")
-      this.features.push(<ProductFeature>feature)
-    });
-    else{
-      this.toastr.info("New feature should be filled")
-    }
-  }
 
   addNewProduct(){
     console.log(this.newProduct)
@@ -83,8 +70,6 @@ toString(object:any){
     })
   }
 
-  isFull(object: any){
-    return !Object.values(this.newCategoryFeature).every(o => o === undefined);
-  }
+  
 
 }

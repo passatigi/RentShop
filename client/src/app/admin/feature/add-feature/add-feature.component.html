@@ -1,0 +1,11 @@
+<div>
+    <h2>{{category?.name}} feature</h2>
+
+    <app-feature-form [feature]='newCategoryFeature'></app-feature-form>
+    
+    <button (click)='addNewFeature()'
+        type="button" class="btn btn-block btn-outline-primary mt-2">Add feature</button>
+</div>
+<div>newCategoryFeature:
+    {{devHelp.toString(newCategoryFeature)}}
+</div>
