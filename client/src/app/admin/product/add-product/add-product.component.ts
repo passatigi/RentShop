@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AdminProduct, ProductFeature } from 'src/app/_models/adminProduct';
+import { AdminProduct } from 'src/app/_models/adminModels/adminProduct';
+import { AdminProductFeature } from 'src/app/_models/adminModels/adminProductFeature';
+
 import { Category } from 'src/app/_models/category';
-import { NewFeature } from 'src/app/_models/newFeature';
 import { AdminHelperService } from 'src/app/_services/admin-helper.service';
 import { DeveloperHelpService } from 'src/app/_services/developer-help.service';
 
@@ -17,7 +18,7 @@ export class AddProductComponent implements OnInit {
  
   newProduct: AdminProduct = {};
   categories: Category[] = [];
-  features: ProductFeature[] = [];
+  features: AdminProductFeature[] = [];
   selectedCategory?: Category;
 
   constructor(private helperService: AdminHelperService, private toastr: ToastrService, 
@@ -36,7 +37,7 @@ export class AddProductComponent implements OnInit {
     this.selectedCategory = this.categories.find(x => x.id == this.newProduct.categoryId);
     if(this.newProduct?.categoryId)
         this.helperService.getFeatures(this.newProduct.categoryId).subscribe(features => {
-          this.features = features as ProductFeature[];
+          this.features = features as AdminProductFeature[];
         })
   }
 

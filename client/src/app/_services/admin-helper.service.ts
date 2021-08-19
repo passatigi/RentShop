@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { AdminProduct } from '../_models/adminProduct';
-import { NewFeature } from '../_models/newFeature';
-import { NewProduct } from '../_models/newProduct';
+import { AdminProduct } from '../_models/adminModels/adminProduct';
+import { AdminProductFeature } from '../_models/adminModels/adminProductFeature';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class AdminHelperService {
     return this.http.get(this.baseUrl + 'adminhelper/features/' + categoryId);
   }
 
-  addFeature(newFeature: NewFeature){
+  addFeature(newFeature: AdminProductFeature){
     return this.http.post(this.baseUrl + 'adminhelper/features', newFeature);
   }
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductFeature } from 'src/app/_models/adminProduct';
+import { AdminProductFeature } from 'src/app/_models/adminModels/adminProductFeature';
+
 
 @Component({
   selector: 'app-feature-form',
@@ -7,7 +8,7 @@ import { ProductFeature } from 'src/app/_models/adminProduct';
   styleUrls: ['./feature-form.component.css']
 })
 export class FeatureFormComponent implements OnInit {
-  @Input() feature?: ProductFeature;
+  @Input() feature?: AdminProductFeature;
 
   constructor() { }
 

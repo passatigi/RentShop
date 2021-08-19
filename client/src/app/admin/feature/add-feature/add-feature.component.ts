@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ProductFeature } from 'src/app/_models/adminProduct';
+import { AdminProductFeature } from 'src/app/_models/adminModels/adminProductFeature';
+
 import { Category } from 'src/app/_models/category';
 import { AdminHelperService } from 'src/app/_services/admin-helper.service';
 import { DeveloperHelpService } from 'src/app/_services/developer-help.service';
@@ -12,9 +13,9 @@ import { DeveloperHelpService } from 'src/app/_services/developer-help.service';
 })
 export class AddFeatureComponent implements OnInit {
   @Input() category?: Category;
-  @Input() features: ProductFeature[] = [];
+  @Input() features: AdminProductFeature[] = [];
 
-  newCategoryFeature: ProductFeature = {};
+  newCategoryFeature: AdminProductFeature = {};
 
   constructor(private helperService: AdminHelperService, private toastr: ToastrService,
     
@@ -33,7 +34,7 @@ export class AddFeatureComponent implements OnInit {
     if(this.isFull(this.newCategoryFeature))
       this.helperService.addFeature(this.newCategoryFeature).subscribe((feature) => {
         this.newCategoryFeature = {};
-        this.features.push(<ProductFeature>feature)
+        this.features.push(<AdminProductFeature>feature)
         this.toastr.success("Successfully added")
       });
     else{

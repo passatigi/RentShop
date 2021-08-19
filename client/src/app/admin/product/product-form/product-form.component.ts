@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AdminProduct, ProductFeature } from 'src/app/_models/adminProduct';
+import { AdminProduct } from 'src/app/_models/adminModels/adminProduct';
+import { AdminProductFeature } from 'src/app/_models/adminModels/adminProductFeature';
 import { DeveloperHelpService } from 'src/app/_services/developer-help.service';
 
 @Component({
@@ -10,9 +11,9 @@ import { DeveloperHelpService } from 'src/app/_services/developer-help.service';
 })
 export class ProductFormComponent implements OnInit {
   @Input() product?: AdminProduct;
-  @Input() features: ProductFeature[] = [];
+  @Input() features: AdminProductFeature[] = [];
 
-  addProductFeature: ProductFeature = {};
+  addProductFeature: AdminProductFeature = {};
 
   constructor( 
     private toastr: ToastrService,
@@ -35,9 +36,9 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  deleteFeature(feature?: ProductFeature){
+  deleteFeature(feature?: AdminProductFeature){
     if(this.product?.productFeatures && feature)
       this.product.productFeatures = this.product.productFeatures.filter(x => x !== feature)
   }
-  
+
 }
