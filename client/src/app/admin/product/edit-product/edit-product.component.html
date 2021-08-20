@@ -1,5 +1,12 @@
 <div>
     <div>
-        <app-product-form [product]='product' [features]=''></app-product-form>
+        <app-product-form [product]='product' [features]='features'></app-product-form>
+        <div class="col-6 p-2">
+            <button (click)='updateProduct()'
+                type="button" 
+                class="btn btn-block  btn-primary">
+                Update product</button>
+        </div>
     </div>
+
 </div>

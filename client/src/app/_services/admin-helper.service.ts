@@ -29,4 +29,8 @@ export class AdminHelperService {
     return this.http.post(this.baseUrl + 'adminhelper/products', newProduct);
   }
 
+  updateProduct(product: AdminProduct){
+    return this.http.put(this.baseUrl + 'adminhelper/products', product);
+  }
+
 }
