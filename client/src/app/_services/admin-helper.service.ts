@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AdminProduct } from '../_models/adminModels/adminProduct';
 import { AdminProductFeature } from '../_models/adminModels/adminProductFeature';
+import { AdminRealProduct } from '../_models/adminModels/adminRealProduct';
 
 
 @Injectable({
@@ -27,6 +28,18 @@ export class AdminHelperService {
 
   addProduct(newProduct: AdminProduct){
     return this.http.post(this.baseUrl + 'adminhelper/products', newProduct);
+  }
+
+  updateProduct(product: AdminProduct){
+    return this.http.put(this.baseUrl + 'adminhelper/products', product);
+  }
+
+  addRealProduct(realProduct:AdminRealProduct){
+    return this.http.post(this.baseUrl + "adminhelper/real-products", realProduct);
+  }
+  
+  updateRealProduct(realProduct:AdminRealProduct){
+    return this.http.put(this.baseUrl + "adminhelper/real-products", realProduct);
   }
 
 }

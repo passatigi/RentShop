@@ -45,6 +45,31 @@ namespace API.Controllers
             return Ok(_mapper.Map<FeatureDto>(feature));
         }
 
+        [HttpPost("real-products")]
+        public async Task<ActionResult<int>> AddRealProduct(RealProductDto realProductDto)
+        {
+            var realProduct  = new RealProduct();
+            _mapper.Map(realProductDto, realProduct);
+
+            _dataContext.RealProducts.Add(realProduct);
+
+            await _dataContext.SaveChangesAsync();
+
+            return Ok(realProduct.Id);
+        }
+        [HttpPut("real-products")]
+        public async Task<ActionResult> UpdateRealProduct(RealProductDto realProductDto)
+        {
+            var realProduct  = new RealProduct();
+            _mapper.Map(realProductDto, realProduct);
+
+            _dataContext.Entry(realProduct).State = EntityState.Modified;
+
+            await _dataContext.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpPost("products")]
         public async Task<ActionResult<int>> AddProduct(AddProductDto productDto)
         {
@@ -56,6 +81,52 @@ namespace API.Controllers
             await _dataContext.SaveChangesAsync();
 
             return Ok(product.Id);
+        }
+
+        [HttpPut("products")]
+        public async Task<ActionResult> UpdateProduct(AddProductDto productDto)
+        {
+            var product  =  new Product();
+            _mapper.Map(productDto, product);
+
+            var featuresBefore = await _dataContext.ProductFeatures
+                                            .Where(pf => pf.ProductId == product.Id)
+                                            .ToListAsync();
+            
+            // remove deleted features and update value existing features
+            bool isExist = false;
+            foreach(var featureBefore in featuresBefore)
+            {
+                isExist = false;
+                foreach(var feature in product.ProductFeatures)
+                {
+                    if(featureBefore.FeatureId == feature.FeatureId)
+                    {
+                        feature.ProductId = product.Id;
+                        featureBefore.Value = feature.Value;
+                        isExist = true;
+                        break;
+                    }
+                }
+                if(!isExist)
+                {
+                    _dataContext.Remove(featureBefore);
+                }
+            }
+
+            // add absolutely new features
+            foreach(var feature in product.ProductFeatures)
+            {
+                if(feature.ProductId == 0)
+                    _dataContext.ProductFeatures.Add(feature);
+            }
+
+            _dataContext.Entry(product).State = EntityState.Modified;
+            
+
+            await _dataContext.SaveChangesAsync();
+
+            return Ok();
         }
 
         // [HttpPost("photos")]

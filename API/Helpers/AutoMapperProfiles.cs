@@ -28,6 +28,7 @@ namespace API.Helpers
             .ForMember(dest => dest.FeatureId, opt => opt.MapFrom(f => f.Feature.Id));
 
             CreateMap<RealProduct, RealProductDto>();
+            CreateMap<RealProductDto, RealProduct>();
 
             CreateMap<RealProduct, RealProductSchedule>()
             .ForMember(dest => dest.RealProductId, opt => opt.MapFrom(p => p.Id))

@@ -8,6 +8,8 @@ import { MainComponent } from './main/main.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { ProductDetailComponent } from './_products/product-detail/product-detail.component';
 import { ProductListComponent } from './_products/product-list/product-list.component';
+import { EditProductComponent } from './admin/product/edit-product/edit-product.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 
 const routes: Routes = [
@@ -25,8 +27,10 @@ const routes: Routes = [
     children: [
       {path: 'main', component: AdminComponent},
       {path: 'add-product', component: AddProductComponent},
+      {path: 'edit-product', component: EditProductComponent},
     ]
-  }
+  },
+  {path: 'not-found', component: NotFoundComponent},
 ];
 
 @NgModule({

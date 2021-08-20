@@ -1,0 +1,25 @@
+
+    <h2>Edit product page</h2>
+
+    <div class="border-top border-bottom  my-2 alert alert-secondary">
+        <h3 class="m-2">Edit main info</h3>
+    </div>
+    <div class="m-md-4 text-center bg-light p-2 " style="max-width: 1600px; margin: 0 auto" > 
+        <app-product-form [product]='product' [features]='features'></app-product-form>
+        <div class="row">
+            <div class="col-6">
+                <button (click)='updateProduct()'
+                    type="button" 
+                    class="btn btn-block  btn-primary">
+                    Update product</button>
+            </div>
+        </div>
+       
+    </div>
+    <div class="border-top border-bottom bg-dark my-2 text-white">
+        <h3 class="m-2">Edit real products</h3>
+    </div>
+    <div class="m-md-4">
+        <app-edit-real-products [product]='product'></app-edit-real-products>
+    </div>
+

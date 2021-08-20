@@ -30,10 +30,15 @@ import { ProductListComponent } from './_products/product-list/product-list.comp
 import { ProductCardComponent } from './_products/product-card/product-card.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { CategoryCardComponent } from './_categories/category-card/category-card.component';
+import { EditProductComponent } from './admin/product/edit-product/edit-product.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { AddRealProductComponent } from './admin/realProduct/add-real-product/add-real-product.component';
+import { RealProductFormComponent } from './admin/realProduct/real-product-form/real-product-form.component';
+import { EditRealProductsComponent } from './admin/product/edit-real-products/edit-real-products.component';
+import { EditRealProductComponent } from './admin/realProduct/edit-real-product/edit-real-product.component';
 import { ShoppingCartComponent } from './_cart/shopping-cart/shopping-cart.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { CardItemComponent } from './_cart/card-item/card-item.component';
-
 
 @NgModule({
   declarations: [
@@ -54,6 +59,12 @@ import { CardItemComponent } from './_cart/card-item/card-item.component';
     ProductListComponent,
     ProductCardComponent,
     CategoryCardComponent,
+    EditProductComponent,
+    NotFoundComponent,
+    AddRealProductComponent,
+    RealProductFormComponent,
+    EditRealProductsComponent,
+    EditRealProductComponent
     ShoppingCartComponent,
     CartDetaisComponent,
     CardItemComponent
