@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { Observable } from 'rxjs';
+import { CartItem } from 'src/app/_models/cartItem';
 import { Product } from 'src/app/_models/product';
+import { RealProduct } from 'src/app/_models/realProduct';
 import { ProductsService } from 'src/app/_services/products.service';
+import { SelectProductService } from 'src/app/_services/select-product.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,12 +14,18 @@ import { ProductsService } from 'src/app/_services/products.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
+
+  @Input() realProduct: RealProduct;
+
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   id: number;
   product: Product;
 
-  constructor(private productService: ProductsService, private route: ActivatedRoute) { }
+
+
+  constructor(private productService: ProductsService, private route: ActivatedRoute, private selectProductService: SelectProductService) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe( params => {
@@ -24,6 +33,7 @@ export class ProductDetailComponent implements OnInit {
     })
 
     this.loadProduct(this.id);
+
 
     this.galleryOptions = [
       {
@@ -55,6 +65,33 @@ export class ProductDetailComponent implements OnInit {
       this.product = product;
       this.galleryImages = this.getImages();
     });
-
   }
+
+
+  add(realProduct: RealProduct) {
+
+    const item: CartItem = {
+      id: realProduct.id,
+      serialNumber: realProduct.serialNumber,
+      rentPrice: realProduct.rentPrice,
+      condition: realProduct.condition,
+      productId: this.product.id,
+      name: this.product.name,
+      vendor: this.product.vendor,
+      productImgLink: this.product.productImgsLinks[0]
+    };
+
+    this.selectProductService.add(item);
+  }
+
+  // get count() {
+  //   return this.selectProductService.items.filter(i => i.id == this.realProduct.id).length;
+  // }
+
+
+  // remove() {
+  //   if (this.count > 0) {
+  //     this.selectProductService.remove(this.realProduct)
+  //   }
+  // }
 }
