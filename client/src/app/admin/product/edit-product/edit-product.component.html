@@ -1,5 +1,6 @@
 <div>
-    <div>
+    <h2>Edit product page</h2>
+    <div class="text-center">
         <app-product-form [product]='product' [features]='features'></app-product-form>
         <div class="col-6 p-2">
             <button (click)='updateProduct()'
@@ -7,6 +8,9 @@
                 class="btn btn-block  btn-primary">
                 Update product</button>
         </div>
+    </div>
+    <div>
+        <app-edit-real-products [product]='product'></app-edit-real-products>
     </div>
 
 </div>

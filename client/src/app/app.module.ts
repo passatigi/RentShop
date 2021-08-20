@@ -32,6 +32,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { CategoryCardComponent } from './_categories/category-card/category-card.component';
 import { EditProductComponent } from './admin/product/edit-product/edit-product.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { AddRealProductComponent } from './admin/realProduct/add-real-product/add-real-product.component';
+import { RealProductFormComponent } from './admin/realProduct/real-product-form/real-product-form.component';
+import { EditRealProductsComponent } from './admin/product/edit-real-products/edit-real-products.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
     ProductCardComponent,
     CategoryCardComponent,
     EditProductComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AddRealProductComponent,
+    RealProductFormComponent,
+    EditRealProductsComponent
   ],
   imports: [
     BrowserModule,

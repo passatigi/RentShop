@@ -45,6 +45,19 @@ namespace API.Controllers
             return Ok(_mapper.Map<FeatureDto>(feature));
         }
 
+        [HttpPost("real-products")]
+        public async Task<ActionResult<int>> AddRealProduct(RealProductDto realProductDto)
+        {
+            var realProduct  = new RealProduct();
+            _mapper.Map(realProductDto, realProduct);
+
+            _dataContext.RealProducts.Add(realProduct);
+
+            await _dataContext.SaveChangesAsync();
+
+            return Ok(realProduct.Id);
+        }
+
         [HttpPost("products")]
         public async Task<ActionResult<int>> AddProduct(AddProductDto productDto)
         {
