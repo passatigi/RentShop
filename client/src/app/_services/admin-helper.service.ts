@@ -37,5 +37,9 @@ export class AdminHelperService {
   addRealProduct(realProduct:AdminRealProduct){
     return this.http.post(this.baseUrl + "adminhelper/real-products", realProduct);
   }
+  
+  updateRealProduct(realProduct:AdminRealProduct){
+    return this.http.put(this.baseUrl + "adminhelper/real-products", realProduct);
+  }
 
 }

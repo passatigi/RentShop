@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AdminProduct } from 'src/app/_models/adminModels/adminProduct';
 import { AdminRealProduct } from 'src/app/_models/adminModels/adminRealProduct';
 import { AdminHelperService } from 'src/app/_services/admin-helper.service';
@@ -13,7 +14,7 @@ export class AddRealProductComponent implements OnInit {
   @Input() product: AdminProduct;
 
   newRealProduct: AdminRealProduct = {};
-  constructor(private helpService: AdminHelperService) { }
+  constructor(private helpService: AdminHelperService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.newRealProduct.productId = this.product.id;
@@ -21,12 +22,17 @@ export class AddRealProductComponent implements OnInit {
 
   addRealProduct(){
     console.log(this.newRealProduct);
-    this.helpService.addRealProduct(this.newRealProduct).subscribe((id) => {
-      this.newRealProduct.id = <number>id;
-      this.product.realProducts.push(this.newRealProduct);
-      this.newRealProduct = {};
-      this.newRealProduct.productId = this.product.id;
-    });
+    if(this.newRealProduct.serialNumber === undefined || this.newRealProduct.serialNumber === "")
+      this.toastr.error("Serial number should be filled")
+    else if(this.newRealProduct.rentPrice === undefined || this.newRealProduct.rentPrice === null)
+      this.toastr.error("Rent price should be filled")
+    else
+      this.helpService.addRealProduct(this.newRealProduct).subscribe((id) => {
+        this.newRealProduct.id = <number>id;
+        this.product.realProducts.push(this.newRealProduct);
+        this.newRealProduct = {};
+        this.newRealProduct.productId = this.product.id;
+      });
   }
 
 }

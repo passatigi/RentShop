@@ -57,6 +57,18 @@ namespace API.Controllers
 
             return Ok(realProduct.Id);
         }
+        [HttpPut("real-products")]
+        public async Task<ActionResult> UpdateRealProduct(RealProductDto realProductDto)
+        {
+            var realProduct  = new RealProduct();
+            _mapper.Map(realProductDto, realProduct);
+
+            _dataContext.Entry(realProduct).State = EntityState.Modified;
+
+            await _dataContext.SaveChangesAsync();
+
+            return Ok();
+        }
 
         [HttpPost("products")]
         public async Task<ActionResult<int>> AddProduct(AddProductDto productDto)

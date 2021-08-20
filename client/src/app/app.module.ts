@@ -35,6 +35,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { AddRealProductComponent } from './admin/realProduct/add-real-product/add-real-product.component';
 import { RealProductFormComponent } from './admin/realProduct/real-product-form/real-product-form.component';
 import { EditRealProductsComponent } from './admin/product/edit-real-products/edit-real-products.component';
+import { EditRealProductComponent } from './admin/realProduct/edit-real-product/edit-real-product.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { EditRealProductsComponent } from './admin/product/edit-real-products/ed
     NotFoundComponent,
     AddRealProductComponent,
     RealProductFormComponent,
-    EditRealProductsComponent
+    EditRealProductsComponent,
+    EditRealProductComponent
   ],
   imports: [
     BrowserModule,
