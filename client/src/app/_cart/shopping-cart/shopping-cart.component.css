@@ -1,0 +1,8 @@
+:host {
+    display: block;
+    text-align: right;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem;
+    font-size: 1.5rem
+}

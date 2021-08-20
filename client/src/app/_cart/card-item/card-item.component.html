@@ -1,0 +1,34 @@
+<div class="card mb-3" style="width: 50%;" *ngIf="show">
+    <div class="row mb-4">
+        <div class="col">
+            <img src="{{item.productImgLink}}" alt="{{item.name}}" class="card-img-top" style="object-fit:cover; height: 200px; width: 200px;">
+        </div>
+
+
+        <div class="col">
+            <div routerLink='/product' [queryParams]='{id:item.productId}'>
+                <h6>
+                    <strong>{{item.name}}</strong>
+                </h6>
+            </div>
+            <p>
+                <strong>Vendor: </strong>{{item.vendor}}
+            </p>
+            <p>
+                <strong>Serial number: </strong>{{item.serialNumber}}
+            </p>
+            <p>
+                <strong>Condition: </strong>{{item.condition}}
+            </p>
+            <p>
+                <strong>Rent Price: {{item.rentPrice}}</strong>
+            </p>
+        </div>
+        <div class="col" style="margin-right: 2%;">
+            <div>
+                <button type="button" class="btn btn-info" (click)='remove()' style="margin-top: 40%;">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
