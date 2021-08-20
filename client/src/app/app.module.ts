@@ -64,7 +64,7 @@ import { CardItemComponent } from './_cart/card-item/card-item.component';
     AddRealProductComponent,
     RealProductFormComponent,
     EditRealProductsComponent,
-    EditRealProductComponent
+    EditRealProductComponent,
     ShoppingCartComponent,
     CartDetaisComponent,
     CardItemComponent
