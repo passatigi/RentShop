@@ -15,6 +15,7 @@ import { ProductsService } from 'src/app/_services/products.service';
 export class EditProductComponent implements OnInit {
   product?: AdminProduct;
   features: AdminProductFeature[] = [];
+  photoLink?: string;
 
   constructor(
     private route: ActivatedRoute, 
@@ -31,6 +32,7 @@ export class EditProductComponent implements OnInit {
           this.product = <AdminProduct>product;
           console.log(this.product)
           this.getFeatures();
+          this.setPhoto();
         }
         else{
           console.error("aboba");
@@ -60,5 +62,10 @@ export class EditProductComponent implements OnInit {
     this.helperService.updateProduct(this.product).subscribe(() => {
       this.toastr.success("Successfully updated");
     })
+  }
+
+  setPhoto(){
+    if(this.product?.productImgsLinks && this.product?.productImgsLinks.length > 0)
+      this.photoLink = this.product.productImgsLinks[0];
   }
 }
