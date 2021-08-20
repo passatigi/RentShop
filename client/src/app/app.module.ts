@@ -30,6 +30,10 @@ import { ProductListComponent } from './_products/product-list/product-list.comp
 import { ProductCardComponent } from './_products/product-card/product-card.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { CategoryCardComponent } from './_categories/category-card/category-card.component';
+import { ShoppingCartComponent } from './_cart/shopping-cart/shopping-cart.component';
+import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
+import { CardItemComponent } from './_cart/card-item/card-item.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +53,10 @@ import { CategoryCardComponent } from './_categories/category-card/category-card
     ProductDetailComponent,
     ProductListComponent,
     ProductCardComponent,
-    CategoryCardComponent
+    CategoryCardComponent,
+    ShoppingCartComponent,
+    CartDetaisComponent,
+    CardItemComponent
   ],
   imports: [
     BrowserModule,
