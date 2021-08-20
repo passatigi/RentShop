@@ -39,6 +39,10 @@ import { EditRealProductComponent } from './admin/realProduct/edit-real-product/
 import { ShoppingCartComponent } from './_cart/shopping-cart/shopping-cart.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { CardItemComponent } from './_cart/card-item/card-item.component';
+import { PhotoUploadComponent } from './admin/photo/photo-upload/photo-upload.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FileUploadModule } from 'ng2-file-upload';
+import { ProductPhotosComponent } from './admin/product/product-photos/product-photos.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +71,9 @@ import { CardItemComponent } from './_cart/card-item/card-item.component';
     EditRealProductComponent,
     ShoppingCartComponent,
     CartDetaisComponent,
-    CardItemComponent
+    CardItemComponent,
+    PhotoUploadComponent,
+    ProductPhotosComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +89,9 @@ import { CardItemComponent } from './_cart/card-item/card-item.component';
       positionClass: 'toast-bottom-right' 
     }),
     FontAwesomeModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    TabsModule.forRoot(),
+    FileUploadModule
   ],
   exports: [
     NgxGalleryModule

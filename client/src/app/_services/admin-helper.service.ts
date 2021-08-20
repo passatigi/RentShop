@@ -42,4 +42,12 @@ export class AdminHelperService {
     return this.http.put(this.baseUrl + "adminhelper/real-products", realProduct);
   }
 
+  getDetailedPhotos(productId: number){
+    return this.http.get(this.baseUrl + "photo/photos/" + productId);
+  }
+  deletePhoto(photoid: number){
+    return this.http.delete(this.baseUrl + "photo/delete-photo/" + photoid);
+
+  }
+
 }
