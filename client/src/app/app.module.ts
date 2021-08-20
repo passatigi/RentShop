@@ -41,6 +41,7 @@ import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { CardItemComponent } from './_cart/card-item/card-item.component';
 import { PhotoUploadComponent } from './admin/photo/photo-upload/photo-upload.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     }),
     FontAwesomeModule,
     NgxGalleryModule,
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    FileUploadModule
   ],
   exports: [
     NgxGalleryModule
