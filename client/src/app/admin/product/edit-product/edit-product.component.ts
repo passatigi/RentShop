@@ -17,7 +17,7 @@ export class EditProductComponent implements OnInit {
   features: AdminProductFeature[] = [];
   photoLink?: string;
 
-  uploadPath?: string;
+  
 
   constructor(
     private route: ActivatedRoute, 
@@ -31,7 +31,7 @@ export class EditProductComponent implements OnInit {
       this.productService.getProductById(Number.parseInt(params.id)).subscribe((product) => {
         if(product){
           this.product = <AdminProduct>product;
-          this.uploadPath = 'photo/add-photo/' + this.product.id;
+          
           console.log(this.product)
           this.getFeatures();
           this.setPhoto();

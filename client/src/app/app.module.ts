@@ -42,6 +42,7 @@ import { CardItemComponent } from './_cart/card-item/card-item.component';
 import { PhotoUploadComponent } from './admin/photo/photo-upload/photo-upload.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ProductPhotosComponent } from './admin/product/product-photos/product-photos.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     ShoppingCartComponent,
     CartDetaisComponent,
     CardItemComponent,
-    PhotoUploadComponent
+    PhotoUploadComponent,
+    ProductPhotosComponent
   ],
   imports: [
     BrowserModule,

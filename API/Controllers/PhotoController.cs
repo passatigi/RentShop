@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
@@ -5,8 +6,10 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -22,9 +25,21 @@ namespace API.Controllers
             _photoService = photoService;
 
         }
+        [HttpGet("photos/{productId}")]
+        public async Task<ActionResult<IEnumerable<ProductImgDto>>> GetPhotos(int productId)
+        {
+            var imgs = await _dataContext.ProductImgs
+                            .Where(i => i.ProductId == productId)
+                            .ProjectTo<ProductImgDto>(_mapper.ConfigurationProvider)
+                            .ToListAsync();
+
+            if(imgs?.Count == 0) return NotFound();
+
+            return Ok(imgs);
+        }
 
         [HttpPost("add-photo/{id}")]
-        public async Task<ActionResult<ProductImg>> AddPhoto(int id, IFormFile file)
+        public async Task<ActionResult<ProductImgDto>> AddPhoto(int id, IFormFile file)
         {
 
 

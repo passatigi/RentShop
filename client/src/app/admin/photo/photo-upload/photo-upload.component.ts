@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
+import { AdminPhoto } from 'src/app/_models/adminModels/adminPhoto';
 import { AdminProduct } from 'src/app/_models/adminModels/adminProduct';
 import { environment } from 'src/environments/environment';
 
@@ -12,7 +13,8 @@ import { environment } from 'src/environments/environment';
 export class PhotoUploadComponent implements OnInit {
 
   @Input() uploadPath: string;
-
+  @Input() photos: AdminPhoto[];
+ 
   uploader?: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
@@ -47,6 +49,7 @@ export class PhotoUploadComponent implements OnInit {
       if(response) {
         console.log(response)
         this.toastr.success("Uploaded successfully")
+        this.photos.push(JSON.parse(response)); 
         // const photo: Photo = JSON.parse(response);
         // this.member?.photos.push(photo);
         // if(photo.isMain &&  this.user && this.member) {
