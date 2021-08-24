@@ -43,6 +43,9 @@ import { PhotoUploadComponent } from './admin/photo/photo-upload/photo-upload.co
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ProductPhotosComponent } from './admin/product/product-photos/product-photos.component';
+import { DeliverymanScheduleFormComponent } from './deliveryman/deliveryman-schedule/deliveryman-schedule-form/deliveryman-schedule-form.component';
+import { MonthDeliveryScheduleComponent } from './deliveryman/delivery-schedule/month-delivery-schedule/month-delivery-schedule.component';
+import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,10 @@ import { ProductPhotosComponent } from './admin/product/product-photos/product-p
     CartDetaisComponent,
     CardItemComponent,
     PhotoUploadComponent,
-    ProductPhotosComponent
+    ProductPhotosComponent,
+    DeliverymanScheduleFormComponent,
+    MonthDeliveryScheduleComponent,
+    MonthDeliverymanScheduleComponent
   ],
   imports: [
     BrowserModule,
