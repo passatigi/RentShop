@@ -1,3 +1,20 @@
-<div>
+<!-- <div>
     <app-deliveryman-schedule-form></app-deliveryman-schedule-form>
+</div> -->
+<!-- <div>
+    <pre class="alert alert-info">Time is: {{date}}</pre>
+    <pre class="alert alert-info">month is: {{date.getMonth()}}</pre>
+    <pre class="alert alert-info">year is: {{date.getFullYear()}}</pre>
+    <pre class="alert alert-info">day is: {{date.getDay()}}</pre>
+    <pre class="alert alert-info">date is: {{date.getDate()}}</pre>
+</div> -->
+
+<style>
+    
+</style>
+
+<div [ngStyle]="getStyles()">
+    <div *ngFor="let day of dateArr" class="m-2">
+        <div>{{day.getDate()}}</div> <div>{{getDayName(day)}}</div>
+    </div>
 </div>

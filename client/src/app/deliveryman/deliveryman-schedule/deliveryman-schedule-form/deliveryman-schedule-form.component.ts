@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeliverymanScheduleFormComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  startTime: Date = new Date();
+  endTime: Date = new Date();
+ 
+  constructor() {
   }
+  ngOnInit(): void {
+    
+  }
+  
 
 }

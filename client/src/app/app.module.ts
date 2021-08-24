@@ -46,6 +46,7 @@ import { ProductPhotosComponent } from './admin/product/product-photos/product-p
 import { DeliverymanScheduleFormComponent } from './deliveryman/deliveryman-schedule/deliveryman-schedule-form/deliveryman-schedule-form.component';
 import { MonthDeliveryScheduleComponent } from './deliveryman/delivery-schedule/month-delivery-schedule/month-delivery-schedule.component';
 import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-sch
     FontAwesomeModule,
     NgxGalleryModule,
     TabsModule.forRoot(),
-    FileUploadModule
+    FileUploadModule,
+    TimepickerModule.forRoot()
   ],
   exports: [
     NgxGalleryModule
