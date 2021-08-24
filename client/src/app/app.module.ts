@@ -47,6 +47,7 @@ import { DeliverymanScheduleFormComponent } from './deliveryman/deliveryman-sche
 import { MonthDeliveryScheduleComponent } from './deliveryman/delivery-schedule/month-delivery-schedule/month-delivery-schedule.component';
 import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { MonthCalendarComponent } from './deliveryman/month-calendar/month-calendar.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     ProductPhotosComponent,
     DeliverymanScheduleFormComponent,
     MonthDeliveryScheduleComponent,
-    MonthDeliverymanScheduleComponent
+    MonthDeliverymanScheduleComponent,
+    MonthCalendarComponent
   ],
   imports: [
     BrowserModule,

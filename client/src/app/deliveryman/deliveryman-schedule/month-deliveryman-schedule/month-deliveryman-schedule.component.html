@@ -8,13 +8,43 @@
     <pre class="alert alert-info">day is: {{date.getDay()}}</pre>
     <pre class="alert alert-info">date is: {{date.getDate()}}</pre>
 </div> -->
-
 <style>
-    
+    .day:hover .change-btn {
+        visibility: visible;
+    }
+    .change-btn {
+        visibility: hidden;
+    }
+    .weekday{
+        color: #2780E3;
+        font-weight: 600;
+    } 
+    .weekends{
+        color: #FF0939;
+        border-color: rgb(221, 85, 61) !important;
+    }
+    .day-opacity{
+        opacity: 0.5;
+    }
 </style>
 
-<div [ngStyle]="getStyles()">
-    <div *ngFor="let day of dateArr" class="m-2">
-        <div>{{day.getDate()}}</div> <div>{{getDayName(day)}}</div>
+<div [ngStyle]="getStyles()" style="min-width: 800px; scroll-behavior: auto;">
+    <div *ngFor="let day of dateArr" class="m-1 border p-2 day" 
+        [ngClass]="getClass(day)">
+
+        <div class="row border-bottom pb-2">
+            <div class="col-6">{{day.getDate()}} {{getDayName(day)}}</div>
+            <div class="col-6 change-btn" >
+                <button type="button" class="btn btn-block btn-outline-primary" >
+                    Change
+                </button>
+            </div>
+        </div>
+        
+        <div class="pt-2">
+            Start: {{day.getUTCHours()}} : {{day.getUTCMinutes()}}
+            <br>
+            End: {{day.getUTCHours()}} : {{day.getUTCMinutes()}}
+        </div>
     </div>
 </div>

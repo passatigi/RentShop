@@ -1,16 +1,17 @@
 import { Component, ContentChild, OnInit, TemplateRef } from '@angular/core';
+import { DeliverymanSchedule } from 'src/app/_models/deliverymanModels/deliverymanSchedule';
 
 @Component({
-  selector: 'app-month-deliveryman-schedule',
-  templateUrl: './month-deliveryman-schedule.component.html',
-  styleUrls: ['./month-deliveryman-schedule.component.css']
-  
+  selector: 'app-month-calendar',
+  templateUrl: './month-calendar.component.html',
+  styleUrls: ['./month-calendar.component.css']
 })
-export class MonthDeliverymanScheduleComponent implements OnInit {
-  @ContentChild(TemplateRef) template: TemplateRef<any>;
+export class MonthCalendarComponent implements OnInit {
+
+  @ContentChild(TemplateRef) template: TemplateRef<DeliverymanSchedule>;
   
   firstDayIsSan = false;
-  date?:Date = new Date();
+  date?:Date;
 
   dateArr: Date[] = [];
 
@@ -18,7 +19,7 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     
-    let dayOfMonth = this.date;
+    let dayOfMonth = new Date();
 
     let firstCalendarDate = this.getMonthCalendarFirstDay(dayOfMonth);
 
@@ -72,12 +73,6 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
       display: 'grid',
       'grid-template-columns': `repeat(7, 1fr)`
     };
-  }
-
-  public getClass(day: Date) {
-    let dayClass = day.getDay() === 0 || day.getDay() === 6 ? 'weekends' : 'weekday';
-    dayClass += ' ' + (day.getMonth() !== this.date.getMonth() ? 'day-opacity' : '');
-    return dayClass;
   }
 
   weekDays: string[] = ['Sun', 'Mon','Tue','Wed', 'Thu','Fri','Sat']
