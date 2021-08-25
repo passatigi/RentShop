@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-deliveryman-schedule-form',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deliveryman-schedule-form.component.css']
 })
 export class DeliverymanScheduleFormComponent implements OnInit {
+  @Input() day: Date;
 
 
   startTime: Date = new Date();

@@ -14,39 +14,51 @@
     }
     .change-btn {
         visibility: hidden;
+        
     }
     .weekday{
         color: #2780E3;
     } 
     .weekends{
         color: #FF0939;
-        border-color: rgb(221, 85, 61) !important;
     }
-    .day-opacity{
+    .day-opacity div{
         opacity: 0.3;
     }
 </style>
+
 <div class="d-flex justify-content-center">
     <app-month-picker [dayOfMonth]='date' (onChanged)='onDateChanged()'></app-month-picker>
 </div>
-<div [ngStyle]="calendarService.getGridStyles()" style="min-width: 800px; scroll-behavior: auto;">
-    <div *ngFor="let day of calendarService.weekDays" class="p-2 border">
+<div    class="mx-2"
+        [ngStyle]="calendarService.getGridStyles()" 
+        style="min-width: 1050px; scroll-behavior: auto;">
+
+    <div *ngFor="let day of calendarService.getDaysNamesArray()"
+         style="font-size: 20px;" 
+         class="p-2 border-left border-right"
+         >
+
         {{day}}
     </div>
-    <div *ngFor="let day of dateArr" class="border p-2 day" 
-        [ngClass]="getClass(day)">
+    <div    *ngFor="let day of dateArr" 
+            class="border-left border-right p-2 day" 
+            [ngClass]="getClass(day)">
 
-        <div class="row border-bottom pb-2">
-            <div class="col-3" style="font-size: 30px;">{{day.getDate()}}</div>
-            <div class="col-9 change-btn" >
+        <div class="row">
+            <div class="col-3" style="font-size: 40px;">{{day.getDate()}}</div>
+            <div class="col-9 change-btn text-right pt-3" >
                 <button type="button" class="btn btn-outline-primary" >
                     Change
                 </button>
             </div>
         </div>
         
-        <div class="pt-2" style="font-size: 20px;">
-            {{day.getUTCHours()}} : {{day.getUTCMinutes()}} -- {{day.getUTCHours()}} : {{day.getUTCMinutes()}}
+        <div class="" style="font-size: 20px;">
+            <div *ngIf="this.deliverymanSchedules.length > 0 && isWorkDay(day) as workSchedule">
+                {{workSchedule.startDelivery | date:'shortTime'}} —
+                 {{workSchedule.endDelivery | date:'shortTime'}} 
+            </div>
         </div>
     </div>
 </div>

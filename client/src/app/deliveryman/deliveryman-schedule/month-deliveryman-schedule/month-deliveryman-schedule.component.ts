@@ -1,5 +1,7 @@
 import { Component, ContentChild, OnInit, TemplateRef } from '@angular/core';
+import { DeliverymanSchedule } from 'src/app/_models/deliverymanModels/deliverymanSchedule';
 import { CalendarService } from 'src/app/_services/calendar.service';
+import { DeliveryService } from 'src/app/_services/delivery.service';
 
 @Component({
   selector: 'app-month-deliveryman-schedule',
@@ -11,8 +13,9 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
   date:Date = new Date();
 
   dateArr: Date[] = [];
+  deliverymanSchedules: DeliverymanSchedule[] = [];
 
-  constructor(public calendarService: CalendarService) { }
+  constructor(public calendarService: CalendarService, public deliveryService: DeliveryService) { }
 
   ngOnInit(): void {
     this.fillDateArr();
@@ -20,6 +23,21 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
 
   fillDateArr(){
     this.dateArr = this.calendarService.getMonthCalendar(this.date);
+    this.deliveryService.getDeliverymanSchedule(this.date.getFullYear(), this.date.getMonth())
+      .subscribe((response) => {
+        this.deliverymanSchedules = []
+        for (const iterator of response) {
+          this.deliverymanSchedules.push(
+            <DeliverymanSchedule> 
+            { 
+              startDelivery: new Date(Date.parse(iterator.startDelivery)),
+              endDelivery: new Date(Date.parse(iterator.endDelivery))
+            }
+          )
+        }
+         
+        console.log(this.deliverymanSchedules)
+      });
   }
 
   public getClass(day: Date) {
@@ -28,7 +46,23 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
     return dayClass;
   }
 
+
+
   public onDateChanged(){
     this.fillDateArr();
   }
+
+  isWorkDay(date: Date){
+    let schedule = undefined;
+    for (let x of this.deliverymanSchedules) {
+      if(x.startDelivery.getDate() == date.getDate() && 
+          x.startDelivery.getMonth() == date.getMonth() ){
+            schedule = x;
+            break;
+          }
+    }
+    return schedule;
+  }
+
+
 }

@@ -65,6 +65,17 @@ export class CalendarService {
   //weekDays: string[] = ['Sun', 'Mon','Tue','Wed', 'Thu','Fri','Sat']
   weekDays: string[] = ['Sunday', 'Monday','Tuesday','Wednesday', 'Thursday','Friday','Saturday']
 
+  getDaysNamesArray(){
+    if(this.firstDayIsSan)
+      return this.weekDays;
+    else
+    {
+      let weekDays = this.weekDays.filter(x => x !== 'Sunday');
+      weekDays.push('Sunday');
+      return weekDays;
+    }
+      
+  }
   getDayName(day: Date){
     return this.weekDays[day.getDay()]
   }
