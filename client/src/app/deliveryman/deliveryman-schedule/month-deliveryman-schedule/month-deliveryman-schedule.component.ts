@@ -1,10 +1,9 @@
-import { Component, ContentChild, OnInit, TemplateRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, OnInit } from '@angular/core';
+
 import { ToastrService } from 'ngx-toastr';
 import { DeliverymanSchedule } from 'src/app/_models/deliverymanModels/deliverymanSchedule';
 import { CalendarService } from 'src/app/_services/calendar.service';
 import { DeliveryService } from 'src/app/_services/delivery.service';
-import { DeliverymanScheduleFormComponent } from '../deliveryman-schedule-form/deliveryman-schedule-form.component';
 
 @Component({
   selector: 'app-month-deliveryman-schedule',
@@ -18,10 +17,14 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
   dateArr: Date[] = [];
   deliverymanSchedules: DeliverymanSchedule[] = [];
 
+  scheduleToEdit?: DeliverymanSchedule;
+
+  coordinateX: number = 0;
+  coordinateY: number = 100; 
+
 
   constructor(  public calendarService: CalendarService,
-                public deliveryService: DeliveryService,
-                private toastr: ToastrService) { }
+                public deliveryService: DeliveryService) { }
 
   ngOnInit(): void {
     this.fillDateArr();
@@ -29,6 +32,7 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
 
   fillDateArr(){
     this.dateArr = this.calendarService.getMonthCalendar(this.date);
+
     this.deliveryService.getDeliverymanSchedule(this.date.getFullYear(), this.date.getMonth())
       .subscribe((response) => {
         this.deliverymanSchedules = []
@@ -41,9 +45,11 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
             }
           )
         }
-         
-        console.log(this.deliverymanSchedules)
       });
+  }
+
+  public onDateChanged(){
+    this.fillDateArr();
   }
 
   public getClass(day: Date) {
@@ -52,17 +58,11 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
     return dayClass;
   }
 
-
-
-  public onDateChanged(){
-    this.fillDateArr();
-  }
-
-  isWorkDay(date: Date){
+  getWorkDay(date: Date){
     let schedule = undefined;
     for (let x of this.deliverymanSchedules) {
       if(x.startDelivery.getDate() == date.getDate() && 
-          x.startDelivery.getMonth() == date.getMonth() ){
+          x.startDelivery.getMonth() == date.getMonth()){
             schedule = x;
             break;
           }
@@ -70,25 +70,8 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
     return schedule;
   }
   
-  scheduleToEdit?: DeliverymanSchedule;
   openEditMenu(event: any, day: Date){
-    let offsetLeft = 0;
-    let offsetTop = 0;
-
-    let el = event.srcElement;
-
-    let num = 0;
-    while(num != 2){
-        offsetLeft += el.offsetLeft;
-        offsetTop += el.offsetTop;
-        el = el.parentElement;
-        num++;
-    }
-    console.log( { offsetTop:offsetTop , offsetLeft:offsetLeft });
-    this.coordinateX = offsetLeft - 140;
-    this.coordinateY =   offsetTop - 190;
-    
-    let scheduleBefore = this.isWorkDay(day);
+    let scheduleBefore = this.getWorkDay(day);
     
     if(!scheduleBefore){
       scheduleBefore = {
@@ -104,26 +87,4 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
     this.scheduleToEdit = scheduleBefore;
   }
 
-  coordinateX: number;
-  coordinateY: number; 
-
-  updateSchedule(){
-    if(this.scheduleToEdit){
-      this.deliveryService.updateDeliverymanSchedule(this.scheduleToEdit).subscribe(() => {
-        let newSchedule = this.deliverymanSchedules.find(x => x.startDelivery.getDate() === this.scheduleToEdit.startDelivery.getDate());
-        if(newSchedule){
-          newSchedule.startDelivery = this.scheduleToEdit.startDelivery;
-          newSchedule.endDelivery = this.scheduleToEdit.endDelivery;
-        } else {
-          this.deliverymanSchedules.push(this.scheduleToEdit);
-        }
-        this.scheduleToEdit = undefined;
-        this.toastr.success("Successfully updated")
-      });
-    }
-  }
-
-  deleteSchedule(){
-    
-  }
 }

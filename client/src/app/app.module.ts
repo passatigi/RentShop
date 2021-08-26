@@ -52,6 +52,7 @@ import { MonthPickerComponent } from './deliveryman/month-picker/month-picker.co
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FixedPositionatedComponent } from './auxiliary-components/fixed-positionated/fixed-positionated.component';
 import { NgxDraggableDomModule } from 'ngx-draggable-dom';
+import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-schedule/deliveryman-edit-day-schedule/deliveryman-edit-day-schedule.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { NgxDraggableDomModule } from 'ngx-draggable-dom';
     MonthDeliverymanScheduleComponent,
     MonthCalendarComponent,
     MonthPickerComponent,
-    FixedPositionatedComponent
+    FixedPositionatedComponent,
+    DeliverymanEditDayScheduleComponent
   ],
   imports: [
     BrowserModule,

@@ -17,11 +17,9 @@ export class CalendarService {
 
   private getMonthCalendarFirstDay(dayOfMonth: Date){
     let firstDay = new Date(dayOfMonth.getTime());
-
     firstDay.setDate(1);
 
     let diff = firstDay.getDay();
-
     if(!this.firstDayIsSan){
       if(diff === 0){
         diff += 6;
@@ -32,7 +30,6 @@ export class CalendarService {
     }
     
     firstDay.setDate(firstDay.getDate() - diff)
-
     return firstDay;
   }
 
@@ -42,12 +39,14 @@ export class CalendarService {
     let isMonthEnd = false;
     let isLastDay = false;
     let lastDayOfWeek = this.firstDayIsSan ? 0 : 1;
-    let tempDate = new Date(firstCalendarDate.getTime());
 
+    let tempDate = new Date(firstCalendarDate.getTime());
     while(!isMonthEnd || !isLastDay){
       dateArr.push(tempDate);
+
       tempDate = new Date(tempDate.getTime());
       tempDate.setDate(tempDate.getDate() + 1); 
+
       let tempMonthNumber = tempDate.getMonth();
       if(tempMonthNumber === 11 && month === 0)
         tempMonthNumber = -1;
@@ -58,6 +57,7 @@ export class CalendarService {
         isLastDay = true;
       }
     }
+
     return dateArr;
   }
 
@@ -68,14 +68,14 @@ export class CalendarService {
   getDaysNamesArray(){
     if(this.firstDayIsSan)
       return this.weekDays;
-    else
-    {
+    else {
       let weekDays = this.weekDays.filter(x => x !== 'Sunday');
       weekDays.push('Sunday');
       return weekDays;
     }
       
   }
+  
   getDayName(day: Date){
     return this.weekDays[day.getDay()]
   }

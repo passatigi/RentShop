@@ -22,7 +22,6 @@ export class DeliverymanScheduleFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log("changes")
     this.dayStart = new Date(this.schedule.startDelivery.getTime());
     this.dayStart.setHours(0)
     this.dayStart.setMinutes(0)

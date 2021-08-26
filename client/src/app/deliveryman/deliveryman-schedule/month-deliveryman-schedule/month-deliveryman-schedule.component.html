@@ -1,109 +1,53 @@
-<!-- <div>
-    <app-deliveryman-schedule-form></app-deliveryman-schedule-form>
-</div> -->
-<!-- <div>
-    <pre class="alert alert-info">Time is: {{date}}</pre>
-    <pre class="alert alert-info">month is: {{date.getMonth()}}</pre>
-    <pre class="alert alert-info">year is: {{date.getFullYear()}}</pre>
-    <pre class="alert alert-info">day is: {{date.getDay()}}</pre>
-    <pre class="alert alert-info">date is: {{date.getDate()}}</pre>
-</div> -->
-<style>
-    .day:hover .change-btn {
-        visibility: visible;
-    }
-    .change-btn {
-        visibility: hidden;
-        
-    }
-    .weekday{
-        color: #2780E3;
-    } 
-    .weekends{
-        color: #FF0939;
-    }
-    .day-opacity div{
-        opacity: 0.3;
-    }
-
-    .visible{
-        visibility: visible;
-    }
-    .collapse{
-        visibility: collapse;
-    }
-</style>
-
-<div class="d-flex justify-content-center">
-    <app-month-picker [dayOfMonth]='date' (onChanged)='onDateChanged()'></app-month-picker>
-</div>
-
 <app-fixed-positionated [templateRef]='templateRef' [coordinateX]='coordinateX' [coordinateY]='coordinateY' *ngIf="scheduleToEdit">
-    <ng-template #templateRef>
-        <div style="position: absolute; right: 20px; top: 20px;">
-            <button type="button" class="btn btn-sm btn-outline-danger" (click)='scheduleToEdit = undefined'>
-                x
-            </button>
-        </div>
-				<div class="p-2" style="background-color: white;">
-					<div class="p-4 border border-lg" >
-            <div style="font-size: 20px;" class="pl-2">
-                {{scheduleToEdit.startDelivery.getDate()}} {{calendarService.getMonthName(scheduleToEdit.startDelivery)}}
-            </div>
-            <div class="pb-2">
-                <app-deliveryman-schedule-form [schedule]='scheduleToEdit'></app-deliveryman-schedule-form>
-            </div>
-						<div class="btn-group btn-block">		
-							<button type="button" class="btn btn-outline-primary pt-2"
-                    (click)='updateSchedule()'>
-                Update
-							</button>
-							<button type="button" class="btn btn-outline-danger pt-2"
-											(click)='deleteSchedule()'>
-									Remove
-							</button>
-						</div>
-            
-        	</div>
-				</div>
-    </ng-template>
+	<ng-template #templateRef>
+		<app-deliveryman-edit-day-schedule 
+				[scheduleToEdit]='scheduleToEdit'
+				[deliverymanSchedules]='deliverymanSchedules'>
+			</app-deliveryman-edit-day-schedule>
+	</ng-template>
 </app-fixed-positionated>
 
+<div	style="min-width: 1050px; overflow-y: auto;">
 
-<div    class="mx-2"
-        [ngStyle]="calendarService.getGridStyles()" 
-        style="min-width: 1050px; scroll-behavior: auto;">
+	<div class="d-flex justify-content-center">
+			<app-month-picker [dayOfMonth]='date' (onChanged)='onDateChanged()'></app-month-picker>
+	</div>
 
-    <div *ngFor="let day of calendarService.getDaysNamesArray()"
-         style="font-size: 20px;" 
-         class="p-2 border-left border-right">
+	<div  class="mx-2" [ngStyle]="calendarService.getGridStyles()">
 
-        {{day}}
-    </div>
-    <div    *ngFor="let day of dateArr" 
-            class="border-left border-right p-2 day"
-            style="z-index: 0;"
-            [ngClass]="getClass(day)">
+			<div *ngFor="let day of calendarService.getDaysNamesArray()"
+					style="font-size: 20px;" 
+					class="p-2 border-left border-right">
 
-        <div class="row">
-            <div class="col-3" style="font-size: 40px;">{{day.getDate()}}</div>
-            <div class="col-9 change-btn text-right pt-3" *ngIf="date.getMonth() === day.getMonth()">
-                <button type="button" class="btn btn-outline-primary" (click)='openEditMenu($event, day)'>
-                    Change
-                </button>
-            </div>
-        </div>
-        
-        <div class="" style="font-size: 20px;">
-            <div *ngIf="this.deliverymanSchedules.length > 0 && isWorkDay(day) as workSchedule">
-                {{workSchedule.startDelivery | date:'shortTime'}} —
-                 {{workSchedule.endDelivery | date:'shortTime'}} 
-            </div>
-        </div>
-    </div>
+					{{day}}
+			</div>
+			
+			<div		*ngFor="let day of dateArr" 
+							class="border-left border-right p-2 day"
+							style="z-index: 0;"
+							[ngClass]="getClass(day)">
 
-    
+					<div class="row">
+							<div class="col-3" style="font-size: 40px;">{{day.getDate()}}</div>
+
+							<div class="col-9 change-btn text-right pt-3" *ngIf="date.getMonth() === day.getMonth()">
+									<button type="button" class="btn btn-outline-primary" (click)='openEditMenu($event, day)'>
+											Change
+									</button>
+							</div>
+					</div>
+					
+					<div class="" style="font-size: 20px;">
+							<div *ngIf="this.deliverymanSchedules.length > 0 && getWorkDay(day) as workSchedule">
+									{{workSchedule.startDelivery | date:'shortTime'}} —
+									{{workSchedule.endDelivery | date:'shortTime'}} 
+							</div>
+					</div>
+
+			</div>
+	</div>
 </div>
+
 
 
 
