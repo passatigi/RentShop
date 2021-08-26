@@ -12,12 +12,9 @@ export class DeliverymanScheduleFormComponent implements OnInit, OnChanges {
   dayStart?: Date;
   dayEnd?: Date;
 
- 
-  constructor() {
-  }
+  constructor() { }
+  
   ngOnInit(): void {
-
-    
 
   }
 
@@ -29,6 +26,4 @@ export class DeliverymanScheduleFormComponent implements OnInit, OnChanges {
     this.dayEnd.setHours(24)
     this.dayEnd.setMinutes(0)
   }
-  
-
 }

@@ -22,10 +22,10 @@
 					{{day}}
 			</div>
 			
-			<div		*ngFor="let day of dateArr" 
-							class="border-left border-right p-2 day"
-							style="z-index: 0;"
-							[ngClass]="getClass(day)">
+			<div 	*ngFor="let day of dateArr" 
+						class="border-left border-right p-2 day"
+						style="z-index: 0;"
+						[ngClass]="getClass(day)">
 
 					<div class="row">
 							<div class="col-3" style="font-size: 40px;">{{day.getDate()}}</div>
@@ -47,9 +47,3 @@
 			</div>
 	</div>
 </div>
-
-
-
-
-
-

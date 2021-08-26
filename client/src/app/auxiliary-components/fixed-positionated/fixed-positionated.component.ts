@@ -13,7 +13,6 @@ export class FixedPositionatedComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
-
- 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ToastrService } from 'ngx-toastr';
 import { DeliverymanSchedule } from 'src/app/_models/deliverymanModels/deliverymanSchedule';
 import { CalendarService } from 'src/app/_services/calendar.service';
 import { DeliveryService } from 'src/app/_services/delivery.service';
