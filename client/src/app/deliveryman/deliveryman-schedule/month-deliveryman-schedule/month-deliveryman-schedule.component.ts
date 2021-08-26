@@ -85,7 +85,7 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
         num++;
     }
     console.log( { offsetTop:offsetTop , offsetLeft:offsetLeft });
-    this.coordinateX = offsetLeft - 120;
+    this.coordinateX = offsetLeft - 140;
     this.coordinateY =   offsetTop - 190;
     
     let scheduleBefore = this.isWorkDay(day);
@@ -121,5 +121,9 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
         this.toastr.success("Successfully updated")
       });
     }
+  }
+
+  deleteSchedule(){
+    
   }
 }

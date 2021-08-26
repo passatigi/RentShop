@@ -1,0 +1,21 @@
+<style>
+	.fixed-div {
+		position: fixed;
+		z-index: 100;
+	}
+	.absolute-div{
+		background-color: white;
+		position: absolute;
+	}
+</style>
+
+
+<div	class="fixed-div"
+		[ngStyle]="{'top': coordinateY + 'px', 'left': coordinateX + 'px'}">
+	<div 
+		class="absolute-div" 
+		[ngxDraggableDom]='true'>
+
+				<ng-container *ngTemplateOutlet="templateRef"></ng-container>
+	</div>
+</div>

@@ -50,6 +50,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MonthCalendarComponent } from './deliveryman/month-calendar/month-calendar.component';
 import { MonthPickerComponent } from './deliveryman/month-picker/month-picker.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FixedPositionatedComponent } from './auxiliary-components/fixed-positionated/fixed-positionated.component';
+import { NgxDraggableDomModule } from 'ngx-draggable-dom';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     MonthDeliveryScheduleComponent,
     MonthDeliverymanScheduleComponent,
     MonthCalendarComponent,
-    MonthPickerComponent
+    MonthPickerComponent,
+    FixedPositionatedComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +108,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     FileUploadModule,
     TimepickerModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxDraggableDomModule
   ],
   exports: [
     NgxGalleryModule
