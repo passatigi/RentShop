@@ -17,6 +17,8 @@ namespace API.Interfaces
 
         Task<bool> CheckPasswordSignInAsync(AppUser user, string password);
 
+        Task<bool> UpdateUserAsync(AppUser user, UserUpdateDto userUpdateDto);
+
         
     }
 }

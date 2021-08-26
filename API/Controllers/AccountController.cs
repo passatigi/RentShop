@@ -2,13 +2,16 @@
 
 using System;
 using System.Net.Mail;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Interfaces;
+using API.Services;
 using AutoMapper;
-
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,14 +23,44 @@ namespace API.Controllers
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
         private readonly IAccountService _accountService;
+        private readonly DataContext _context;
 
-        public AccountController(IAccountService accountService, ITokenService tokenService, IMapper mapper)
+        public AccountController(IAccountService accountService, DataContext context,
+            ITokenService tokenService, IMapper mapper)
         {
             _accountService = accountService;
+            _context = context;
             _tokenService = tokenService;
             _mapper = mapper;
 
         }
+
+        
+        [HttpPut("updateUserInfo")]
+        public async Task<ActionResult> UpdateUserInfo(UserUpdateDto userUpdateDto){
+            var email = User.GetEmail();
+        
+            var user = await _context.Users
+                .SingleOrDefaultAsync(x => x.Email == email);
+            
+            
+            if(user==null) return BadRequest("User not found");
+            _mapper.Map(userUpdateDto, user);
+
+            if(await _accountService.UpdateUserAsync(user, userUpdateDto)) return Ok();
+
+            return BadRequest("Failed to update user info");
+        }
+
+
+
+
+
+
+
+
+
+
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
@@ -67,9 +100,6 @@ namespace API.Controllers
             var result = await _accountService.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
-
-
-
             var roleResult = await _accountService.AddToRoleAsync(user, "Customer");
 
             if (!roleResult.Succeeded) return BadRequest(result.Errors);

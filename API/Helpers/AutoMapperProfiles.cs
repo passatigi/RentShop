@@ -49,6 +49,8 @@ namespace API.Helpers
             CreateMap<AddProductFeatureDto, ProductFeature>();
 
             CreateMap<ProductImg, ProductImgDto>();
+
+            CreateMap<UserUpdateDto,AppUser>();
         }
     }
 }

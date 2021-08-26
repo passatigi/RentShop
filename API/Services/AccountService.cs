@@ -1,8 +1,11 @@
 using System.Linq;
 using System.Threading.Tasks;
+using API.Data;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Services
 {
@@ -10,9 +13,12 @@ namespace API.Services
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly DataContext _context;
 
-        public AccountService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
+            DataContext context)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -36,6 +42,11 @@ namespace API.Services
         {
             return await _userManager.CreateAsync(user, password);
 
+        }
+        
+        public async Task<bool> UpdateUserAsync(AppUser user, UserUpdateDto userUpdateDto){
+           _context.Entry(user).State = EntityState.Modified;
+            return await _context.SaveChangesAsync()>0;
         }
     }
 }
