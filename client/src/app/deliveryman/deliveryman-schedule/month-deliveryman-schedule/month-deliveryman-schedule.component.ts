@@ -110,7 +110,13 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
   updateSchedule(){
     if(this.scheduleToEdit){
       this.deliveryService.updateDeliverymanSchedule(this.scheduleToEdit).subscribe(() => {
-        this.deliverymanSchedules.push(this.scheduleToEdit);
+        let newSchedule = this.deliverymanSchedules.find(x => x.startDelivery.getDate() === this.scheduleToEdit.startDelivery.getDate());
+        if(newSchedule){
+          newSchedule.startDelivery = this.scheduleToEdit.startDelivery;
+          newSchedule.endDelivery = this.scheduleToEdit.endDelivery;
+        } else {
+          this.deliverymanSchedules.push(this.scheduleToEdit);
+        }
         this.scheduleToEdit = undefined;
         this.toastr.success("Successfully updated")
       });
