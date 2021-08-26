@@ -14,4 +14,8 @@ export class DeliveryService {
   getDeliverymanSchedule(year: number, month: number){
     return this.http.get<Array<any>>(this.baseUrl + 'deliveryman/schedule-month?year=' + year + '&month=' + (month + 1));
   }
+
+  updateDeliverymanSchedule(schedule: DeliverymanSchedule){
+    return this.http.put(this.baseUrl + 'deliveryman/schedule-day', schedule);
+  }
 }

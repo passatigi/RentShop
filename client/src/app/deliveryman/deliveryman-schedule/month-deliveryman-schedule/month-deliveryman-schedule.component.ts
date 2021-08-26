@@ -1,7 +1,10 @@
 import { Component, ContentChild, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { DeliverymanSchedule } from 'src/app/_models/deliverymanModels/deliverymanSchedule';
 import { CalendarService } from 'src/app/_services/calendar.service';
 import { DeliveryService } from 'src/app/_services/delivery.service';
+import { DeliverymanScheduleFormComponent } from '../deliveryman-schedule-form/deliveryman-schedule-form.component';
 
 @Component({
   selector: 'app-month-deliveryman-schedule',
@@ -15,7 +18,10 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
   dateArr: Date[] = [];
   deliverymanSchedules: DeliverymanSchedule[] = [];
 
-  constructor(public calendarService: CalendarService, public deliveryService: DeliveryService) { }
+
+  constructor(  public calendarService: CalendarService,
+                public deliveryService: DeliveryService,
+                private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.fillDateArr();
@@ -63,6 +69,51 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
     }
     return schedule;
   }
+  
+  scheduleToEdit?: DeliverymanSchedule;
+  openEditMenu(event: any, day: Date){
+    let offsetLeft = 0;
+    let offsetTop = 0;
 
+    let el = event.srcElement;
 
+    let num = 0;
+    while(num != 2){
+        offsetLeft += el.offsetLeft;
+        offsetTop += el.offsetTop;
+        el = el.parentElement;
+        num++;
+    }
+    console.log( { offsetTop:offsetTop , offsetLeft:offsetLeft });
+    this.coordinateX = offsetLeft - 120;
+    this.coordinateY =   offsetTop - 190;
+    
+    let scheduleBefore = this.isWorkDay(day);
+    
+    if(!scheduleBefore){
+      scheduleBefore = {
+        startDelivery: new Date(day.getTime()),
+        endDelivery: new Date(day.getTime())
+      }
+      scheduleBefore.startDelivery.setHours(10);
+      scheduleBefore.startDelivery.setMinutes(0);
+      scheduleBefore.endDelivery.setHours(17);
+      scheduleBefore.endDelivery.setMinutes(0);
+    }
+
+    this.scheduleToEdit = scheduleBefore;
+  }
+
+  coordinateX: number;
+  coordinateY: number; 
+
+  updateSchedule(){
+    if(this.scheduleToEdit){
+      this.deliveryService.updateDeliverymanSchedule(this.scheduleToEdit).subscribe(() => {
+        this.deliverymanSchedules.push(this.scheduleToEdit);
+        this.scheduleToEdit = undefined;
+        this.toastr.success("Successfully updated")
+      });
+    }
+  }
 }

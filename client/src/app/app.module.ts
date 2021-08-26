@@ -49,6 +49,7 @@ import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-sch
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MonthCalendarComponent } from './deliveryman/month-calendar/month-calendar.component';
 import { MonthPickerComponent } from './deliveryman/month-picker/month-picker.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { MonthPickerComponent } from './deliveryman/month-picker/month-picker.co
     NgxGalleryModule,
     TabsModule.forRoot(),
     FileUploadModule,
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     NgxGalleryModule

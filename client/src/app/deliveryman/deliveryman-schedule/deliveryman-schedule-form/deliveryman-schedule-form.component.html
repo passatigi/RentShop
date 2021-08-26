@@ -1,6 +1,12 @@
-<div>
-    <h4>Work day start</h4>
-    <timepicker [(ngModel)]="startTime" [max]="endTime"></timepicker>
-    <h4>Work day end</h4>
-    <timepicker [(ngModel)]="endTime" [min]="startTime"></timepicker>
-</div>
+<div class="p-2">Start:</div>
+<timepicker [showSpinners]='false'  
+            [(ngModel)]="schedule.startDelivery" 
+            [max]="schedule.endDelivery" 
+            [min]="dayStart">
+</timepicker>
+<div class="p-2">End:</div>
+<timepicker [showSpinners]='false' 
+            [(ngModel)]="schedule.endDelivery" 
+            [min]="schedule.startDelivery"
+            [max]="dayEnd">
+</timepicker>
