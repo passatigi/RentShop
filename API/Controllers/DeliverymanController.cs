@@ -67,5 +67,36 @@ namespace API.Controllers
             return Ok(schedule);
         }
 
+        
+        [HttpGet("delivery-list")]
+        public async Task<ActionResult<IEnumarable<Order>>> GetDeliveryList(DateTime date)
+        {
+            var userId = User.GetUserId();
+            var orders = await _dataContext.Orders.Where(
+                o => o.DeliverymanId == userId &&
+                o.RequiredDate.Date == date.Date)
+                .Include(o => o.Customer)
+                .Include(o => o.OrderProducts)
+                .ThenInclude(op => op.RealProduct)
+                .ProjectTo<OrderDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return Ok(orders);
+        }
+
+        [HttpPut("delivery-list")]
+        public async Task<ActionResult> UpdateOrderStatus(int orderId, string newStatus)
+        {
+            var order = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+
+            if(order == null) return NotFound();
+
+            order.Status = newStatus;
+
+            await _dataContext.SaveChangesAsync();
+
+            return Ok();
+        }
+
     }
 }
