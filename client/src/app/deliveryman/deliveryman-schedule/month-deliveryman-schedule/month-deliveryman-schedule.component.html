@@ -23,9 +23,11 @@
 			</div>
 			
 			<div 	*ngFor="let day of dateArr" 
-						class="border-left border-right p-2 day"
-						style="z-index: 0;"
-						[ngClass]="getClass(day)">
+					class="border-left border-right p-2 day"
+					style="z-index: 0;"
+					[ngClass]="getClass(day)"
+					routerLink='/delivery/delivery-list' 
+					[queryParams]='{date:day.getTime()}'>
 
 					<div class="row">
 							<div class="col-3" style="font-size: 40px;">{{day.getDate()}}</div>
