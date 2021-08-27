@@ -1,13 +1,12 @@
-using System;
-
 namespace API.Entities
 {
-    public class DeliverymanSchedule
+    public class DeliverySchedule
     {
         public int Id { get; set; }
+        public int OrderId { get; set; }
+        public Order Order { get; set; }
         public int DeliverymanId { get; set; }
         public AppUser Deliveryman { get; set; }
-        public DateTime StartDelivery { get; set; }
-        public DateTime EndDelivery { get; set; }
+        public bool isShipping { get; set; }
     }
 }

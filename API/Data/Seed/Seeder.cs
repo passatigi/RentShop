@@ -92,7 +92,7 @@ namespace API.Data.Seed
             {
                 UserName = "deliveryman",
                 FullName = "deliveryman",
-                Email = "delivery@",
+                Email = "delivery@m",
                 PhoneNumber = "+374 29 222 99 99"
             };
 

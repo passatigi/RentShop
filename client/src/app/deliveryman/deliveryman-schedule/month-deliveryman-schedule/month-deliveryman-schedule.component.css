@@ -1,0 +1,23 @@
+.day:hover .change-btn {
+    visibility: visible;
+}
+.change-btn {
+    visibility: hidden;
+    
+}
+.weekday{
+    color: #2780E3;
+} 
+.weekends{
+    color: #FF0939;
+}
+.day-opacity div{
+    opacity: 0.3;
+}
+
+.visible{
+    visibility: visible;
+}
+.collapse{
+    visibility: collapse;
+}

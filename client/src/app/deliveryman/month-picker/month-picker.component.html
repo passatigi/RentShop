@@ -1,0 +1,13 @@
+<div>
+  <ul class="pagination pagination-lg">
+    <li class="page-item">
+      <a class="page-link" (click)='addMonth(-1)'>&laquo;</a>
+    </li>
+    <li class="page-item" style="width: 200px; text-align: center;">
+      <a class="page-link" >{{monthName}} {{dayOfMonth.getFullYear()}}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" (click)='addMonth(1)'>&raquo;</a>
+    </li>
+  </ul>
+</div>

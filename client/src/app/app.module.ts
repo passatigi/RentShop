@@ -43,6 +43,15 @@ import { PhotoUploadComponent } from './admin/photo/photo-upload/photo-upload.co
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ProductPhotosComponent } from './admin/product/product-photos/product-photos.component';
+import { DeliverymanScheduleFormComponent } from './deliveryman/deliveryman-schedule/deliveryman-schedule-form/deliveryman-schedule-form.component';
+import { MonthDeliveryScheduleComponent } from './deliveryman/delivery-schedule/month-delivery-schedule/month-delivery-schedule.component';
+import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { MonthPickerComponent } from './deliveryman/month-picker/month-picker.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { FixedPositionatedComponent } from './auxiliary-components/fixed-positionated/fixed-positionated.component';
+import { NgxDraggableDomModule } from 'ngx-draggable-dom';
+import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-schedule/deliveryman-edit-day-schedule/deliveryman-edit-day-schedule.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +82,13 @@ import { ProductPhotosComponent } from './admin/product/product-photos/product-p
     CartDetaisComponent,
     CardItemComponent,
     PhotoUploadComponent,
-    ProductPhotosComponent
+    ProductPhotosComponent,
+    DeliverymanScheduleFormComponent,
+    MonthDeliveryScheduleComponent,
+    MonthDeliverymanScheduleComponent,
+    MonthPickerComponent,
+    FixedPositionatedComponent,
+    DeliverymanEditDayScheduleComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +106,10 @@ import { ProductPhotosComponent } from './admin/product/product-photos/product-p
     FontAwesomeModule,
     NgxGalleryModule,
     TabsModule.forRoot(),
-    FileUploadModule
+    FileUploadModule,
+    TimepickerModule.forRoot(),
+    ModalModule.forRoot(),
+    NgxDraggableDomModule
   ],
   exports: [
     NgxGalleryModule
