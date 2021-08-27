@@ -28,8 +28,9 @@ namespace API
                 var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                 await context.Database.MigrateAsync();
                 Seeder seeder = new Seeder();
-                await seeder.SeedData(context);
+                
                 await seeder.SeedUsers(userManager, roleManager);
+                await seeder.SeedData(context);
             }
             catch(Exception ex){
                 var logger = services.GetRequiredService<ILogger<Program>>();

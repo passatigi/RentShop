@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210817135918_InitialCreate")]
+    [Migration("20210827110627_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -187,6 +187,31 @@ namespace API.Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("API.Entities.DeliverySchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DeliverymanId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isShipping")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliverymanId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("DeliverySchedule");
+                });
+
             modelBuilder.Entity("API.Entities.DeliverymanSchedule", b =>
                 {
                     b.Property<int>("Id")
@@ -194,12 +219,18 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DeliveryManId")
+                    b.Property<int>("DeliverymanId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDelivery")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDelivery")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeliveryManId");
+                    b.HasIndex("DeliverymanId");
 
                     b.ToTable("DeliverymanSchedules");
                 });
@@ -268,16 +299,10 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AdressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<int>("DeliverymanId")
@@ -295,13 +320,13 @@ namespace API.Data.Migrations
                     b.Property<string>("ReturnAdress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReturnDate")
+                    b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ShippedAdress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ShippedDate")
+                    b.Property<DateTime?>("ShippedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
@@ -387,6 +412,9 @@ namespace API.Data.Migrations
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -542,13 +570,34 @@ namespace API.Data.Migrations
                     b.Navigation("ParentCategory");
                 });
 
+            modelBuilder.Entity("API.Entities.DeliverySchedule", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "Deliveryman")
+                        .WithMany("DeliverySchedules")
+                        .HasForeignKey("DeliverymanId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Deliveryman");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("API.Entities.DeliverymanSchedule", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", "DeliveryMan")
-                        .WithMany()
-                        .HasForeignKey("DeliveryManId");
+                    b.HasOne("API.Entities.AppUser", "Deliveryman")
+                        .WithMany("DeliverymanShedules")
+                        .HasForeignKey("DeliverymanId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("DeliveryMan");
+                    b.Navigation("Deliveryman");
                 });
 
             modelBuilder.Entity("API.Entities.Feature", b =>
@@ -586,7 +635,8 @@ namespace API.Data.Migrations
                     b.HasOne("API.Entities.AppUser", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("API.Entities.AppUser", "Deliveryman")
                         .WithMany("DeliverymanOrders")
@@ -716,6 +766,10 @@ namespace API.Data.Migrations
                     b.Navigation("Addresses");
 
                     b.Navigation("DeliverymanOrders");
+
+                    b.Navigation("DeliverymanShedules");
+
+                    b.Navigation("DeliverySchedules");
 
                     b.Navigation("MessagesReceived");
 

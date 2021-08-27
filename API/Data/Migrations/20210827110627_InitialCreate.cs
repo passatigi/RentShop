@@ -205,14 +205,16 @@ namespace API.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DeliveryManId = table.Column<int>(type: "int", nullable: true)
+                    DeliverymanId = table.Column<int>(type: "int", nullable: false),
+                    StartDelivery = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDelivery = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DeliverymanSchedules", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DeliverymanSchedules_AspNetUsers_DeliveryManId",
-                        column: x => x.DeliveryManId,
+                        name: "FK_DeliverymanSchedules_AspNetUsers_DeliverymanId",
+                        column: x => x.DeliverymanId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -255,15 +257,13 @@ namespace API.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RequiredDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShippedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ShippedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RequiredReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CustomeId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
                     DeliverymanId = table.Column<int>(type: "int", nullable: false),
-                    AdressId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     ShippedAdress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReturnAdress = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -274,8 +274,7 @@ namespace API.Data.Migrations
                         name: "FK_Orders_AspNetUsers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_AspNetUsers_DeliverymanId",
                         column: x => x.DeliverymanId,
@@ -328,6 +327,33 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DeliverySchedule",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    DeliverymanId = table.Column<int>(type: "int", nullable: false),
+                    isShipping = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeliverySchedule", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DeliverySchedule_AspNetUsers_DeliverymanId",
+                        column: x => x.DeliverymanId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DeliverySchedule_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductFeatures",
                 columns: table => new
                 {
@@ -358,7 +384,8 @@ namespace API.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -465,9 +492,19 @@ namespace API.Data.Migrations
                 column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DeliverymanSchedules_DeliveryManId",
+                name: "IX_DeliverymanSchedules_DeliverymanId",
                 table: "DeliverymanSchedules",
-                column: "DeliveryManId");
+                column: "DeliverymanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeliverySchedule_DeliverymanId",
+                table: "DeliverySchedule",
+                column: "DeliverymanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeliverySchedule_OrderId",
+                table: "DeliverySchedule",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Features_CategoryId",
@@ -542,6 +579,9 @@ namespace API.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "DeliverymanSchedules");
+
+            migrationBuilder.DropTable(
+                name: "DeliverySchedule");
 
             migrationBuilder.DropTable(
                 name: "Messages");
