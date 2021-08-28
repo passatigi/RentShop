@@ -32,18 +32,28 @@ namespace API.Services
         public async Task<bool> CheckPasswordSignInAsync(AppUser user, string password)
         {
             var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
-
             if (!result.Succeeded) return false;
-
             return true;
+        }
+
+        public async Task<bool> CheckPasswordAsync(AppUser user, string password){
+            var result = await _userManager.CheckPasswordAsync(user, password);
+            return result;
         }
 
         public async Task<IdentityResult> CreateAsync(AppUser user, string password)
         {
             return await _userManager.CreateAsync(user, password);
-
         }
-        
+
+        public async Task<IdentityResult> ChangePasswordAsync(AppUser user, string currentPassword,
+            string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+        }
+
+
+
         public async Task<bool> UpdateUserAsync(AppUser user, UserUpdateDto userUpdateDto){
            _context.Entry(user).State = EntityState.Modified;
             return await _context.SaveChangesAsync()>0;

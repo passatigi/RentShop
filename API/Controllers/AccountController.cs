@@ -3,6 +3,7 @@
 using System;
 using System.Net.Mail;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -43,7 +44,6 @@ namespace API.Controllers
             var user = await _context.Users
                 .SingleOrDefaultAsync(x => x.Email == email);
             
-            
             if(user==null) return BadRequest("User not found");
             _mapper.Map(userUpdateDto, user);
 
@@ -52,7 +52,27 @@ namespace API.Controllers
             return BadRequest("Failed to update user info");
         }
 
+        [HttpPut("changePassword")]
+        public async Task<ActionResult> ChangePassword(string currentPassword, string newPassword){
+            var email = User.GetEmail();
+        
+            var user = await _context.Users
+                .SingleOrDefaultAsync(x => x.Email == email);
+            
+            if(user==null) return BadRequest("User not found");
+            
+            if (!(await _accountService.CheckPasswordAsync(user, currentPassword))) 
+                return BadRequest("Wrong password!");
+            
 
+            if((await _accountService.ChangePasswordAsync(user, currentPassword, newPassword))
+                .Succeeded) return Ok(newPassword);
+
+
+            return BadRequest("Failed to change password");
+
+
+        }
 
 
 

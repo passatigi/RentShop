@@ -13,9 +13,14 @@ namespace API.Interfaces
 
         Task<IdentityResult> CreateAsync(AppUser user, string password);
 
+        Task<IdentityResult> ChangePasswordAsync(AppUser user, string currentPassword,
+            string password);
+
         Task<IdentityResult> AddToRoleAsync(AppUser user, string role); 
 
         Task<bool> CheckPasswordSignInAsync(AppUser user, string password);
+
+        Task<bool> CheckPasswordAsync(AppUser user, string password);
 
         Task<bool> UpdateUserAsync(AppUser user, UserUpdateDto userUpdateDto);
 
