@@ -1,6 +1,10 @@
 .day:hover .change-btn {
     visibility: visible;
 }
+
+.day:hover{
+    background-color: #F8F9FA;
+}
 .change-btn {
     visibility: hidden;
     
@@ -20,4 +24,11 @@
 }
 .collapse{
     visibility: collapse;
+}
+
+.edit-img{
+    cursor: pointer;
+    margin: 10px;
+    width: 30px;
+    height: 30px;
 }

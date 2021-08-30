@@ -1,0 +1,20 @@
+.real-product{
+    cursor: pointer;
+}
+.real-product:hover{
+    background-color: white;
+}
+.order-string:hover{
+    cursor: pointer;
+    background-color: #F8F9FA;
+}
+.delivery-completed {
+    background-color: #e3fbe7;
+}
+.delivery-completed:hover {
+    background-color: #cafbd1;
+    
+}
+.hidden-info {
+    visibility: collapse;
+}

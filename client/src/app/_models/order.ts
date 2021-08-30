@@ -15,5 +15,7 @@ export interface Order {
     shippedAdress: string
     returnAdress: string
     realProducts: RealProduct[]
+
+    totalPrice?: number;
   }
   

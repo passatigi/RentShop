@@ -40,11 +40,13 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
           this.deliverymanSchedules.push(
             <DeliverymanSchedule> 
             { 
-              startDelivery: new Date(Date.parse(iterator.startDelivery)),
-              endDelivery: new Date(Date.parse(iterator.endDelivery))
+              startDelivery: new Date(iterator.startDelivery),
+              endDelivery: new Date(iterator.endDelivery)
             }
           )
         }
+        console.log(this.deliverymanSchedules);
+        
       });
   }
 

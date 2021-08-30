@@ -74,7 +74,8 @@ namespace API.Controllers
             var userId = User.GetUserId();
             var orders = await _dataContext.Orders.Where(
                 o => o.DeliverymanId == userId &&
-                o.RequiredDate.Date == date.Date)
+                o.RequiredDate.Date == date.Date || 
+                o.RequiredReturnDate.Date == date.Date)
                 .Include(o => o.Customer)
                 .Include(o => o.OrderProducts)
                 .ThenInclude(op => op.RealProduct)
@@ -85,13 +86,17 @@ namespace API.Controllers
         }
 
         [HttpPut("delivery-list")]
-        public async Task<ActionResult> UpdateOrderStatus(int orderId, string newStatus)
+        public async Task<ActionResult> UpdateOrderStatus(UpdateOrderStatusDto updateOrderStatusDto)
         {
-            var order = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+            var order = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == updateOrderStatusDto.OrderId);
 
             if(order == null) return NotFound();
 
-            order.Status = newStatus;
+            order.Status = updateOrderStatusDto.NewStatus;
+            if(order.Status == "Delivered")
+                order.ShippedDate = DateTime.UtcNow;
+            else if(order.Status == "Returned")
+                order.RequiredReturnDate = DateTime.UtcNow;
 
             await _dataContext.SaveChangesAsync();
 
