@@ -1,6 +1,8 @@
 
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -72,6 +74,23 @@ namespace API.Controllers
             return BadRequest("Failed to change password");
 
 
+        }
+
+        [HttpGet("getAddresses/{email}")]
+        public async Task<ActionResult<IEnumerable<Address>>> GetUserAddresses(string email)
+        {
+           var user = await _context.Users
+                .SingleOrDefaultAsync(x => x.Email == email);
+
+            if(user==null) return BadRequest("User not found");
+
+           var addresses = await _context.Addresses
+                            .Where(i => i.AppUserId == user.Id)
+                            .ToListAsync();
+
+           if(addresses?.Count == 0) return Ok("User hasn't added any addresses");
+
+           return Ok(addresses);
         }
 
 
