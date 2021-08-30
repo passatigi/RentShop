@@ -49,6 +49,7 @@ export class CardItemComponent implements OnInit {
     });
   }
 
+  // add subscribe
   addOrder(){
     
     let user = JSON.parse(localStorage.getItem('user'));
