@@ -33,26 +33,8 @@
             </p>
         </div>
         <div *ngFor='let realProduct of product.realProducts'>
-            <div class="card mb-3">
-                <div class="row mb-4">
-                    <div class="col-9 ml-3">
-                        <p>
-                            <strong>SerialNumber: </strong>{{realProduct.serialNumber}}
-                        </p>
-                        <p>
-                            <strong>Condition: </strong>{{realProduct.condition}}
-                        </p>
-                        <h4>
-                            <strong>Rent Price: </strong>{{realProduct.rentPrice}}
-                        </h4>
-                    </div>
-                    <div class="col" style="margin-right: 2%;">
-                        <div>
-                            <button type="button" class="btn btn-info" (click)="add(realProduct)" style="margin-top: 40%;">Add to cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-real-product-card [realProduct] = "realProduct" [product] = "product"></app-real-product-card>
         </div>
     </div>
+
 </div>
