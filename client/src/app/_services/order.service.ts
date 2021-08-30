@@ -23,9 +23,6 @@ export class OrderService {
   addOrder(order: CreateOrder){
     console.log(JSON.stringify(order));
     let q = 1;
-    return this.http.post(this.baseUrl + 'order/new', order).subscribe(q => {
-      console.log(q);
-      
-    });
+    return this.http.post(this.baseUrl + 'order/new', order);
   }
 }
