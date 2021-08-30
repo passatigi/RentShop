@@ -39,6 +39,11 @@ import { EditRealProductComponent } from './admin/realProduct/edit-real-product/
 import { ShoppingCartComponent } from './_cart/shopping-cart/shopping-cart.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { CardItemComponent } from './_cart/card-item/card-item.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CalendarComponent } from './_products/calendar/calendar.component';
+import { RealProductCardComponent } from './_products/real-product-card/real-product-card.component';
+import { OrdersListComponent } from './_orders/orders-list/orders-list.component';
+import { OrderCardComponent } from './_orders/order-card/order-card.component';
 import { PhotoUploadComponent } from './admin/photo/photo-upload/photo-upload.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -81,6 +86,10 @@ import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-s
     ShoppingCartComponent,
     CartDetaisComponent,
     CardItemComponent,
+    CalendarComponent,
+    RealProductCardComponent,
+    OrdersListComponent,
+    OrderCardComponent,
     PhotoUploadComponent,
     ProductPhotosComponent,
     DeliverymanScheduleFormComponent,
@@ -105,6 +114,7 @@ import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-s
     }),
     FontAwesomeModule,
     NgxGalleryModule,
+    BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     FileUploadModule,
     TimepickerModule.forRoot(),
