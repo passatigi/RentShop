@@ -24,6 +24,7 @@
     "@kolkov/ngx-gallery": "^1.2.3",
     "bootstrap": "^4.5.3",
     "bootswatch": "^5.1.0",
+    "moment": "^2.29.1",
     "ngx-bootstrap": "^7.0.0",
     "ngx-gallery": "^5.10.0",
     "ngx-toastr": "^14.1.0",
@@ -34,7 +35,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.1.4",
     "@angular/cli": "~12.1.4",
-    "@angular/compiler-cli": "^12.1.5",
+    "@angular/compiler-cli": "^12.2.2",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.20.19",
     "jasmine-core": "~3.8.0",

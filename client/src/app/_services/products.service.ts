@@ -19,8 +19,6 @@ export class ProductsService {
   }
 
   getProductById(id: number){
-    console.log('qqq');
-    
     return this.http.get<Product>(this.baseUrl + 'Product/detail/' + id)
   }
 }

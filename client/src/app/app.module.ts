@@ -39,6 +39,12 @@ import { EditRealProductComponent } from './admin/realProduct/edit-real-product/
 import { ShoppingCartComponent } from './_cart/shopping-cart/shopping-cart.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { CardItemComponent } from './_cart/card-item/card-item.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CalendarComponent } from './_products/calendar/calendar.component';
+import { RealProductCardComponent } from './_products/real-product-card/real-product-card.component';
+import { OrdersListComponent } from './_orders/orders-list/orders-list.component';
+import { OrderCardComponent } from './_orders/order-card/order-card.component';
+
 
 @NgModule({
   declarations: [
@@ -64,10 +70,14 @@ import { CardItemComponent } from './_cart/card-item/card-item.component';
     AddRealProductComponent,
     RealProductFormComponent,
     EditRealProductsComponent,
-    EditRealProductComponent
+    EditRealProductComponent,
     ShoppingCartComponent,
     CartDetaisComponent,
-    CardItemComponent
+    CardItemComponent,
+    CalendarComponent,
+    RealProductCardComponent,
+    OrdersListComponent,
+    OrderCardComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +93,8 @@ import { CardItemComponent } from './_cart/card-item/card-item.component';
       positionClass: 'toast-bottom-right' 
     }),
     FontAwesomeModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     NgxGalleryModule

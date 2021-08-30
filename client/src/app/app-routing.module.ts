@@ -11,11 +11,13 @@ import { ProductListComponent } from './_products/product-list/product-list.comp
 import { EditProductComponent } from './admin/product/edit-product/edit-product.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
+import { OrdersListComponent } from './_orders/orders-list/orders-list.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'product', component: ProductDetailComponent},
   {path: 'category', component: ProductListComponent},
+  {path: 'orders', component: OrdersListComponent},
   {path: 'cart', component: CartDetaisComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
