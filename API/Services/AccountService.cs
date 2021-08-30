@@ -67,5 +67,13 @@ namespace API.Services
             return IdentityResult.Failed();
             
         }
+
+        public async Task<IdentityResult> DeleteAddressAsync(Address address){
+            var result = _context.Addresses.Remove(address);
+            if ((await _context.SaveChangesAsync())>0)
+                return IdentityResult.Success;
+            
+            return IdentityResult.Failed();
+        }
     }
 }

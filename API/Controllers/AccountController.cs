@@ -105,6 +105,10 @@ namespace API.Controllers
             var address = _mapper.Map<Address>(addressDto);
             address.AppUserId = user.Id;
 
+            // if ((_context.Addresses.Contains(address, ))){
+            //     return BadRequest("Address already exists");
+            // }
+
             if((await _accountService.AddAddressAsync(address)).Succeeded){
                 return Ok(address);
             }
@@ -112,11 +116,25 @@ namespace API.Controllers
             return BadRequest("Failed to add address");
         }
 
+        [HttpDelete("deleteAddress/{addressId}")]
+        public async Task<ActionResult<bool>> DeleteAddress(int addressId){
+            var email = User.GetEmail();
+        
+            var user = await _context.Users
+                .SingleOrDefaultAsync(x => x.Email == email);
 
+            if(user == null) return BadRequest("User not found");
 
+            var address = await _context.Addresses.FindAsync(addressId);
 
+            if (address == null) return BadRequest("Wrong id");
 
+            if((await _accountService.DeleteAddressAsync(address)).Succeeded){
+                return Ok();
+            }
 
+            return BadRequest("Failed to delete address");
+        }
 
 
         [HttpPost("login")]

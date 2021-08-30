@@ -25,5 +25,7 @@ namespace API.Interfaces
         Task<bool> UpdateUserAsync(AppUser user);
 
         Task<IdentityResult> AddAddressAsync(Address address);
+
+        Task<IdentityResult> DeleteAddressAsync(Address address);
     }
 }
