@@ -50,10 +50,10 @@ namespace API.Controllers
         {
             //would test it later
             return await _dataContext.RealProducts
+                .Where(p => p.Id == id)
                 .Include(rp => rp.OrderProducts).ThenInclude(op => op.Order)
                 .ProjectTo<RealProductSchedule>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
         }
-
         
     }
 }
