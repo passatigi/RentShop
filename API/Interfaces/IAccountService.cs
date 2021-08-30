@@ -22,8 +22,8 @@ namespace API.Interfaces
 
         Task<bool> CheckPasswordAsync(AppUser user, string password);
 
-        Task<bool> UpdateUserAsync(AppUser user, UserUpdateDto userUpdateDto);
+        Task<bool> UpdateUserAsync(AppUser user);
 
-        
+        Task<IdentityResult> AddAddressAsync(Address address);
     }
 }

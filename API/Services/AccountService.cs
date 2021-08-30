@@ -54,9 +54,18 @@ namespace API.Services
 
 
 
-        public async Task<bool> UpdateUserAsync(AppUser user, UserUpdateDto userUpdateDto){
+        public async Task<bool> UpdateUserAsync(AppUser user){
            _context.Entry(user).State = EntityState.Modified;
             return await _context.SaveChangesAsync()>0;
+        }
+
+        public async Task<IdentityResult> AddAddressAsync(Address address){
+            var result = await _context.Addresses.AddAsync(address);
+            if ((await _context.SaveChangesAsync())>0)
+                return IdentityResult.Success;
+            
+            return IdentityResult.Failed();
+            
         }
     }
 }

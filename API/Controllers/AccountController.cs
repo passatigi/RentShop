@@ -49,7 +49,7 @@ namespace API.Controllers
             if(user==null) return BadRequest("User not found");
             _mapper.Map(userUpdateDto, user);
 
-            if(await _accountService.UpdateUserAsync(user, userUpdateDto)) return Ok();
+            if(await _accountService.UpdateUserAsync(user)) return Ok();
 
             return BadRequest("Failed to update user info");
         }
@@ -91,6 +91,25 @@ namespace API.Controllers
            if(addresses?.Count == 0) return Ok("User hasn't added any addresses");
 
            return Ok(addresses);
+        }
+
+        [HttpPost("addAddress")]
+        public async Task<ActionResult<AddressDto>> AddAddress(AddressDto addressDto){
+            var email = User.GetEmail();
+        
+            var user = await _context.Users
+                .SingleOrDefaultAsync(x => x.Email == email);
+            
+            if(user==null) return BadRequest("User not found");
+
+            var address = _mapper.Map<Address>(addressDto);
+            address.AppUserId = user.Id;
+
+            if((await _accountService.AddAddressAsync(address)).Succeeded){
+                return Ok(address);
+            }
+
+            return BadRequest("Failed to add address");
         }
 
 
