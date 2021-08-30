@@ -1,0 +1,8 @@
+.fixed-div {
+    position: fixed;
+    z-index: 100;
+}
+.absolute-div{
+    background-color: white;
+    position: absolute;
+}

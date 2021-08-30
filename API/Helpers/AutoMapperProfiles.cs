@@ -58,6 +58,10 @@ namespace API.Helpers
                 .ForMember(dest => dest.SerialNumber, opt => opt.MapFrom(f => f.RealProduct.SerialNumber))
                 .ForMember(dest => dest.Condition, opt => opt.MapFrom(f => f.RealProduct.Condition))
                 .ForMember(dest => dest.RentPrice, opt => opt.MapFrom(f => f.RealProduct.RentPrice));
+                
+            CreateMap<ProductImg, ProductImgDto>();
+
+            CreateMap<DeliverymanSchedule, DeliverymanScheduleDto>();
         }
     }
 }

@@ -12,6 +12,8 @@ import { EditProductComponent } from './admin/product/edit-product/edit-product.
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { OrdersListComponent } from './_orders/orders-list/orders-list.component';
+import { DeliverymanGuard } from './_guards/deliveryman.guard';
+import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -30,6 +32,16 @@ const routes: Routes = [
       {path: 'main', component: AdminComponent},
       {path: 'add-product', component: AddProductComponent},
       {path: 'edit-product', component: EditProductComponent},
+    ]
+  },
+  {
+    path: 'delivery', 
+    runGuardsAndResolvers: 'always',
+    canActivate: [DeliverymanGuard],
+    children: [
+      // {path: 'main', component: AdminComponent},
+      {path: 'man-schedule', component: MonthDeliverymanScheduleComponent},
+      
     ]
   },
   {path: 'not-found', component: NotFoundComponent},

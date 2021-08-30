@@ -1,25 +1,92 @@
-
-    <h2>Edit product page</h2>
-
-    <div class="border-top border-bottom  my-2 alert alert-secondary">
-        <h3 class="m-2">Edit main info</h3>
-    </div>
-    <div class="m-md-4 text-center bg-light p-2 " style="max-width: 1600px; margin: 0 auto" > 
-        <app-product-form [product]='product' [features]='features'></app-product-form>
-        <div class="row">
-            <div class="col-6">
-                <button (click)='updateProduct()'
-                    type="button" 
-                    class="btn btn-block  btn-primary">
-                    Update product</button>
+<div class="m-md-4" *ngIf="product">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-lg-2" style="max-height: 150px;">
+                    <img class=""  
+                        src="{{photoLink ?? 'assets/settings'}}" alt=""
+                        style="height: 100%; margin: 0 auto;">
+                </div>
+                <div class="col-lg-6">
+                    <table class="table">
+                        <tr>
+                            <th>Name</th>
+                            <th>{{product.name}}</th>
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>{{product.vendor}}</td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>{{product.categoryName}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-4">
+                    <div>
+                        <button routerLink="/product"
+                                [queryParams]='{ id: product.id }'
+                                style="float: right top;" 
+                                type="button" 
+                                class="btn btn-outline-danger">
+                            Back to product page
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-       
+        <div class="col-12">
+            <tabset [justified]="true" >
+                <tab>
+                    <ng-template tabHeading>
+                        <h4>Main info</h4>
+                    </ng-template>
+        
+                    <div>
+                        <div class=" text-center bg-light p-2 py-4 border" >
+                            <div style="max-width: 1600px; margin: 0 auto">
+                                <app-product-form [product]='product' [features]='features'></app-product-form>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button (click)='updateProduct()'
+                                            type="button" 
+                                            class="btn btn-block  btn-outline-primary">
+                                            Update main info</button>
+                                    </div>
+                                </div>
+                            </div> 
+                            
+                        </div>
+                    </div>
+                </tab>
+                <tab>
+                    <ng-template tabHeading>
+                        <h4>Real products</h4>
+                    </ng-template>
+        
+                    <div>
+                        <div class="border py-4">
+                            <app-edit-real-products [product]='product'></app-edit-real-products>
+                        </div>
+                    </div>
+                </tab>
+                <tab>
+                    <ng-template tabHeading>
+                        <h4>Product photos</h4>
+                    </ng-template>
+        
+                    <app-product-photos [product]='product'></app-product-photos>
+                </tab>
+            </tabset>
+        </div>
     </div>
-    <div class="border-top border-bottom bg-dark my-2 text-white">
-        <h3 class="m-2">Edit real products</h3>
-    </div>
-    <div class="m-md-4">
-        <app-edit-real-products [product]='product'></app-edit-real-products>
-    </div>
+    
+</div>
+ 
+
+
+    
+
+    
 

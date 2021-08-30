@@ -1,4 +1,5 @@
 using API.Entities;
+using API.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -98,7 +99,17 @@ namespace API.Data
             .OnDelete(DeleteBehavior.Restrict);
 
 
+            builder.Entity<DeliverymanSchedule>()
+            .HasOne(s => s.Deliveryman)
+            .WithMany(m => m.DeliverymanShedules)
+            .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<DeliverySchedule>()
+            .HasOne(s => s.Deliveryman)
+            .WithMany(m => m.DeliverySchedules)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            builder.ApplyUtcDateTimeConverter();
         }
     }
 }

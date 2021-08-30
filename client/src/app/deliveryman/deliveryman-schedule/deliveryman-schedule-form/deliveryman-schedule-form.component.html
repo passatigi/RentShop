@@ -1,0 +1,12 @@
+<div class="p-2">Start:</div>
+<timepicker [showSpinners]='false'  
+            [(ngModel)]="schedule.startDelivery" 
+            [max]="schedule.endDelivery" 
+            [min]="dayStart">
+</timepicker>
+<div class="p-2">End:</div>
+<timepicker [showSpinners]='false' 
+            [(ngModel)]="schedule.endDelivery" 
+            [min]="schedule.startDelivery"
+            [max]="dayEnd">
+</timepicker>
