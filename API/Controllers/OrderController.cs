@@ -60,7 +60,7 @@ namespace API.Controllers
         [HttpPost("new")]
         public async Task<ActionResult> AddOrder(Order order)
         {
-            order.OrderDate = DateTime.Now;
+            order.OrderDate = DateTime.UtcNow;
             order.Status = "order in processing";
             order.DeliverymanId = 1;
 
