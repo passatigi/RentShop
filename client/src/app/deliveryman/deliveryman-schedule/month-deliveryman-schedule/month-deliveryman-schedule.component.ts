@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { DeliverymanSchedule } from 'src/app/_models/deliverymanModels/deliverymanSchedule';
 import { CalendarService } from 'src/app/_services/calendar.service';
@@ -11,7 +12,7 @@ import { DeliveryService } from 'src/app/_services/delivery.service';
   
 })
 export class MonthDeliverymanScheduleComponent implements OnInit {
-  date:Date = new Date();
+  date?:Date;
 
   dateArr: Date[] = [];
   deliverymanSchedules: DeliverymanSchedule[] = [];
@@ -23,9 +24,12 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
 
 
   constructor(  public calendarService: CalendarService,
-                public deliveryService: DeliveryService) { }
+                public deliveryService: DeliveryService
+                ) { }
 
   ngOnInit(): void {
+    this.date = this.calendarService.date;
+    
     this.fillDateArr();
   }
 

@@ -1,3 +1,4 @@
+import { OrderProduct } from "./orderProduct";
 import { RealProduct } from "./realProduct";
 import { User } from "./user";
 

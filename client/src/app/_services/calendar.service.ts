@@ -7,13 +7,24 @@ import { environment } from 'src/environments/environment';
 export class CalendarService {
   firstDayIsSan = environment.firstDayIsSan;
 
-  constructor() { }
+  private _date: Date = new Date();
+
+  public get date(): Date {
+    return this._date;
+  }
+
+
+  constructor() { 
+    this.date.setDate(15);
+  }
 
   public getMonthCalendar(dayOfMonth: Date){
     let firstCalendarDate = this.getMonthCalendarFirstDay(dayOfMonth);
 
     return this.fillMonthDays(dayOfMonth, firstCalendarDate);
   }
+
+
 
   private getMonthCalendarFirstDay(dayOfMonth: Date){
     let firstDay = new Date(dayOfMonth.getTime());

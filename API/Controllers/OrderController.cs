@@ -43,12 +43,12 @@ namespace API.Controllers
         }
 
         [HttpGet("list/{userid}")]
-        public async Task<ActionResult<OrderDto>> GetOrdersByUserId(int userid)
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersByUserId(int userid)
         {
             var orders = await _context.Orders
                 .Include(p => p.OrderProducts)
                 .ThenInclude(s => s.RealProduct)
-                .Where(c => c.CustomeId == userid)
+                .Where(c => c.CustomerId == userid)
                 .ProjectTo<OrderDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 

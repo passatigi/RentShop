@@ -27,23 +27,10 @@ namespace API.DTOs
         public string ReturnAdress { get; set; }
 
         public ICollection<RealProductDto> RealProducts { get; set; }
+        
 //=======
 
         public ICollection<RealProductDto> OrderProducts { get; set; }
-
-        public DateTime OrderDate { get; set; }
-
-        public DateTime RequiredDate { get; set; }
-
-        public DateTime ShippedDate { get; set; }
-
-        public DateTime RequiredReturnDate { get; set; }
-
-        public DateTime ReturnDate { get; set; }
-
-        public string Status { get; set; }
-
-        public string Comments { get; set; }
 
         public int CustomeId { get; set; }
 
@@ -54,10 +41,6 @@ namespace API.DTOs
         //public AppUser Deliveryman { get; set; }
 
         public int AdressId { get; set; }
-
-        public string ShippedAdress { get; set; }
-        
-        public string ReturnAdress { get; set; }
 
     }
 }
