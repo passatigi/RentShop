@@ -21,10 +21,14 @@ export class ProductDetailComponent implements OnInit {
   galleryImages: NgxGalleryImage[];
   id: number;
   product: Product;
+  items: CartItem[];
+  item: CartItem;
 
 
 
-  constructor(private productService: ProductsService, private route: ActivatedRoute, private selectProductService: SelectProductService) {
+  constructor(private productService: ProductsService, 
+    private route: ActivatedRoute, 
+    private selectProductService: SelectProductService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +37,6 @@ export class ProductDetailComponent implements OnInit {
     })
 
     this.loadProduct(this.id);
-
 
     this.galleryOptions = [
       {
@@ -60,7 +63,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   loadProduct(id: number){
-    console.log(id);
     this.productService.getProductById(id).subscribe(product =>{
       this.product = product;
       this.galleryImages = this.getImages();

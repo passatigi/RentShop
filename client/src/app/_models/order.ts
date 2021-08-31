@@ -17,5 +17,7 @@ export interface Order {
     realProducts: RealProduct[]
 
     totalPrice?: number;
-  }
   
+    orderProducts: OrderProduct[];
+ }
+
