@@ -1,0 +1,80 @@
+
+<div style="font-size: 30px;" class="p-3 d-flex justify-content-between">
+    <div>
+        {{date | date: "fullDate"}}
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-secondary"
+                routerLink='/delivery/man-schedule'>
+            Back to calendar
+        </button>
+    </div>
+</div>
+
+<div *ngIf="orders.length === 0">
+    No orders here...
+</div>
+<div *ngIf="orders?.length !== 0">
+    <table class="table border text-center">
+        <tr>
+            <th>Id</th>
+            <th>Status</th>
+            <th>Comments</th>
+            <th>Customer</th>
+            <th>Addres</th>
+            <th>Completed</th>
+        </tr>
+        <ng-container *ngFor="let order of orders" >
+            <tr class="order-string" [ngClass]="isCompleted(order) ? 'delivery-completed' : ''" (click)='openInfo(order.id)'>
+                <td>{{order.id}}</td>
+                <td>{{order.status}}</td>
+                <td>{{order.comments}}</td>
+                <td>{{order.customer.fullName}}</td>
+                <td>{{order.requiredDate.toDateString() === date.toDateString() ? order.shippedAdress : order.returnAdress}}</td>
+                <td class="">
+                    {{isCompleted(order) ? '+' : '-'}}
+                </td>
+            </tr>
+            <tr class="bg-light hidden-info" id="hidden-info-{{order.id}}">
+                <td colspan="3">
+                    <table class="table border">
+                        <tr>
+                            <td>Serial number</td>
+                            <td>Rent price</td>
+                            <td>Condition</td>
+                        </tr>
+                        <ng-container  *ngFor="let realProduct of order.realProducts">
+                            <tr class='real-product'
+                                routerLink='/product' [queryParams]='{id:realProduct.productId}'>
+                                <td>{{realProduct.serialNumber}}</td>
+                                <td>{{realProduct.rentPrice}}</td>
+                                <td>{{realProduct.condition}}</td>
+                            </tr>
+                        </ng-container>
+                    </table>
+                </td>
+                <td >
+                    <strong>Contacts:</strong> 
+                    <div class="p-2">
+                        {{order.customer.email}} 
+                        <br>
+                        {{order.customer.phoneNumber}}
+                    </div>
+                </td>
+                <td colspan="2">
+                    <strong>Total price:</strong> 
+                    <div style='font-size: 30px;'>
+                        {{order.totalPrice}}
+                    </div>
+                    <div *ngIf="!isCompleted(order)">
+                        <button (click)='submitOrder(order)'
+                                type="button" class="btn btn-primary">
+                            Submit
+                        </button>    
+                    </div>
+                </td>
+            </tr>
+        </ng-container>
+        
+    </table>
+</div>

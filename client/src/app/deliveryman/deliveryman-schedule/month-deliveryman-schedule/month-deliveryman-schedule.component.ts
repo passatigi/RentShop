@@ -34,16 +34,19 @@ export class MonthDeliverymanScheduleComponent implements OnInit {
 
     this.deliveryService.getDeliverymanSchedule(this.date.getFullYear(), this.date.getMonth())
       .subscribe((response) => {
+        console.log(response)
         this.deliverymanSchedules = []
         for (const iterator of response) {
           this.deliverymanSchedules.push(
             <DeliverymanSchedule> 
             { 
-              startDelivery: new Date(Date.parse(iterator.startDelivery)),
-              endDelivery: new Date(Date.parse(iterator.endDelivery))
+              startDelivery: new Date(iterator.startDelivery),
+              endDelivery: new Date(iterator.endDelivery)
             }
           )
         }
+        console.log(this.deliverymanSchedules);
+        
       });
   }
 

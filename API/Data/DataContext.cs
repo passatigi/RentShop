@@ -79,14 +79,16 @@ namespace API.Data
             .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Order>()
-            .HasOne(o => o.Customer)
-            .WithMany(c => c.Orders)
-            .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Order>()
             .HasOne(o => o.Deliveryman)
             .WithMany(d => d.DeliverymanOrders)
             .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Order>()
+            .HasOne(o => o.Customer)
+            .WithMany(c => c.Orders)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            
 
              builder.Entity<Message>()
             .HasOne(u => u.Recipient)

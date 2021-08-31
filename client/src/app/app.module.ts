@@ -49,7 +49,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ProductPhotosComponent } from './admin/product/product-photos/product-photos.component';
 import { DeliverymanScheduleFormComponent } from './deliveryman/deliveryman-schedule/deliveryman-schedule-form/deliveryman-schedule-form.component';
-import { MonthDeliveryScheduleComponent } from './deliveryman/delivery-schedule/month-delivery-schedule/month-delivery-schedule.component';
 import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MonthPickerComponent } from './deliveryman/month-picker/month-picker.component';
@@ -57,6 +56,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FixedPositionatedComponent } from './auxiliary-components/fixed-positionated/fixed-positionated.component';
 import { NgxDraggableDomModule } from 'ngx-draggable-dom';
 import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-schedule/deliveryman-edit-day-schedule/deliveryman-edit-day-schedule.component';
+import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
 
 @NgModule({
   declarations: [
@@ -93,11 +93,11 @@ import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-s
     PhotoUploadComponent,
     ProductPhotosComponent,
     DeliverymanScheduleFormComponent,
-    MonthDeliveryScheduleComponent,
     MonthDeliverymanScheduleComponent,
     MonthPickerComponent,
     FixedPositionatedComponent,
-    DeliverymanEditDayScheduleComponent
+    DeliverymanEditDayScheduleComponent,
+    DeliveryListComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { OrdersListComponent } from './_orders/orders-list/orders-list.component';
 import { DeliverymanGuard } from './_guards/deliveryman.guard';
 import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
+import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -41,7 +42,7 @@ const routes: Routes = [
     children: [
       // {path: 'main', component: AdminComponent},
       {path: 'man-schedule', component: MonthDeliverymanScheduleComponent},
-      
+      {path: 'delivery-list', component: DeliveryListComponent}
     ]
   },
   {path: 'not-found', component: NotFoundComponent},

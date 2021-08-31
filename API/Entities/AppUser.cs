@@ -11,8 +11,8 @@ namespace API.Entities
 
         public ICollection<Address> Addresses { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
-        public ICollection<Order> Orders { get; set; }
 
+        public ICollection<Order> Orders { get; set; }
         public ICollection<Order> DeliverymanOrders { get; set; }
 
 

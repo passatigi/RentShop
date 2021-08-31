@@ -23,17 +23,18 @@
 			</div>
 			
 			<div 	*ngFor="let day of dateArr" 
-						class="border-left border-right p-2 day"
-						style="z-index: 0;"
-						[ngClass]="getClass(day)">
+					class="border-left border-right p-2 day"
+					style="z-index: 0;"
+					[ngClass]="getClass(day)"
+					routerLink='/delivery/delivery-list' 
+					[queryParams]='{date:day.getTime()}'>
 
 					<div class="row">
 							<div class="col-3" style="font-size: 40px;">{{day.getDate()}}</div>
 
-							<div class="col-9 change-btn text-right pt-3" *ngIf="date.getMonth() === day.getMonth()">
-									<button type="button" class="btn btn-outline-primary" (click)='openEditMenu($event, day)'>
-											Change
-									</button>
+							<div class="col-9 change-btn text-right pt-2" *ngIf="date.getMonth() === day.getMonth()">
+								<img (click)='openEditMenu($event, day);$event.stopPropagation()'
+									class="edit-img"  src="assets/settings.png" alt="Settings">
 							</div>
 					</div>
 					
