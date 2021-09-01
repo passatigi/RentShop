@@ -68,6 +68,9 @@ namespace API.Helpers
             CreateMap<Order, OrderDto>()
                 .ForMember(dest => dest.RealProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.RealProduct)));
 
+
+            CreateMap<Message, MessageDto>();
+            
         }
     }
 }

@@ -20,6 +20,8 @@ namespace API.Data
         public DbSet<DeliverymanSchedule> DeliverymanSchedules  { get; set; }
         public DbSet<DeliverySchedule> DeliverySchedules  { get; set; }
         public DbSet<Message> Messages  { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Connection> Connections { get; set; }
         public DbSet<Order> Orders  { get; set; }
         public DbSet<OrderProduct> OrderProducts  { get; set; }
         public DbSet<Product> Products  { get; set; }
