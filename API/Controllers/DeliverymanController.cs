@@ -96,7 +96,7 @@ namespace API.Controllers
             if(order.Status == "Delivered")
                 order.ShippedDate = DateTime.UtcNow;
             else if(order.Status == "Returned")
-                order.RequiredReturnDate = DateTime.UtcNow;
+                order.ReturnDate = DateTime.UtcNow;
 
             await _dataContext.SaveChangesAsync();
 
