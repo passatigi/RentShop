@@ -18,6 +18,7 @@ namespace API.Data
         public DbSet<Category> Categories  { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<DeliverymanSchedule> DeliverymanSchedules  { get; set; }
+        public DbSet<DeliverySchedule> DeliverySchedules  { get; set; }
         public DbSet<Message> Messages  { get; set; }
         public DbSet<Order> Orders  { get; set; }
         public DbSet<OrderProduct> OrderProducts  { get; set; }

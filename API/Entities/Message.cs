@@ -15,6 +15,9 @@ namespace API.Entities
         public DateTime? DateRead  { get; set; }
         public DateTime MessageSent  { get; set; } = DateTime.UtcNow;
 
+        public int OrderId { get; set; }
+        public Order Order { get; set; }
+
         // public bool SenderDeleted { get; set; }
         // public bool RecipientDeleted { get; set; }
     }
