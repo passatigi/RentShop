@@ -13,7 +13,8 @@ namespace API.DTOs
         public int OrderId { get; set; }
 
         public string Content { get; set; }
-        public DateTime? DateRead  { get; set; }
+
+        public bool isRead  { get; set; } = false;
         public DateTime MessageSent  { get; set; } 
 
     }

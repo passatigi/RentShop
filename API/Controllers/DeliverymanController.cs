@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
@@ -52,7 +53,7 @@ namespace API.Controllers
         }
 
         [HttpGet("schedule-month")]
-        public async Task<ActionResult<IEnumarable<DeliverymanScheduleDto>>> GetMonthShedule
+        public async Task<ActionResult<IEnumerable<DeliverymanScheduleDto>>> GetMonthShedule
                                                                                 ([FromQuery] short year,
                                                                                 [FromQuery] short month)
         {
@@ -69,7 +70,7 @@ namespace API.Controllers
 
         
         [HttpGet("delivery-list")]
-        public async Task<ActionResult<IEnumarable<Order>>> GetDeliveryList(DateTime date)
+        public async Task<ActionResult<IEnumerable<Order>>> GetDeliveryList(DateTime date)
         {
             var userId = User.GetUserId();
             var orders = await _dataContext.Orders.Where(

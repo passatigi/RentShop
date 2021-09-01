@@ -90,7 +90,7 @@ namespace API.SignalR
 
             if (group.Connections.Any(x => x.UserId == newMessageDto.RecipientId))
             {
-                message.DateRead = DateTime.UtcNow;
+                message.isRead = true;
             }
             else
             {

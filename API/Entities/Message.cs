@@ -12,7 +12,7 @@ namespace API.Entities
         public AppUser Recipient { get; set; }
 
         public string Content { get; set; }
-        public DateTime? DateRead  { get; set; }
+        public bool isRead  { get; set; }
         public DateTime MessageSent  { get; set; } = DateTime.UtcNow;
 
         public int OrderId { get; set; }

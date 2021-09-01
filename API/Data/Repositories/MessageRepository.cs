@@ -42,8 +42,8 @@ namespace API.Data.Repositories
                 && m.SenderId == currentId
             ).AsQueryable();
 
-            var unreadMessages = messages.Where(m => m.DateRead == null && m.RecipientId == currentId)
-            .AsQueryable();
+            var unreadMessages = messages.Where(m => m.isRead == false && m.RecipientId == currentId)
+                .AsQueryable();
 
 
 
@@ -51,7 +51,7 @@ namespace API.Data.Repositories
             {
                 foreach (var message in unreadMessages)
                 {
-                    message.DateRead = DateTime.UtcNow;
+                    message.isRead = true;
                 }
             }
 
