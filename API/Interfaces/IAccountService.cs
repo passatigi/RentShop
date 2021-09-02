@@ -27,5 +27,7 @@ namespace API.Interfaces
         Task<IdentityResult> AddAddressAsync(Address address);
 
         Task<IdentityResult> DeleteAddressAsync(Address address);
+
+        Task<bool> AddressAlreadyExists(Address address);
     }
 }

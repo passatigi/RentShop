@@ -75,5 +75,19 @@ namespace API.Services
             
             return IdentityResult.Failed();
         }
+
+        public async Task<bool> AddressAlreadyExists(Address address){
+            if ((await _context.Addresses
+                .Where(a => a.AppUserId == address.AppUserId)
+                .Where(a => a.Country == address.Country)
+                .Where(a => a.City == address.City)
+                .Where(a => a.HouseAddress == address.HouseAddress)
+                .Where(a => a.PostalCode == address.PostalCode)
+                .FirstOrDefaultAsync())
+                != null){
+                return true;
+            }
+            return false;
+        }
     }
 }

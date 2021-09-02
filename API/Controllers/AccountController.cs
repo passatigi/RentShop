@@ -105,9 +105,9 @@ namespace API.Controllers
             var address = _mapper.Map<Address>(addressDto);
             address.AppUserId = user.Id;
 
-            // if ((_context.Addresses.Contains(address, ))){
-            //     return BadRequest("Address already exists");
-            // }
+            if (await _accountService.AddressAlreadyExists(address)){
+                return BadRequest("Address already exists");
+            }
 
             if((await _accountService.AddAddressAsync(address)).Succeeded){
                 return Ok(address);
