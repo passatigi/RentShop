@@ -89,11 +89,17 @@ export class ChatComponent implements OnInit {
 
     scrollToBottom(): void {
         try {
-
           if(this.myScrollContainer){
             this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
           }
         } catch(err) { }                 
+    }
+
+    getMessageClass(message: Message){
+      let messageClass = !message.isRead && message.recipientId === this.recipientId ? "unread" : "read";
+      messageClass += message.recipientId === this.recipientId ? "sent" : "received";
+
+      return messageClass;
     }
 
 }

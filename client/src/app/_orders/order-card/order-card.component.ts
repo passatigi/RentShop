@@ -15,4 +15,7 @@ export class OrderCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openChat(){
+    
+  }
 }

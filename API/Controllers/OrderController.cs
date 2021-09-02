@@ -61,8 +61,8 @@ namespace API.Controllers
         public async Task<ActionResult> AddOrder(Order order)
         {
             order.OrderDate = DateTime.UtcNow;
-            order.Status = "order in processing";
-            order.DeliverymanId = 1;
+            order.Status = "Avaiting delivery";
+            order.DeliverymanId = 5;
 
             _dataContext.Orders.Add(order);
 
