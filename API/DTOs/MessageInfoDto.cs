@@ -6,6 +6,6 @@ namespace API.DTOs
         public int OrderId { get; set; }
         public string Content { get; set; }
 
-        public int Page { get; set; }
+        public int StartFrom { get; set; }
     }
 }

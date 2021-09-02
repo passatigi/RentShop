@@ -29,7 +29,7 @@ export class MessageService {
     this.startFrom = 0;
     this.messagesCount = 0;
     this.receivedMessagesCount = 0;
-
+    console.log("createHubConnection")
 
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'message?user=' + recipientId + '&order=' + orderId, {
@@ -99,11 +99,11 @@ export class MessageService {
     }
   }
 
-  async sendMessage(userId: number, orderId:number , content: string){
+  async sendMessage(recipientId: number, orderId:number , content: string){
     return  this.hubConnection?.invoke(
       'SendMessage', 
       {
-        userId, orderId, content
+        recipientId, orderId, content
       })
       .catch(error => console.log(error));
   }

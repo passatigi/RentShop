@@ -63,7 +63,7 @@ namespace API.SignalR
                     Context.User.GetUserId(),
                     messageThreadPageDto.RecipientId,
                     messageThreadPageDto.OrderId,
-                    messageThreadPageDto.Page)
+                    messageThreadPageDto.StartFrom)
                 );
         }
 

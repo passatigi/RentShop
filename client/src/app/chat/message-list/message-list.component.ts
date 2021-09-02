@@ -14,17 +14,22 @@ export class MessageListComponent implements OnInit {
   recipient?: User;
   orderId?: number;
 
+  recipientId?: number;
+
   constructor(
     private accountService: AccountService,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.recipientId = 5;
+    this.orderId = 4;
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+    this.loadMessages();
   }
 
   loadMessages(){
-    if(this.user && this.recipient && this.orderId){
-      this.messageService.createHubConnection(this.user, this.recipient.id, this.orderId);
+    if(true){
+      this.messageService.createHubConnection(this.user, this.recipientId, this.orderId);
     }
   }
 

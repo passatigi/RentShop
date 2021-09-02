@@ -39,8 +39,7 @@ export class ChatComponent implements OnInit {
   constructor(public messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.recipientId = 5;
-    this.orderId = 1;
+
   }
 
   ngAfterViewChecked(){
