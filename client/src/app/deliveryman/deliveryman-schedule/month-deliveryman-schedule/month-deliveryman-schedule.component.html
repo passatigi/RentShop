@@ -1,0 +1,50 @@
+<app-fixed-positionated [templateRef]='templateRef' [coordinateX]='coordinateX' [coordinateY]='coordinateY' *ngIf="scheduleToEdit">
+	<ng-template #templateRef>
+		<app-deliveryman-edit-day-schedule 
+				[scheduleToEdit]='scheduleToEdit'
+				[deliverymanSchedules]='deliverymanSchedules'>
+			</app-deliveryman-edit-day-schedule>
+	</ng-template>
+</app-fixed-positionated>
+
+<div	style="min-width: 1050px; overflow-y: auto;">
+
+	<div class="d-flex justify-content-center">
+			<app-month-picker [dayOfMonth]='date' (onChanged)='onDateChanged()'></app-month-picker>
+	</div>
+
+	<div  class="mx-2" [ngStyle]="calendarService.getGridStyles()">
+
+			<div *ngFor="let day of calendarService.getDaysNamesArray()"
+					style="font-size: 20px;" 
+					class="p-2 border-left border-right">
+
+					{{day}}
+			</div>
+			
+			<div 	*ngFor="let day of dateArr" 
+					class="border-left border-right p-2 day"
+					style="z-index: 0;"
+					[ngClass]="getClass(day)"
+					routerLink='/delivery/delivery-list' 
+					[queryParams]='{date:day.getTime()}'>
+
+					<div class="row">
+							<div class="col-3" style="font-size: 40px;">{{day.getDate()}}</div>
+
+							<div class="col-9 change-btn text-right pt-2" *ngIf="date.getMonth() === day.getMonth()">
+								<img (click)='openEditMenu($event, day);$event.stopPropagation()'
+									class="edit-img"  src="assets/settings.png" alt="Settings">
+							</div>
+					</div>
+					
+					<div class="" style="font-size: 20px;">
+							<div *ngIf="this.deliverymanSchedules.length > 0 && getWorkDay(day) as workSchedule">
+									{{workSchedule.startDelivery | date:'shortTime'}} —
+									{{workSchedule.endDelivery | date:'shortTime'}} 
+							</div>
+					</div>
+
+			</div>
+	</div>
+</div>

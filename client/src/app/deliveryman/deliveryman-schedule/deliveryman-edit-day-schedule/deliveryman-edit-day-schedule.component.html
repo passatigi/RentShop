@@ -1,0 +1,27 @@
+<div *ngIf="scheduleToEdit">
+    <div style="position: absolute; right: 20px; top: 20px;">
+        <button type="button" class="btn btn-sm btn-outline-danger" (click)='scheduleToEdit = undefined'>
+            x
+        </button>
+    </div>
+    <div class="p-2" style="background-color: white;">
+        <div class="p-4 border border-lg" >
+            <div style="font-size: 20px;" class="pl-2">
+                {{scheduleToEdit.startDelivery.getDate()}} {{calendarService.getMonthName(scheduleToEdit.startDelivery)}}
+            </div>
+            <div class="pb-2">
+                <app-deliveryman-schedule-form [schedule]='scheduleToEdit'></app-deliveryman-schedule-form>
+            </div>
+            <div class="btn-group btn-block">		
+                <button type="button" class="btn btn-outline-primary pt-2"
+                        (click)='updateSchedule()'>
+                    Update
+                </button>
+                <button type="button" class="btn btn-outline-danger pt-2"
+                        (click)='deleteSchedule()'>
+                    Remove
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

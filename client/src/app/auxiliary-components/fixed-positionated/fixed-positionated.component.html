@@ -1,0 +1,9 @@
+<div	class="fixed-div"
+		[ngStyle]="{'top': coordinateY + 'px', 'left': coordinateX + 'px'}">
+	<div 
+		class="absolute-div" 
+		[ngxDraggableDom]='true'>
+
+				<ng-container *ngTemplateOutlet="templateRef"></ng-container>
+	</div>
+</div>

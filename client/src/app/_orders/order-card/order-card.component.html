@@ -1,0 +1,25 @@
+<div class="card mb-4"  >
+
+    <div class="card-body p-1">
+        <h5 class="card-title text-center mb-1">
+            <strong>Order number </strong>{{orderDto.id}}
+        </h5>
+        <p>
+            <strong>Order date: </strong>{{orderDto.orderDate}}
+        </p>
+        <p>
+            <strong>Required Date: </strong>{{orderDto.requiredDate}}
+        </p>
+        <p>
+            <strong>Status: </strong>{{orderDto.status}}
+        </p>
+        <p>
+            <strong>Comments: </strong>{{orderDto.comments}}
+        </p>
+        <div *ngFor = 'let product of orderDto.orderProducts'>
+            <p>
+                <strong>Serial number: </strong>{{product.serialNumber}}
+            </p>
+        </div>
+    </div>
+</div>

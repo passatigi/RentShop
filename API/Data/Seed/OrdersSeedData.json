@@ -1,0 +1,75 @@
+[
+    {
+        "OrderProducts": [
+            {
+                "RealProductId": 1  
+            },
+            {
+                "RealProductId": 2  
+            }
+        ],
+        "OrderDate": "2021-09-01T12:00:00Z",
+        "RequiredDate": "2021-09-10T12:00:00Z",
+        "RequiredReturnDate": "2021-09-15T12:00:00Z",
+        "Status": "Awaiting delivery",
+        "Comments": "Comments",
+        "CustomerId": 1,
+        "DeliverymanId": 5,
+        "ShippedAdress": "ShippedAdress",
+        "ReturnAdress": "ReturnAdress"
+    },
+    {
+        "OrderProducts": [
+            {
+                "RealProductId": 3  
+            }
+        ],
+        "OrderDate": "2021-09-01T12:10:00Z",
+        "RequiredDate": "2021-09-16T12:00:00Z",
+        "RequiredReturnDate": "2021-09-17T12:00:00Z",
+        "Status": "Awaiting delivery",
+        "Comments": "Comments",
+        "CustomerId": 1,
+        "DeliverymanId": 5,
+        "ShippedAdress": "ShippedAdress",
+        "ReturnAdress": "ReturnAdress"
+    },
+    {
+        "OrderProducts": [
+            {
+                "RealProductId": 3  
+            },
+            {
+                "RealProductId": 4  
+            }
+        ],
+        "OrderDate": "2021-09-01T12:00:00Z",
+        "RequiredDate": "2021-09-10T12:00:00Z",
+        "RequiredReturnDate": "2021-09-15T12:00:00Z",
+        "Status": "Awaiting delivery",
+        "Comments": "Comments",
+        "CustomerId": 2,
+        "DeliverymanId": 5,
+        "ShippedAdress": "ShippedAdress",
+        "ReturnAdress": "ReturnAdress"
+    },
+    {
+        "OrderProducts": [
+            {
+                "RealProductId": 5 
+            },
+            {
+                "RealProductId": 6  
+            }
+        ],
+        "OrderDate": "2021-09-01T12:00:00Z",
+        "RequiredDate": "2021-09-10T12:00:00Z",
+        "RequiredReturnDate": "2021-09-15T12:00:00Z",
+        "Status": "Awaiting delivery",
+        "Comments": "Comments",
+        "CustomerId": 3,
+        "DeliverymanId": 5,
+        "ShippedAdress": "ShippedAdress",
+        "ReturnAdress": "ReturnAdress"
+    }
+]

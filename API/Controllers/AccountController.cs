@@ -150,6 +150,7 @@ namespace API.Controllers
 
             return new UserDto
             {
+                Id = user.Id,
                 Email = user.Email,
                 FullName = user.FullName,
                 PhoneNumber = user.PhoneNumber,
@@ -182,6 +183,7 @@ namespace API.Controllers
 
             return new UserDto
             {
+                Id = user.Id,
                 Email = user.Email,
                 FullName = user.FullName,
                 PhoneNumber = user.PhoneNumber,

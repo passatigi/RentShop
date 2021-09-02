@@ -1,16 +1,20 @@
-<div class="card mb-3" style="width: 50%;" *ngIf="show">
+<div class="card mb-3" style="width: 100%;" *ngIf="show">
+    <p></p>
     <div class="row mb-4">
-        <div class="col">
-            <img src="{{item.productImgLink}}" alt="{{item.name}}" class="card-img-top" style="object-fit:cover; height: 200px; width: 200px;">
+        <div class="col-3">
+            <img src="{{item.productImgLink}}" alt="{{item.name}}" class="card-img-top" style="object-fit:cover; height: 240px; width: 200px;">
         </div>
 
 
-        <div class="col">
+        <div class="col-3">
             <div routerLink='/product' [queryParams]='{id:item.productId}'>
                 <h6>
                     <strong>{{item.name}}</strong>
                 </h6>
             </div>
+            <p>
+                <strong>Id: </strong>{{item.id}}
+            </p>
             <p>
                 <strong>Vendor: </strong>{{item.vendor}}
             </p>
@@ -24,9 +28,67 @@
                 <strong>Rent Price: {{item.rentPrice}}</strong>
             </p>
         </div>
+
         <div class="col" style="margin-right: 2%;">
             <div>
-                <button type="button" class="btn btn-info" (click)='remove()' style="margin-top: 40%;">Delete</button>
+                <button type="button" class="btn btn-info mt-4" (click)='remove()' >Delete</button>
+            </div>
+
+            <button type="button" class="btn btn-primary mt-4" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Create Order
+            </button>
+            <p></p>
+            <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+                <div class="well well-lg card card-block card-header">
+                    <form [formGroup]='myForm' (ngSubmit)="myForm.valid && addOrder()" autocomplete="off">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" 
+                                    class="form-control mb-3" 
+                                    placeholder="First day" 
+                                    bsDatepicker formControlName="requiredDate" 
+                                    [minDate] = "minDate"
+                                    [datesDisabled]="disabledDates"/>
+                                    <div *ngIf="this.myForm.controls.requiredDate.invalid" class="invalid-feedback">qq</div>
+                                <p *ngIf="myForm.value.start" class="code-">{{myForm.value.start | date}}</p>
+
+                            </div>
+        
+                            <div class="col">
+                                <input type="text" 
+                                    class="form-control mb-3" 
+                                    preview   placeholder="Last day" 
+                                    bsDatepicker formControlName="requiredReturnDate"
+                                    [minDate] = "minDate"
+                                    [datesDisabled]="disabledDates"/>
+                                <p *ngIf="myForm.value.end" class="code-preview">{{myForm.value.end | date}}</p>
+                                <p *ngIf = "myForm.value.end">
+                                    {{myForm.errors}}
+                                </p>
+                                <div *ngIf="this.myForm.controls.requiredReturnDate.invalid" class="invalid-feedback">qq</div>
+                            </div>
+
+                            <app-text-input [formControl]='myForm.controls["shippedAdress"]' 
+                            [label]='"Shipped adress"'>
+                            </app-text-input>
+
+                            <app-text-input [formControl]='myForm.controls["returnAdress"]' 
+                            [label]='"Return adress"'>
+                            </app-text-input>
+
+                            <app-text-input [formControl]='myForm.controls["comments"]' 
+                            [label]='"Comments"'>
+                            </app-text-input>
+
+                            <p>Form value: {{myForm.value | json}}</p>
+                            <p>Form: {{myForm.status}}</p>
+                            <div *ngIf = 'error'>{{error}}</div>
+
+                            <button [disabled]='!myForm.valid' class="btn btn-success mr-2" type="submit">Add order</button>
+                        </div>
+
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -15,21 +15,11 @@ namespace API.Data.Seed
 
         public async Task SeedData(DataContext dataContext)
         {
-            //await SeedCategories(dataContext);
-
             var categories = await SeedEntities<Category>(dataContext, "CategorySeedData.json");
-            foreach(var category in categories)
-            {
-                if(category.ParentCategoryId != null)
-                    category.ParentCategory = categories.FirstOrDefault(c => c.Id == category.ParentCategoryId);
-            }
-
 
             var features = await SeedEntities<Feature>(dataContext, "FeatureSeedData.json");
             var products = await SeedEntities<Product>(dataContext, "ProductSeedData.json");
-
-
-            await dataContext.SaveChangesAsync();
+            var orders = await SeedEntities<Order>(dataContext, "OrdersSeedData.json");
         }
 
         
@@ -44,7 +34,10 @@ namespace API.Data.Seed
             var dbSet = dataContext.Set<T>();
 
             var objects = new List<T>();
-            if(await dbSet.AnyAsync()) return objects;
+            if(await dbSet.AnyAsync()) 
+            {
+                return await dbSet.ToListAsync();
+            }
 
             objects = await GetObjectsFromJson<T>(fileName);
             if(objects.Count() == 0) return objects;
@@ -52,6 +45,8 @@ namespace API.Data.Seed
             foreach(var product in objects){
                 dbSet.Add(product);
             }
+
+            await dataContext.SaveChangesAsync();
 
             return objects;
         }
@@ -92,7 +87,7 @@ namespace API.Data.Seed
             {
                 UserName = "deliveryman",
                 FullName = "deliveryman",
-                Email = "delivery@",
+                Email = "delivery@m",
                 PhoneNumber = "+374 29 222 99 99"
             };
 

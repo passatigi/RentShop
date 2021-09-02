@@ -57,10 +57,11 @@ namespace API.Extensions
             });
             services.AddScoped<IAccountService, AccountService>(); 
 
-            // services.AddAuthorization(opt => {
-            //     opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-            //     opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
-            // });
+            services.AddAuthorization(opt => {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                opt.AddPolicy("RequireDeliverymanRole", policy => policy.RequireRole("Deliveryman"));
+                opt.AddPolicy("RequireCustomerRole", policy => policy.RequireRole("Customer"));
+            });
             
         return services;
 
