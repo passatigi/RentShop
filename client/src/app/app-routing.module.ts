@@ -15,10 +15,12 @@ import { OrdersListComponent } from './_orders/orders-list/orders-list.component
 import { DeliverymanGuard } from './_guards/deliveryman.guard';
 import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
 import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
+import { MessageListComponent } from './chat/message-list/message-list.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'product', component: ProductDetailComponent},
+  {path: 'messages', component: MessageListComponent},
   {path: 'category', component: ProductListComponent},
   {path: 'orders', component: OrdersListComponent},
   {path: 'cart', component: CartDetaisComponent},

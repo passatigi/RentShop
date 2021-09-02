@@ -57,7 +57,7 @@ import { FixedPositionatedComponent } from './auxiliary-components/fixed-positio
 import { NgxDraggableDomModule } from 'ngx-draggable-dom';
 import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-schedule/deliveryman-edit-day-schedule/deliveryman-edit-day-schedule.component';
 import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
-import { ChatComponent } from './chat/chat.component';
+import { ChatComponent } from './chat/chat/chat.component';
 import { MessageListComponent } from './chat/message-list/message-list.component';
 
 @NgModule({

@@ -10,6 +10,15 @@ import { MessageService } from 'src/app/_services/message.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+  
+  @ViewChild('messageForm') messageForm?: NgForm;
+
+  @Input() recipientId?: number;
+  @Input() orderId?: number;
+
+
+  @ViewChild('scrollMe') private myScrollContainer?: ElementRef;
+  @ViewChildren('messagesNgFor') messagesNgFor?: QueryList<any>;
 
   isSmallScreen = false;
   isFirstScroll = true;
@@ -17,26 +26,21 @@ export class ChatComponent implements OnInit {
     this.isSmallScreen = event.target.innerWidth < 1000;
   }
 
-  @ViewChild('messageForm') messageForm?: NgForm;
-
-  @Input() recipientId?: number;
-  @Input() orderId?: number;
-  @Input() messages: Message[] = [];
   
   messageContent?: string;
   loading = false;
   height = 500;
 
   
-  @ViewChild('scrollMe') private myScrollContainer?: ElementRef;
-  @ViewChildren('messagesNgFor') messagesNgFor?: QueryList<any>;
+
 
   isLoadingThread = false;
 
   constructor(public messageService: MessageService) { }
 
   ngOnInit(): void {
-    
+    this.recipientId = 5;
+    this.orderId = 1;
   }
 
   ngAfterViewChecked(){
