@@ -59,6 +59,8 @@
                         {{order.customer.email}} 
                         <br>
                         {{order.customer.phoneNumber}}
+                        <button routerLink="/messages" 
+                        [queryParams]="{'recipientId': order.customer.id, 'orderId':order.id }">Chat</button>
                     </div>
                 </td>
                 <td colspan="2">

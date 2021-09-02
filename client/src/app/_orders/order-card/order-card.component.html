@@ -21,8 +21,8 @@
                 <strong>Serial number: </strong>{{product.serialNumber}}
             </p>
         </div>
-        <button (click)='openChat()' routerLink="/messages" 
-            [state]="{ recipientId: orderDto.deliverymanId, orderId: orderDto.id }"
+        <button routerLink="/messages" 
+                [queryParams]="{'recipientId': orderDto.deliverymanId , 'orderId': orderDto.id}"
 
         type="button" class="btn btn-outline-primary">Chat with deliveryman</button>
     </div> 

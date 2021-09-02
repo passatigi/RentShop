@@ -145,7 +145,7 @@ namespace API.SignalR
 
         private string GetGroupName(int callerId, int otherId, int orderId)
         {
-            return callerId > otherId ? $"{callerId}-{otherId}" : $"{otherId}-{callerId}" + $"-{orderId}";
+            return (callerId > otherId ? $"{callerId}-{otherId}-" : $"{otherId}-{callerId}-") + orderId;
         }
 
     }

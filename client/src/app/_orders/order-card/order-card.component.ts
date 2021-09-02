@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OrderDto } from 'src/app/_models/orderDto';
 
 @Component({
@@ -15,7 +16,5 @@ export class OrderCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openChat(){
-    
-  }
+
 }

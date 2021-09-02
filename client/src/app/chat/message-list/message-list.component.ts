@@ -16,29 +16,30 @@ export class MessageListComponent implements OnInit {
   
   user?: User;
   recipient?: User;
-  orderId?: number;
 
+  orderId?: number;
   recipientId?: number;
 
   constructor(
     private accountService: AccountService,
     private messageService: MessageService,
-    public router: Router) { }
+    public route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    
-    console.log(this.router.getCurrentNavigation().extras.state)
+    this.route.queryParams.subscribe(
+      (queryParam: any) => {
+          this.orderId = queryParam['orderId'];
+          this.recipientId = queryParam['recipientId'];
+      });
 
-    this.recipientId = 1;
-    this.orderId = 4;
+    console.log(this.orderId, this.recipientId)
+
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
-    this.loadMessages();
-  }
 
-  loadMessages(){
     if(true){
       this.messageService.createHubConnection(this.user, this.recipientId, this.orderId);
     }
   }
+
 
 }
