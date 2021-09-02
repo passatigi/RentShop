@@ -55,18 +55,19 @@ namespace API.SignalR
             await base.OnDisconnectedAsync(exception);
         }
 
-        // public async Task GetMoreMessages(MessageThreadPageDto messageThreadPageDto)
-        // {
-        //     await Clients.Caller.SendAsync(
-        //         "MoreMessagesThreadReceived",
-        //         await _unitOfWork.MessageRepository.GetMessageThread(
-        //             Context.User.GetUserName(),
-        //              messageThreadPageDto.RecipientUserName,
-        //             messageThreadPageDto.StartFrom)
-        //         );
-        // }
+        public async Task GetMoreMessages(MessageInfoDto messageThreadPageDto)
+        {
+            await Clients.Caller.SendAsync(
+                "MoreMessagesThreadReceived",
+                await _unitOfWork.MessageRepository.GetMessageThread(
+                    Context.User.GetUserId(),
+                    messageThreadPageDto.RecipientId,
+                    messageThreadPageDto.OrderId,
+                    messageThreadPageDto.Page)
+                );
+        }
 
-        public async Task SendMessage(NewMessageDto newMessageDto)
+        public async Task SendMessage(MessageInfoDto newMessageDto)
         {
             var userId = Context.User.GetUserId();
 

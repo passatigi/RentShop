@@ -25,14 +25,14 @@ export class MessageService {
   constructor(private http: HttpClient) { }
 
 
-  createHubConnection(user: User, otherUsername: string, orderId: number) {
+  createHubConnection(user: User, recipientId: number, orderId: number) {
     this.startFrom = 0;
     this.messagesCount = 0;
     this.receivedMessagesCount = 0;
 
 
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(this.hubUrl + 'message?user=' + otherUsername + '&order=' + orderId, {
+      .withUrl(this.hubUrl + 'message?user=' + recipientId + '&order=' + orderId, {
         accessTokenFactory: () => user.token
       })
       .withAutomaticReconnect()
@@ -81,7 +81,7 @@ export class MessageService {
     })
 
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
-      if(group.connections.some(x => x.userName === otherUsername)) {
+      if(group.connections.some(x => x.userId === recipientId)) {
         this.messageThread$?.pipe(take(1)).subscribe(messages => {
           messages.forEach(message => {
               message.isRead = true;
@@ -108,12 +108,12 @@ export class MessageService {
       .catch(error => console.log(error));
   }
 
-  async getMoreMessages(userName: string){
+  async getMoreMessages(recipientId: number, orderId: number){
     if(this.startFrom !== 0)
       return  this.hubConnection?.invoke(
           'GetMoreMessages', 
           {
-            recipientUserName: userName, startFrom: this.startFrom 
+            recipientId, orderId, startFrom: this.startFrom 
           })
           .catch(error => console.log(error));
   }

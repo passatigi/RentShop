@@ -1,0 +1,60 @@
+<div class="card">
+    <div class="card-body pr-0">
+        <div #scrollMe style="overflow-y: scroll; " (scroll)="onScroll()" [ngStyle]="{'height.px': isSmallScreen ? 300 : 500}" class="pr-2 mr-0">
+        <div *ngIf="(messageService.messageThread$ | async)?.length === 0" class="text-center">
+            No messages yeat... say hi :)
+        </div>
+        
+        <!-- <div style="height: 300px;">
+            
+        </div> -->
+        <div *ngIf="messageService.startFrom === 0 && messageService.messagesCount !== 0" class="text-center">
+            No more messages :)
+        </div>
+        <div *ngIf="isLoadingThread" class="text-center m-3">
+            <img width="50" height="50" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading">
+        </div>
+        <ul #messageList *ngIf="(messageService.messageThread$ | async)?.length ?? 0 > 0" class="chat">
+            <li #messagesNgFor *ngFor="let message of (messageService.messageThread$ | async); let last = last">
+                <span class="chat-img float-right">
+                    <img src="{{message.senderPhotoUrl || 'assets/user.png'}}" alt="{{message.senderUserName}}" class="rounded-circle">
+                </span>
+                <div class="chat-body">
+                    <div class="header">
+                        <small class="text-muted">
+                            <span class="fa fa-clock-o">{{message.messageSent | date : "dd MMMM yyyy hh:mm"}}</span>
+                            <span class="text-danger" *ngIf="!message.dateRead && message.senderUserName !== userName">
+                                (unread)
+                            </span>
+                            <span class="text-success" *ngIf="message.dateRead && message.senderUserName !== userName">
+                                (read {{message.dateRead | timeago}})
+                            </span>
+                        </small>
+                    </div>
+                    <p>{{message.content}}</p>
+                </div>
+                <span *ngIf="!!last && isFirstScroll">{{autoBottomScroll()}}</span>
+            </li>
+        </ul>
+
+        </div>
+    </div>
+    <div class="card-footer">
+        <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+            <div class="input-group">
+                <input 
+                name="messageContent"
+                required
+                [(ngModel)]="messageContent"
+                type="text" 
+                class="form-control input-sm" 
+                placeholder="Send a private message">
+                <div class="input-group-append">
+                    <button [disabled]="!messageForm.valid || loading" class="btn btn-primary" type="submit">Send <i *ngIf="loading" class="fa fa-spinner fa-spin"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p *ngFor="let message of messages">{{message?.content}}</p>
