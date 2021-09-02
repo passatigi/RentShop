@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using API.Data;
 using API.Extensions;
 using AutoMapper;
@@ -21,20 +22,19 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public void GetMessageThreadsList()
+        public async Task<ActionResult> GetMessageThreadsList()
         {
             var userId = User.GetUserId();
 
-            _dataContext.Messages.Include(m => m.Recipient)
+            var messages = await _dataContext.Messages.Include(m => m.Recipient)
                 .Where(m => m.RecipientId == userId || m.SenderId == userId)
+                .OrderBy(m => m.Id)
                 .GroupBy(m => m.Order)
-                .Select(m => 
-                    new { 
-                        OrderId = m.OrderId, 
-                        Content = m.Content, 
-                        СompanionName = m.Recipient.FullName, 
-                        Date = m.MessageSent
-                    }).;
+                .Select(m => m.TakeLast(1))
+                .ToListAsync();
+
+
+            return Ok(messages);
                     
         }
     }
