@@ -30,7 +30,7 @@
 </style>
 
 <div style="max-width: 800px;" class="p-2 border">
-    <div>
+    <div style="position: relative;">
         <div    #scrollMe style="overflow-y: scroll;" 
                 (scroll)="onScroll()" 
                 [ngStyle]="{'height.px': isSmallScreen ? 300 : 500}" 
@@ -62,7 +62,19 @@
                 <span *ngIf="!!last && isFirstScroll">{{autoBottomScroll()}}</span>
             </div>
         </div>
-
+        
+        <div    *ngIf="!isBottomScrolled && isAnyNewMessages" (click)='scrollToBottom()'
+                class="m-2" 
+                style="width: 30%; position: absolute; left: 35%; bottom: 10px; z-index: 2; cursor: pointer;">
+                <div>
+                    <div class="text-center border p-2 bg-light">
+                        Show new messages
+                    </div>
+                </div>
+                
+        </div>
+        
+        
         </div>
     </div>
     <div class="py-2">

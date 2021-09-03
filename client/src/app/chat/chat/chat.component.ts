@@ -68,6 +68,9 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
         this.lastMessageId = messages[messages.length - 1].id;
         if(this.isBottomScrolled)
           this.scrollToBottom();
+        else{
+          this.isAnyNewMessages = true;
+        }
       }
     }
   }
@@ -91,11 +94,13 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
 
 
   lastScrollHeight = 0;
+  isAnyNewMessages = false;
 
   onScroll(){
     if(this.myScrollContainer.nativeElement.scrollTop + this.height === this.myScrollContainer.nativeElement.scrollHeight){
       this.isBottomScrolled = true;
-      console.log("bottom")
+      this.isAnyNewMessages = false;
+            console.log("bottom")
     }
     else{
       this.isBottomScrolled = false;
