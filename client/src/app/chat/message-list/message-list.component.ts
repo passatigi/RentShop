@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { parse } from '@fortawesome/fontawesome-svg-core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
@@ -28,8 +29,8 @@ export class MessageListComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(
       (queryParam: any) => {
-          this.orderId = queryParam['orderId'];
-          this.recipientId = queryParam['recipientId'];
+          this.orderId =  parseInt(queryParam['orderId']) ;
+          this.recipientId = parseInt(queryParam['recipientId']);
       });
 
     console.log(this.orderId, this.recipientId)

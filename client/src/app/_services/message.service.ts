@@ -100,6 +100,7 @@ export class MessageService {
   }
 
   async sendMessage(recipientId: number, orderId:number , content: string){
+    console.log(recipientId, orderId, content)
     return  this.hubConnection?.invoke(
       'SendMessage', 
       {
@@ -113,7 +114,7 @@ export class MessageService {
       return  this.hubConnection?.invoke(
           'GetMoreMessages', 
           {
-            recipientId, orderId, startFrom: this.startFrom 
+            recipientId, orderId// startFrom: this.startFrom 
           })
           .catch(error => console.log(error));
   }

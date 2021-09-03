@@ -62,8 +62,7 @@ namespace API.SignalR
                 await _unitOfWork.MessageRepository.GetMessageThread(
                     Context.User.GetUserId(),
                     messageThreadPageDto.RecipientId,
-                    messageThreadPageDto.OrderId,
-                    messageThreadPageDto.StartFrom)
+                    messageThreadPageDto.OrderId)
                 );
         }
 
