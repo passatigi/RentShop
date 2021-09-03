@@ -1,6 +1,10 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { identifierModuleUrl } from '@angular/compiler';
+import { AfterViewChecked, Component, ElementRef, HostListener, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { distinctUntilChanged, take } from 'rxjs/operators';
 import { Message } from 'src/app/_models/message';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 import { MessageService } from 'src/app/_services/message.service';
 
 
@@ -9,7 +13,8 @@ import { MessageService } from 'src/app/_services/message.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked  {
+  user?: User;
   
   @ViewChild('messageForm') messageForm?: NgForm;
 
@@ -31,15 +36,37 @@ export class ChatComponent implements OnInit {
   loading = false;
   height = 500;
 
+  lastMessageId = 0;
+
   
 
 
   isLoadingThread = false;
 
-  constructor(public messageService: MessageService) { }
+  constructor(public messageService: MessageService,
+              private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+      this.messageService.createHubConnection(this.user, this.recipientId, this.orderId);
+    });
 
+    this.messageService.messageThread$.pipe(distinctUntilChanged())
+        .subscribe(messages => {
+          console.log(messages)
+          setTimeout(() => {
+            this.onMessagesChange(messages);
+          }, 0)
+        });
+  }
+  onMessagesChange(messages: Message[]){
+    if(messages){
+      if(messages[messages.length - 1].id > this.lastMessageId){
+        this.lastMessageId = messages[messages.length - 1].id;
+        this.scrollToBottom();
+      }
+    }
   }
 
   ngAfterViewChecked(){

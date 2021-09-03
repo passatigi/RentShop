@@ -19,7 +19,7 @@ export class MessageService {
   baseUrl = environment.apiUrl;
   hubUrl = environment.hubUrl;
   private hubConnection?: HubConnection;
-  private messageThreadSourse? = new BehaviorSubject<Message[]>([])
+  messageThreadSourse? = new BehaviorSubject<Message[]>([])
   messageThread$ = this.messageThreadSourse?.asObservable();
 
   constructor(private http: HttpClient) { }
@@ -114,7 +114,7 @@ export class MessageService {
       return  this.hubConnection?.invoke(
           'GetMoreMessages', 
           {
-            recipientId, orderId// startFrom: this.startFrom 
+            recipientId, orderId, startFrom: this.startFrom 
           })
           .catch(error => console.log(error));
   }

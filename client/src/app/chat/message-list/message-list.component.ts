@@ -15,15 +15,13 @@ import { MessageService } from 'src/app/_services/message.service';
 export class MessageListComponent implements OnInit {
   data$: Observable<object>;
   
-  user?: User;
+  
   recipient?: User;
 
   orderId?: number;
   recipientId?: number;
 
   constructor(
-    private accountService: AccountService,
-    private messageService: MessageService,
     public route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -35,11 +33,8 @@ export class MessageListComponent implements OnInit {
 
     console.log(this.orderId, this.recipientId)
 
-    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+    
 
-    if(true){
-      this.messageService.createHubConnection(this.user, this.recipientId, this.orderId);
-    }
   }
 
 
