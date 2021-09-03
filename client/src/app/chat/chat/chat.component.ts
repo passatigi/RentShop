@@ -14,33 +14,23 @@ import { MessageService } from 'src/app/_services/message.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit  {
-  user?: User;
-  
-  @ViewChild('messageForm') messageForm?: NgForm;
-
   @Input() recipientId?: number;
   @Input() orderId?: number;
 
-
+  @ViewChild('messageForm') messageForm?: NgForm;
   @ViewChild('scrollMe') private myScrollContainer?: ElementRef;
-  @ViewChildren('messagesNgFor') messagesNgFor?: QueryList<any>;
 
-  isSmallScreen = false;
-  isFirstScroll = true;
-
-
+  user?: User;
   
-  messageContent?: string;
-  loading = false;
-  height = 500;
-
-  lastMessageId = 0;
-
-  
-
-
+  isAnyNewMessages = false;
+  isBottomScrolled = true;
   isLoadingThread = false;
-
+  loadingSend = false;
+  
+  lastScrollHeight = 0;
+  lastMessageId = 0;
+  messageContent?: string;
+  
   constructor(public messageService: MessageService,
               private accountService: AccountService) { }
 
@@ -52,13 +42,12 @@ export class ChatComponent implements OnInit  {
 
     this.messageService.messageThread$.pipe(distinctUntilChanged())
         .subscribe(messages => {
-          console.log(messages)
+          //console.log(messages)
           setTimeout(() => {
             this.onMessagesChange(messages);
           }, 0)
         });
   }
-  isBottomScrolled = true;
 
   onMessagesChange(messages: Message[]){
     if(messages.length > 0){
@@ -76,73 +65,55 @@ export class ChatComponent implements OnInit  {
     }
   }
 
-
-
   sendMessage(){
-    this.loading = true;
+    this.loadingSend = true;
     if(this.recipientId && this.orderId && this.messageContent)
-      this.messageService.sendMessage(this.recipientId, this.orderId, this.messageContent).then(() => {
+      this.messageService
+      .sendMessage(this.recipientId, this.orderId, this.messageContent)
+      .then(() => {
         this.messageForm?.reset();
         this.scrollToBottom();
-      }).then(() => this.loading = false);
+      })
+      .then(() => this.loadingSend = false);
   }
 
-
-
-  lastScrollHeight = 0;
-  isAnyNewMessages = false;
-
   onScroll(){
-    if(
-      this.myScrollContainer.nativeElement.scrollTop
-       + this.myScrollContainer.nativeElement.offsetHeight 
-       === this.myScrollContainer.nativeElement.scrollHeight){
+    if(!this.myScrollContainer) return;
+
+    let el = this.myScrollContainer.nativeElement;
+    
+    //console.log(el.scrollTop, el.offsetHeight,el.scrollHeight)
+    if(Math.ceil(el.scrollTop) + el.offsetHeight === el.scrollHeight){
       this.isBottomScrolled = true;
       this.isAnyNewMessages = false;
-            console.log("bottom")
     }
     else{
       this.isBottomScrolled = false;
-      console.log("no bottom")
-
     }
-    if(this.messageService.startFrom !== 0 && 
-      this.myScrollContainer && 
-      this.myScrollContainer.nativeElement.scrollTop === 0
-      ){
+    if(this.messageService.startFrom !== 0 && el.scrollTop === 0){
       this.isLoadingThread = true;
-      this.lastScrollHeight = this.myScrollContainer.nativeElement.scrollHeight - this.myScrollContainer.nativeElement.scrollTop;
+      this.lastScrollHeight = el.scrollHeight - el.scrollTop;
       setTimeout(() => {
         if(this.recipientId)
         this.messageService.getMoreMessages(this.recipientId, this.orderId).then(() => {
-          if(this.myScrollContainer){
-            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight - this.lastScrollHeight;
-          }
+          el.scrollTop = el.scrollHeight - this.lastScrollHeight;
         });
       }, 1000)
 
     }
   }
-    autoBottomScroll(){
-      if(this.isFirstScroll){
-        this.isFirstScroll = false;
-        this.scrollToBottom();
-      }
-    }
 
-    scrollToBottom(): void {
-        try {
-          if(this.myScrollContainer){
-            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-          }
-        } catch(err) { }                 
-    }
+  scrollToBottom(): void {
+    if(this.myScrollContainer){
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    }              
+  }
 
-    getMessageClass(message: Message){
-      let messageClass = !message.isRead && message.recipientId === this.recipientId ? "unread" : "read";
-      messageClass += message.recipientId === this.recipientId ? "sent" : "received";
+  getMessageClass(message: Message){
+    let messageClass = !message.isRead && message.recipientId === this.recipientId ? "unread" : "read";
+    messageClass += message.recipientId === this.recipientId ? "sent" : "received";
 
-      return messageClass;
-    }
+    return messageClass;
+  }
 
 }

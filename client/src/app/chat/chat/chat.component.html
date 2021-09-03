@@ -1,48 +1,8 @@
-<style>
-    
-    .chat{
-        height: 50vh;
-        min-height: 200px;
-    }
- 
-    
-    .unread{
-        background-color: #F8F9FA;
-    }
-    .read{
-        background-color: white;
-    }
-
-    .sent {
-        margin-left: auto;
-
-    }
-    /* .received {
-        
-        
-    } */
-
-    
-    .message {
-        padding: 5px 0px;
-        display: flex;
-    }
-
-    .message-text {
-        padding: 2px 15px;
-        background-color: white;
-        border:  4px solid #F8F9FA;
-        border-radius: 6px;
-        max-width: 80vw;
-        word-wrap: break-word;
-    }
-</style>
-
 <div  style="max-width: 800px;" class="p-2 border">
-    <div class=' mr-0"' style="position: relative;">
-        <div  class="chat"
-            #scrollMe style="overflow-y: scroll; overflow-x: hidden;" 
-            (scroll)="onScroll()" >
+    <div class='mr-0"' style="position: relative;">
+        <div 
+            #scrollMe class="chat" 
+            (scroll)="onScroll()">
             <div *ngIf="(messageService.messageThread$ | async)?.length === 0" class="text-center">
                 No messages yeat...
             </div>
@@ -61,19 +21,19 @@
 
                     <div    class="message-text"
                             [ngClass]='message.recipientId === recipientId ? "sent" : "received"'>
+
                         <small>
                             <span>{{message.messageSent | date : "dd MMMM yyyy hh:mm"}}</span>
                         </small>
                         <br>
-                        
                         {{message.content}}
                     </div>
                 </div>
             </div>
 
             <div    *ngIf="!isBottomScrolled && isAnyNewMessages" (click)='scrollToBottom()'
-                    class="m-2" 
-                    style="width: 30%; position: absolute; left: 35%; bottom: 10px; z-index: 2; cursor: pointer;">
+                    class="m-2 show-new-messages-button">
+
                     <div>
                         <div class="text-center border p-2 bg-light">
                             Show new messages
@@ -83,6 +43,7 @@
             </div>
         </div>
     </div>
+
     <div class="py-2">
         <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
             <div class="input-group">
@@ -94,7 +55,7 @@
                 class="form-control input-sm" 
                 placeholder="Send a private message">
                 <div class="input-group-append">
-                    <button [disabled]="!messageForm.valid || loading" class="btn btn-primary" type="submit">Send <i *ngIf="loading" class="fa fa-spinner fa-spin"></i></button>
+                    <button [disabled]="!messageForm.valid || loadingSend" class="btn btn-primary" type="submit">Send <i *ngIf="loadingSend" class="fa fa-spinner fa-spin"></i></button>
                 </div>
             </div>
         </form>
