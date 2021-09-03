@@ -57,15 +57,19 @@ namespace API.SignalR
 
         public async Task GetMoreMessages(MessageInfoDto messageThreadPageDto)
         {
-            await Clients.Caller.SendAsync(
-                "MoreMessagesThreadReceived",
-                await _unitOfWork.MessageRepository.GetMessageThread(
+            var messages = await _unitOfWork.MessageRepository.GetMessageThread(
                     Context.User.GetUserId(),
                     messageThreadPageDto.RecipientId,
                     messageThreadPageDto.OrderId,
                     messageThreadPageDto.StartFrom.Value
-                    )
+                    );
+            await _unitOfWork.Complete();
+            
+            await Clients.Caller.SendAsync(
+                "MoreMessagesThreadReceived",
+                messages
                 );
+            
         }
 
         public async Task SendMessage(MessageInfoDto newMessageDto)

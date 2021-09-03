@@ -59,6 +59,7 @@ import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-s
 import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
 import { ChatComponent } from './chat/chat/chat.component';
 import { MessageListComponent } from './chat/message-list/message-list.component';
+import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
 
 @NgModule({
   declarations: [

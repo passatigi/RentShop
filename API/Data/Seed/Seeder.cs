@@ -29,18 +29,18 @@ namespace API.Data.Seed
             return JsonSerializer.Deserialize<List<T>>(data);
         }
 
-        public async Task<List<T>> SeedEntities<T>(DataContext dataContext, string fileName) where T : class
+        public async Task<IQueryable<T>> SeedEntities<T>(DataContext dataContext, string fileName) where T : class
         {
             var dbSet = dataContext.Set<T>();
 
             var objects = new List<T>();
             if(await dbSet.AnyAsync()) 
             {
-                return await dbSet.ToListAsync();
+                return dbSet;
             }
 
             objects = await GetObjectsFromJson<T>(fileName);
-            if(objects.Count() == 0) return objects;
+            if(objects.Count() == 0) return null;
 
             foreach(var product in objects){
                 dbSet.Add(product);
@@ -48,7 +48,7 @@ namespace API.Data.Seed
 
             await dataContext.SaveChangesAsync();
 
-            return objects;
+            return dbSet;
         }
 
         public async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager){
