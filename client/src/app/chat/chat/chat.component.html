@@ -1,4 +1,11 @@
 <style>
+    
+    .chat{
+        height: 50vh;
+        min-height: 200px;
+    }
+ 
+    
     .unread{
         background-color: #F8F9FA;
     }
@@ -17,64 +24,63 @@
 
     
     .message {
-        padding: 5px;
+        padding: 5px 0px;
         display: flex;
     }
 
     .message-text {
-        padding: 5px 15px;
+        padding: 2px 15px;
         background-color: white;
         border:  4px solid #F8F9FA;
         border-radius: 6px;
+        max-width: 80vw;
+        word-wrap: break-word;
     }
 </style>
 
-<div style="max-width: 800px;" class="p-2 border">
-    <div style="position: relative;">
-        <div    #scrollMe style="overflow-y: scroll;" 
-                (scroll)="onScroll()" 
-                [ngStyle]="{'height.px': isSmallScreen ? 300 : 500}" 
-                class=" mr-0">
-        <div *ngIf="(messageService.messageThread$ | async)?.length === 0" class="text-center">
-            No messages yeat...
-        </div>
-        
-        <div *ngIf="messageService.startFrom === 0 && messageService.messagesCount !== 0" class="text-center">
-            No more messages :)
-        </div>
-        <div *ngIf="isLoadingThread" class="text-center m-3">
-            <img width="50" height="50" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading">
-        </div>
-
-        <div  #messageList *ngIf="(messageService.messageThread$ | async)?.length ?? 0 > 0">
-            <div    [ngClass]='!message.isRead && message.recipientId === recipientId ? "unread" : "read"'
-                    class='message' #messagesNgFor 
-                    *ngFor="let message of (messageService.messageThread$ | async); let last = last">
-
-                <div    class="message-text"
-                        [ngClass]='message.recipientId === recipientId ? "sent" : "received"'>
-                    <small>
-                        <span >{{message.messageSent | date : "dd MMMM yyyy hh:mm"}}</span>
-                    </small>
-                    <br>
-                    {{message.content}}
-                </div>
-                <span *ngIf="!!last && isFirstScroll">{{autoBottomScroll()}}</span>
+<div  style="max-width: 800px;" class="p-2 border">
+    <div class=' mr-0"' style="position: relative;">
+        <div  class="chat"
+            #scrollMe style="overflow-y: scroll; overflow-x: hidden;" 
+            (scroll)="onScroll()" >
+            <div *ngIf="(messageService.messageThread$ | async)?.length === 0" class="text-center">
+                No messages yeat...
             </div>
-        </div>
-        
-        <div    *ngIf="!isBottomScrolled && isAnyNewMessages" (click)='scrollToBottom()'
-                class="m-2" 
-                style="width: 30%; position: absolute; left: 35%; bottom: 10px; z-index: 2; cursor: pointer;">
-                <div>
-                    <div class="text-center border p-2 bg-light">
-                        Show new messages
+            
+            <div *ngIf="messageService.startFrom === 0 && messageService.messagesCount !== 0" class="text-center">
+                No more messages :)
+            </div>
+            <div *ngIf="isLoadingThread" class="text-center m-3">
+                <img width="50" height="50" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading">
+            </div>
+
+            <div  #messageList *ngIf="(messageService.messageThread$ | async)?.length ?? 0 > 0">
+                <div    [ngClass]='!message.isRead && message.recipientId === recipientId ? "unread" : "read"'
+                        class='message' #messagesNgFor 
+                        *ngFor="let message of (messageService.messageThread$ | async)">
+
+                    <div    class="message-text"
+                            [ngClass]='message.recipientId === recipientId ? "sent" : "received"'>
+                        <small>
+                            <span>{{message.messageSent | date : "dd MMMM yyyy hh:mm"}}</span>
+                        </small>
+                        <br>
+                        
+                        {{message.content}}
                     </div>
                 </div>
-                
-        </div>
-        
-        
+            </div>
+
+            <div    *ngIf="!isBottomScrolled && isAnyNewMessages" (click)='scrollToBottom()'
+                    class="m-2" 
+                    style="width: 30%; position: absolute; left: 35%; bottom: 10px; z-index: 2; cursor: pointer;">
+                    <div>
+                        <div class="text-center border p-2 bg-light">
+                            Show new messages
+                        </div>
+                    </div>
+                    
+            </div>
         </div>
     </div>
     <div class="py-2">

@@ -13,7 +13,7 @@ import { MessageService } from 'src/app/_services/message.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit, AfterViewChecked  {
+export class ChatComponent implements OnInit  {
   user?: User;
   
   @ViewChild('messageForm') messageForm?: NgForm;
@@ -27,9 +27,7 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
 
   isSmallScreen = false;
   isFirstScroll = true;
-  @HostListener('window:resize', ['$event']) resizeHandler(event: any) { 
-    this.isSmallScreen = event.target.innerWidth < 1000;
-  }
+
 
   
   messageContent?: string;
@@ -63,7 +61,7 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
   isBottomScrolled = true;
 
   onMessagesChange(messages: Message[]){
-    if(messages){
+    if(messages.length > 0){
       if(messages[messages.length - 1].id > this.lastMessageId){
         this.lastMessageId = messages[messages.length - 1].id;
         if(this.isBottomScrolled)
@@ -72,14 +70,12 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
           this.isAnyNewMessages = true;
         }
       }
+      else{
+        this.isLoadingThread = false;
+      }
     }
   }
 
-  ngAfterViewChecked(){
-    //console.log("ngAfterViewChecked")
-    this.isSmallScreen = (window.innerWidth) < 1000;
-    this.isLoadingThread = false;
-  }
 
 
   sendMessage(){
@@ -97,7 +93,10 @@ export class ChatComponent implements OnInit, AfterViewChecked  {
   isAnyNewMessages = false;
 
   onScroll(){
-    if(this.myScrollContainer.nativeElement.scrollTop + this.height === this.myScrollContainer.nativeElement.scrollHeight){
+    if(
+      this.myScrollContainer.nativeElement.scrollTop
+       + this.myScrollContainer.nativeElement.offsetHeight 
+       === this.myScrollContainer.nativeElement.scrollHeight){
       this.isBottomScrolled = true;
       this.isAnyNewMessages = false;
             console.log("bottom")
