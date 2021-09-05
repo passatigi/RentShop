@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
-using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
@@ -57,7 +56,7 @@ namespace API.Controllers
             return Ok(orders);
         }
 
-        [HttpPost("new")]
+        [HttpPost]
         public async Task<ActionResult> AddOrder(Order order)
         {
             order.OrderDate = DateTime.UtcNow;
