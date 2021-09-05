@@ -104,6 +104,7 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     ProfileComponent,
     AddressEditComponent,
     EditProfileComponent,
+    DeliveryListComponent
   ],
   imports: [
     BrowserModule,
