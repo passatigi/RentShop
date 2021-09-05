@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <strong>Email:</strong>
+                    <p>{{appUser.email}}</p>
+                </div>
+
+                <div>
+                    <strong>Full Name:</strong>
+                    <p>{{appUser.fullName}}</p>
+                </div>
+
+                <div>
+                    <strong>Phone Number:</strong>
+                    <p>{{appUser.phoneNumber}}</p>
+                </div>
+
+                <div>
+                    <strong>Addresses:</strong>
+                    <div>
+                        <p *ngIf="addresses?.length == 0">
+                            You don't have addresses
+                        </p>
+                        <ul #scrollMe style="overflow: scroll; height:350px;" [scrollTop]="scrollMe.scrollHeight"
+                            class="chat">
+                            <li *ngFor="let address of addresses">
+                                <div class="card-body row align-items-center">
+                                    <div class="col-3">
+                                        <p>{{address.country}}</p>
+                                        <p>{{address.city}}</p>
+                                        <p>{{address.houseAddress}}</p>
+                                        <p>{{address.postalCode}}</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-danger" type="submit" 
+                                            (click)="this.deleteAddress(address.id)">Delete Address</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <app-address-edit></app-address-edit>
+    </div>
+</div>

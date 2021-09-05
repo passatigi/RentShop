@@ -57,6 +57,9 @@ import { FixedPositionatedComponent } from './auxiliary-components/fixed-positio
 import { NgxDraggableDomModule } from 'ngx-draggable-dom';
 import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-schedule/deliveryman-edit-day-schedule/deliveryman-edit-day-schedule.component';
 import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { AddressEditComponent } from './profile/address-edit/address-edit.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +100,10 @@ import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-
     MonthPickerComponent,
     FixedPositionatedComponent,
     DeliverymanEditDayScheduleComponent,
-    DeliveryListComponent
+    DeliveryListComponent,
+    ProfileComponent,
+    AddressEditComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
