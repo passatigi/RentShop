@@ -14,5 +14,8 @@ namespace API.Extensions
              return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value) ;
         }
 
+        public static string GetEmail(this ClaimsPrincipal user){
+            return user.FindFirst(ClaimTypes.Email)?.Value;
+        }
     }
 }
