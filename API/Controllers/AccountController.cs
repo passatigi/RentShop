@@ -40,7 +40,7 @@ namespace API.Controllers
 
         
         [HttpPut("updateUserInfo")]
-        public async Task<ActionResult> UpdateUserInfo(UserUpdateDto userUpdateDto){
+        public async Task<ActionResult<UserDto>> UpdateUserInfo(UserUpdateDto userUpdateDto){
             var email = User.GetEmail();
         
             var user = await _context.Users
@@ -49,10 +49,21 @@ namespace API.Controllers
             if(user==null) return BadRequest("User not found");
             _mapper.Map(userUpdateDto, user);
 
-            if(await _accountService.UpdateUserAsync(user)) return Ok();
+            if(await _context.Users.FirstOrDefaultAsync(x => x.Email == userUpdateDto.Email)
+                != null) return BadRequest("User with this email already exists");
+
+            if(await _accountService.UpdateUserAsync(user)) return new UserDto
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FullName = user.FullName,
+                PhoneNumber = user.PhoneNumber,
+                Token = await _tokenService.CreateTokenAsync(user),
+            };
 
             return BadRequest("Failed to update user info");
         }
+
 
         [HttpPut("changePassword")]
         public async Task<ActionResult> ChangePassword(string currentPassword, string newPassword){
@@ -65,15 +76,11 @@ namespace API.Controllers
             
             if (!(await _accountService.CheckPasswordAsync(user, currentPassword))) 
                 return BadRequest("Wrong password!");
-            
 
             if((await _accountService.ChangePasswordAsync(user, currentPassword, newPassword))
                 .Succeeded) return Ok(newPassword);
 
-
             return BadRequest("Failed to change password");
-
-
         }
 
         [HttpGet("getAddresses/{email}")]
