@@ -69,9 +69,10 @@ namespace API.Helpers
 
             CreateMap<AppUser, UserDto>();
 
-            CreateMap<Order, OrderDto>()
-                .ForMember(dest => dest.RealProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.RealProduct)));
-
+            // CreateMap<Order, OrderDto>()
+            //     .ForMember(dest => dest.RealProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.RealProduct)));
+            
+            CreateMap<Address, AddressDto>();
         }
     }
 }
