@@ -15,6 +15,7 @@ namespace API.Entities
         public DateTime? ReturnDate { get; set; }
 
         public string Status { get; set; }
+
         public string Comments { get; set; }
 
         public int DeliverymanId { get; set; }
@@ -23,8 +24,11 @@ namespace API.Entities
         public int CustomerId { get; set; }
         public AppUser Customer { get; set; }
 
-        public string ShippedAdress { get; set; }
-        public string ReturnAdress { get; set; }
+        public int ShippedAddressId { get; set; }
+        public Address ShippedAddress { get; set; }
+
+        public int ReturnAddressId { get; set; }
+        public Address ReturnAddress { get; set; }
 
         public ICollection<OrderProduct> OrderProducts { get; set; }
     }
