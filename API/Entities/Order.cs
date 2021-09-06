@@ -27,5 +27,6 @@ namespace API.Entities
         public string ReturnAdress { get; set; }
 
         public ICollection<OrderProduct> OrderProducts { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }

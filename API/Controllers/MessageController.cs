@@ -21,18 +21,18 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("list")]
         public async Task<ActionResult> GetMessageThreadsList()
         {
             var userId = User.GetUserId();
 
-            var messages = await _dataContext.Messages.Include(m => m.Recipient)
-                .Where(m => m.RecipientId == userId || m.SenderId == userId)
-                .OrderBy(m => m.Id)
-                .GroupBy(m => m.Order)
-                .Select(m => m.TakeLast(1))
-                .ToListAsync();
 
+            var messages = await _dataContext.Messages
+                .FromSqlRaw(
+                "SELECT * from [dbo].[Messages] " + 
+                "where Id = any (SELECT MAX(Id) FROM [dbo].[Messages] " + 
+                $" Where [SenderId] = {userId} or [RecipientId] = {userId} GROUP by [OrderId] ) ")
+                .ToListAsync();
 
             return Ok(messages);
                     

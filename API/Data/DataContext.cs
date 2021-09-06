@@ -91,16 +91,20 @@ namespace API.Data
             .WithMany(c => c.Orders)
             .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Message>()
+            .HasOne(m => m.Order)
+            .WithMany(o => o.Messages)
+            .OnDelete(DeleteBehavior.NoAction);
             
 
              builder.Entity<Message>()
-            .HasOne(u => u.Recipient)
-            .WithMany(m => m.MessagesReceived)
+            .HasOne(m => m.Recipient)
+            .WithMany(u => u.MessagesReceived)
             .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Message>()
-            .HasOne(u => u.Sender)
-            .WithMany(m => m.MessagesSent)
+            .HasOne(m => m.Sender)
+            .WithMany(u => u.MessagesSent)
             .OnDelete(DeleteBehavior.Restrict);
 
 

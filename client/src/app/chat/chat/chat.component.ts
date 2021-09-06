@@ -59,10 +59,8 @@ export class ChatComponent implements OnInit  {
           this.isAnyNewMessages = true;
         }
       }
-      else{
-        this.isLoadingThread = false;
-      }
     }
+    this.isLoadingThread = false;
   }
 
   sendMessage(){
@@ -72,6 +70,7 @@ export class ChatComponent implements OnInit  {
       .sendMessage(this.recipientId, this.orderId, this.messageContent)
       .then(() => {
         this.messageForm?.reset();
+        this.isBottomScrolled = true;
         this.scrollToBottom();
       })
       .then(() => this.loadingSend = false);
