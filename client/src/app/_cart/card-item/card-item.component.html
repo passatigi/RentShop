@@ -1,3 +1,4 @@
+
 <div class="card mb-3" style="width: 100%;" *ngIf="show">
     <p></p>
     <div class="row mb-4">
@@ -41,32 +42,15 @@
             <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
                 <div class="well well-lg card card-block card-header">
                     <form [formGroup]='myForm' (ngSubmit)="myForm.valid && addOrder()" autocomplete="off">
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" 
-                                    class="form-control mb-3" 
-                                    placeholder="First day" 
-                                    bsDatepicker formControlName="requiredDate" 
-                                    [minDate] = "minDate"
-                                    [datesDisabled]="disabledDates"/>
-                                    <div *ngIf="this.myForm.controls.requiredDate.invalid" class="invalid-feedback">qq</div>
-                                <p *ngIf="myForm.value.start" class="code-">{{myForm.value.start | date}}</p>
-
-                            </div>
-        
-                            <div class="col">
-                                <input type="text" 
-                                    class="form-control mb-3" 
-                                    preview   placeholder="Last day" 
-                                    bsDatepicker formControlName="requiredReturnDate"
-                                    [minDate] = "minDate"
-                                    [datesDisabled]="disabledDates"/>
-                                <p *ngIf="myForm.value.end" class="code-preview">{{myForm.value.end | date}}</p>
-                                <p *ngIf = "myForm.value.end">
-                                    {{myForm.errors}}
-                                </p>
-                                <div *ngIf="this.myForm.controls.requiredReturnDate.invalid" class="invalid-feedback">qq</div>
-                            </div>
+                            
+                            <input 
+                                type="text" 
+                                class="form-control mb-3"
+                                placeholder="Daterangepicker" 
+                                bsDaterangepicker formControlName="range"
+                                [minDate] = "minDate"
+                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                [datesDisabled]="disabledDates" />
 
                             <app-text-input [formControl]='myForm.controls["shippedAdress"]' 
                             [label]='"Shipped adress"'>
@@ -85,7 +69,7 @@
                             <div *ngIf = 'error'>{{error}}</div>
 
                             <button [disabled]='!myForm.valid' class="btn btn-success mr-2" type="submit">Add order</button>
-                        </div>
+
 
                     </form>
                 </div>

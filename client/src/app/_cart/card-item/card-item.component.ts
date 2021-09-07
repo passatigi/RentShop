@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Self} from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, NgControl, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, NgControl, ValidatorFn, Validators } from '@angular/forms';
 import { CartItem } from 'src/app/_models/cartItem';
 import { CreateOrder } from 'src/app/_models/createOrder';
 import { OrderProduct } from 'src/app/_models/orderProduct';
@@ -24,9 +24,9 @@ export class CardItemComponent implements OnInit {
   myForm: FormGroup;
   isCollapsed = true;
   error: string;
+  daterangepickerModel?: Date[];
 
   @Input() item: CartItem;
-
   constructor(private selectProductService: SelectProductService, 
     private dateService: DateService,
     private formBuilder: FormBuilder,
@@ -41,12 +41,29 @@ export class CardItemComponent implements OnInit {
     });
 
     this.myForm = this.formBuilder.group({
-      requiredDate: [null, [Validators.required, this.matchValues("requiredReturnDate")]],
-      requiredReturnDate: [null, [Validators.required, this.matchValues("requiredDate")]],
       shippedAdress: ['', Validators.required],
       returnAdress: ['', Validators.required],
-      comments: ['', ]
+      comments: ['', ],
+      range: ['', [Validators.required, this.matchRangeValues()]]
     });
+  }
+
+  matchRangeValues(): ValidatorFn{
+    return (control: AbstractControl) => {
+      let requiredReturnDate = new Date(control.value[1]);
+      let requiredDate = new Date(control.value[0]);
+
+      for (var i = 0; i < this.disabledDates.length; i++)
+        {
+          if ( new Date(this.disabledDates[i]) >= requiredDate && new Date(this.disabledDates[i]) <= requiredReturnDate)
+            {
+              this.error = 'You can only rent the item on available days';
+              return { invalidRangeOfDays: 'You can only rent the item on available days'}
+            }
+        }
+      this.error = undefined;
+      return null;
+    }
   }
 
   // add subscribe
@@ -59,17 +76,18 @@ export class CardItemComponent implements OnInit {
     }
     orderProducts.push(orderProduct);
 
-    let newOrder: CreateOrder = {
-      orderProducts : orderProducts,
-      requiredDate : this.myForm?.controls.requiredDate.value,
-      requiredReturnDate : this.myForm?.controls.requiredReturnDate.value,
-      comments : this.myForm?.controls.comments?.value,
-      customeId : user.id,
-      shippedAdress : this.myForm?.controls.shippedAdress.value,
-      returnAdress : this.myForm?.controls.returnAdress.value
-    }
+    // let newOrder: CreateOrder = {
+    //   orderProducts : orderProducts,
+    //   requiredDate : this.myForm?.controls.requiredDate.value,
+    //   requiredReturnDate : this.myForm?.controls.requiredReturnDate.value,
+    //   comments : this.myForm?.controls.comments?.value,
+    //   customeId : user.id,
+    //   shippedAdress : this.myForm?.controls.shippedAdress.value,
+    //   returnAdress : this.myForm?.controls.returnAdress.value,
+    //   totalPrice = orderProduct.realProduct.rentPrice * 
+    // }
 
-    this.orderService.addOrder(newOrder);
+    // this.orderService.addOrder(newOrder);
 
     this.remove();
   }
