@@ -4,6 +4,7 @@ import { parse } from '@fortawesome/fontawesome-svg-core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Message } from 'src/app/_models/message';
+import { Order } from 'src/app/_models/order';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MessageService } from 'src/app/_services/message.service';
@@ -20,6 +21,7 @@ export class MessageListComponent implements OnInit {
   
   
   recipient?: User;
+  order?: Order;
 
   orderId?: number;
   recipientId?: number;
@@ -27,7 +29,8 @@ export class MessageListComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     public route: ActivatedRoute, 
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe((user) => {
@@ -45,12 +48,36 @@ export class MessageListComponent implements OnInit {
       });
 
     console.log(this.orderId, this.recipientId)
-
+    this.getThreadInfo();
   }
 
 
   openChat(message: Message){
-    this.orderId =  message.orderId ;
-    this.recipientId = message.recipientId === this.user.id ? message.senderId : message.recipientId;
+    let recipientId = message.recipientId === this.user.id ? message.senderId : message.recipientId;
+    if(this.orderId ===  message.orderId &&
+      this.recipientId === recipientId){
+
+      }
+      else{
+        this.orderId =  message.orderId;
+        this.recipientId = recipientId;
+        this.getThreadInfo();
+        this.router.navigate(
+          [], 
+          {
+            relativeTo: this.route,
+            queryParams: {recipientId:this.recipientId,
+                        orderId: this.orderId },
+            queryParamsHandling: 'merge'
+          });
+      }
+    
+  }
+
+  getThreadInfo(){
+    this.messageService.getMessageThreadInfo(this.recipientId, this.orderId).subscribe((obj) => {
+      this.order = obj.order;
+      this.recipient = obj.recipient;
+    })
   }
 }

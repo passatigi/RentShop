@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Group } from '../_models/group';
 import { Message } from '../_models/message';
+import { Order } from '../_models/order';
 import { User } from '../_models/user';
 
 
@@ -29,6 +30,10 @@ export class MessageService {
   getMessageThreads(){
     return this.http.get<Message[]>(this.baseUrl + 'message/list');
   }
+
+  getMessageThreadInfo(recipientId: number, orderId: number){
+    return this.http.get<{order: Order, recipient: User}>(this.baseUrl + `message/thread-info?recipientId=${recipientId}&orderId=${orderId}`)
+  } 
 
 
   createHubConnection(user: User, recipientId: number, orderId: number) {
