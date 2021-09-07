@@ -1,5 +1,5 @@
 import { identifierModuleUrl } from '@angular/compiler';
-import { AfterViewChecked, Component, ElementRef, HostListener, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, HostListener, Input, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { distinctUntilChanged, take } from 'rxjs/operators';
 import { Message } from 'src/app/_models/message';
@@ -35,10 +35,7 @@ export class ChatComponent implements OnInit  {
               private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
-      this.user = user;
-      this.messageService.createHubConnection(this.user, this.recipientId, this.orderId);
-    });
+    this.openChat();
 
     this.messageService.messageThread$.pipe(distinctUntilChanged())
         .subscribe(messages => {
@@ -47,6 +44,24 @@ export class ChatComponent implements OnInit  {
             this.onMessagesChange(messages);
           }, 0)
         });
+  }
+  ngOnChanges(changes: SimpleChanges) {
+        
+     this.openChat();
+  }
+
+  openChat(){
+    this.isAnyNewMessages = false;
+    this.isBottomScrolled = true;
+    this.isLoadingThread = false;
+    this.loadingSend = false;
+    
+    this.messageService.stopHubConnection();
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+      this.messageService.createHubConnection(this.user, this.recipientId, this.orderId);
+    });
+    
   }
 
   onMessagesChange(messages: Message[]){

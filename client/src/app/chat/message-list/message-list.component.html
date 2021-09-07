@@ -1,3 +1,23 @@
-<div *ngIf="orderId && recipientId">
-    <app-chat [orderId]='orderId' [recipientId]='recipientId'></app-chat>
+<div class="row">
+    <div class="col-12 col-md-3" style="max-height: 80vh; cursor: pointer;">
+        <div *ngFor="let message of messageThreadList" 
+            class="border"
+            (click)='openChat(message)'
+            >
+            <div class="p-2 border border-bottom">
+            <strong>Order: {{message.orderId}}</strong> , {{message.messageSent | date: 'short'}}
+            </div>
+            <div class="p-2" style="font-size: large;">
+                {{message.content}}
+            </div>
+        </div>
+    </div>
+    <div *ngIf="orderId && recipientId" class="col-12 col-md-6">
+        <app-chat [orderId]='orderId' [recipientId]='recipientId'></app-chat>
+    </div>
+    <div *ngIf="!orderId && !recipientId" class="col-12 col-md-6 text-center">
+        <div class="p-5 bg-light">
+            choise chat to start messaging
+        </div>
+    </div>
 </div>
