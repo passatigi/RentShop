@@ -1,6 +1,8 @@
 
 <div class="container">
-    <div *ngFor='let order of orders'>
-        <app-order-card [orderDto] = 'order'></app-order-card>
+    <div class="row">
+        <div class="col-4" *ngFor='let order of orders'>
+                <app-order-card [orderDto] = 'order'  style="margin-right: 0px;"></app-order-card>
+        </div>
     </div>
 </div>

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-using API.Entities;
-
 
 namespace API.DTOs
 {
@@ -25,7 +23,5 @@ namespace API.DTOs
         public int ShippedAddressId { get; set; }
         public int CustomerId { get; set; }
         public int DeliverymanId { get; set; }
-
-        //public ICollection<RealProductDto> RealProducts { get; set; }
     }
 }

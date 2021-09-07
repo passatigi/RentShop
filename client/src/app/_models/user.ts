@@ -9,4 +9,3 @@ export interface User {
     addresses: Address[]
     roles: string[];
 }
-  
