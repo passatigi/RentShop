@@ -1,14 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Interfaces;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -16,72 +13,72 @@ namespace API.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
-        public CategoryController(DataContext dataContext, IMapper mapper)
-        {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CategoryController(DataContext dataContext, IMapper mapper,
+            IUnitOfWork unitOfWork)
+        { 
             _mapper = mapper;
             _dataContext = dataContext;
+            _unitOfWork = unitOfWork;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll()
-        {
-            var mainCategories = (await _dataContext.Categories
-                                    .Include(c => c.ParentCategory)
-                                    .ToListAsync())
-                                    .Where(c => c.ParentCategory == null);
-                                    
-                                    
-            var dtos = _mapper.Map<IEnumerable<CategoryDto>>(mainCategories);
-            return Ok(dtos);
-            //
-        }
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll()
+    {
+        var parentCategories = await _unitOfWork.CategoryRepository.GetParentCategoriesAsync();
+        var dtos = _mapper.Map<IEnumerable<CategoryDto>>(parentCategories);
+        return Ok(dtos);
+    }
 
-        [HttpPost]
-        public async Task<ActionResult<CategoryDto>> AddCategory(CreateCategoryDto categoryDto)
+    [HttpPost]
+    public async Task<ActionResult<CategoryDto>> AddCategory(CreateCategoryDto categoryDto)
+    {
+        Category category = new Category
         {
-            Category category = new Category 
-            { 
-                 ParentCategoryId = categoryDto.ParentCategoryId, 
-                 ImgLink = categoryDto.ImgLink, 
-                 Name = categoryDto.Name 
-            };
-            _dataContext.Categories.Add(category);
-            
-            await _dataContext.SaveChangesAsync();
-
+            ParentCategoryId = categoryDto.ParentCategoryId,
+            ImgLink = categoryDto.ImgLink,
+            Name = categoryDto.Name
+        };
+        
+        if(await _unitOfWork.CategoryRepository.AddCategoryAsync(category))
             return Ok(
-                new CategoryDto(){ 
-                    Name = category.Name, 
-                    ImgLink = category.ImgLink, 
+                new CategoryDto()
+                {
+                    Name = category.Name,
+                    ImgLink = category.ImgLink,
                     Id = category.Id
                 });
-        }
 
-        [HttpDelete]
-        public async Task<ActionResult> DeleteCategory(int categoryId)
-        {
-            var category =  _dataContext.Categories.FirstOrDefault(c => c.Id == categoryId);
-
-            if(category == null) return NotFound();
-            
-            _dataContext.Categories.Remove(category);
-            await _dataContext.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        [HttpPut]
-        public async Task<ActionResult> UpdateCategory(CategoryDto categoryDto)
-        {
-            var category = await _dataContext.Categories.FirstOrDefaultAsync(c => c.Id == categoryDto.Id);
-
-            if(category == null) return NotFound();
-            
-            category.ImgLink = categoryDto.ImgLink;
-            category.Name = categoryDto.Name;
-            await _dataContext.SaveChangesAsync();
-
-            return Ok();
-        }
+        else return BadRequest("Failed to add category");
     }
+
+    [HttpDelete]
+    public async Task<ActionResult> DeleteCategory(int categoryId)
+    {
+        var category = await _unitOfWork.CategoryRepository.GetCategoryAsync(categoryId);
+
+        if (category == null) return NotFound("Category not found");
+
+        if (await _unitOfWork.CategoryRepository.DeleteCategoryAsync(category))
+            return Ok();
+
+        return BadRequest("Failed to delete category");
+    }
+
+    [HttpPut]
+    public async Task<ActionResult> UpdateCategory(CategoryDto categoryDto)
+    {
+        var category = await _unitOfWork.CategoryRepository.GetCategoryAsync(categoryDto.Id);
+
+        if (category == null) return NotFound();
+
+        _mapper.Map(categoryDto, category);
+        _unitOfWork.CategoryRepository.UpdateCategory(category);
+
+        if (await _unitOfWork.Complete()) return Ok();
+
+        return BadRequest("Failed to update category");
+    }
+}
 }

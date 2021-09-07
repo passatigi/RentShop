@@ -6,8 +6,8 @@ namespace API.Interfaces
     {
         
         IUserRepository UserRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
         Task<bool> Complete();
-
         bool HasChanges();
     }
 }

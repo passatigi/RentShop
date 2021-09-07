@@ -13,6 +13,8 @@ namespace API.Data
         public IUserRepository UserRepository => new UserRepository(_context, _userManager,
             _signInManager);
 
+        public ICategoryRepository CategoryRepository => new CategoryRepository(_context);
+
         public UnitOfWork(DataContext context, UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager)
         {

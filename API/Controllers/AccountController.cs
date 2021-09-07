@@ -35,7 +35,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> UpdateUserInfo(UserUpdateDto userUpdateDto){
             var user = await _unitOfWork.UserRepository.GetLoggedInUserAsync(User);
             
-            if(user==null) return BadRequest("User not found");
+            if(user==null) return NotFound("User not found");
 
             if(!IsValidEmail(userUpdateDto.Email)) return BadRequest("Wrong email");
 
@@ -61,7 +61,7 @@ namespace API.Controllers
         public async Task<ActionResult> ChangePassword(string currentPassword, string newPassword){
             var user = await _unitOfWork.UserRepository.GetLoggedInUserAsync(User);
             
-            if(user==null) return BadRequest("User not found");
+            if(user==null) return NotFound("User not found");
             
             if (!(await _unitOfWork.UserRepository.CheckPasswordAsync(user, currentPassword))) 
                 return BadRequest("Wrong password!");
@@ -77,7 +77,7 @@ namespace API.Controllers
         {
            var user = await _unitOfWork.UserRepository.FindUserAsync(email);
 
-            if(user==null) return BadRequest("User not found");
+            if(user==null) return NotFound("User not found");
 
            var addresses = await _unitOfWork.UserRepository.GetAddressesAsync(user.Id);
 
@@ -90,7 +90,7 @@ namespace API.Controllers
         public async Task<ActionResult<AddressDto>> AddAddress(AddressDto addressDto){
             var user = await _unitOfWork.UserRepository.GetLoggedInUserAsync(User);
             
-            if(user==null) return BadRequest("User not found");
+            if(user==null) return NotFound("User not found");
 
             var address = _mapper.Map<Address>(addressDto);
             address.AppUserId = user.Id;
@@ -110,11 +110,11 @@ namespace API.Controllers
         public async Task<ActionResult<bool>> DeleteAddress(int addressId){
             var user = await _unitOfWork.UserRepository.GetLoggedInUserAsync(User);
 
-            if(user == null) return BadRequest("User not found");
+            if(user == null) return NotFound("User not found");
 
             var address = await _unitOfWork.UserRepository.FindAddressAsync(addressId);
 
-            if (address == null) return BadRequest("Wrong id");
+            if (address == null) return NotFound("Wrong address id");
 
             if((await _unitOfWork.UserRepository.DeleteAddressAsync(address)).Succeeded){
                 return Ok();
