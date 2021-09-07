@@ -16,13 +16,19 @@ export class MessageService {
   startFrom = 0;
   receivedMessagesCount = 0;
   messagesCount = 0;
+
   baseUrl = environment.apiUrl;
   hubUrl = environment.hubUrl;
+
   private hubConnection?: HubConnection;
   messageThreadSourse? = new BehaviorSubject<Message[]>([])
   messageThread$ = this.messageThreadSourse?.asObservable();
 
   constructor(private http: HttpClient) { }
+
+  getMessageThreads(){
+    return this.http.get<Message[]>(this.baseUrl + 'message/list');
+  }
 
 
   createHubConnection(user: User, recipientId: number, orderId: number) {
