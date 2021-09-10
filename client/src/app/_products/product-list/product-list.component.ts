@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
+import { Category } from 'src/app/_models/category';
 import { Product } from 'src/app/_models/product';
 import { ProductsService } from 'src/app/_services/products.service';
 
@@ -10,6 +11,7 @@ import { ProductsService } from 'src/app/_services/products.service';
 })
 export class ProductListComponent implements OnInit {
   id: number; 
+  category: Category;
   products: Product[] = [];
 
   constructor(private productService: ProductsService, private route: ActivatedRoute) {}
@@ -24,6 +26,7 @@ export class ProductListComponent implements OnInit {
   loadProducts(id: number){
     this.productService.getProductsByCaregoryId(id).subscribe(products => {
       this.products = products;
+      console.log(products)
     })
   }
 }

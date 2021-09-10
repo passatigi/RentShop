@@ -1,3 +1,26 @@
-<div *ngFor="let product of products" class="col-2">
-    <app-product-card [product]="product"></app-product-card>
+
+<div *ngIf="products?.length < 1"> No products ( ((( )))) </div>
+<div>
+    <!-- <h2>{{product}}</h2> -->
+</div>
+<div *ngFor="let product of products" class="row">
+    <div class="col-12" style="max-width: 1000px; margin: 0 auto;">
+        <div class="row">
+            <div class="col-3">
+                <img style="width: 200px;" src="{{product.imgUrl}}" alt="">
+            </div>
+            <div class="col-9">
+                <h3>
+                    {{product.name}}
+                </h3>
+                <h5>
+                    {{product.vendor}}
+                </h5>
+                <p>
+                    {{product.description}}
+                </p>
+                
+            </div>
+        </div>
+    </div>
 </div>
