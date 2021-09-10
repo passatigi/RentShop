@@ -27,6 +27,15 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .btn-category-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .btn-category:hover .btn-category-img{
+        filter: brightness(0) invert(1);
+        transition: filter 1.15s ease-in-out;
+    }
 </style>
 
 
@@ -34,29 +43,15 @@
 <!-- style="filter: invert()" -->
 <h1 class="m-3">Choose product category</h1>
 <div class="btn-group btn-block">
-    <button type="button" class="btn  btn-outline-dark" *ngFor="let category of categories" (click)="openCategory(category.id)">
-        <span>
+    <button type="button" class="btn btn-outline-dark btn-category" *ngFor="let category of categories" (click)="openCategory(category.id)">
+        <div>
+            <img class="btn-category-img" src="{{category.imgLink}}" alt="{{category.name}}">
+        </div>
+        <div>
             {{category.name}}
-        </span>
+        </div>
     </button>
 </div>
-
-<!-- <div class="mainCategoriesBox">
-        <div style="cursor: pointer;" class="categoryBox" *ngFor="let category of categories" (click)="openCategory(category.id)">
-            <div>
-                <img class="categoryImg center" 
-                src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
-            </div>
-            <div>
-                <span>
-                    {{category.name}}
-                </span>
-            </div>
-            
-        </div>
-</div> -->
-
-
 
 <div class="row">
     <div style="cursor: pointer;" class=" m-2 col-12 col-md-4 col-lg-2" *ngFor="let category of childCategories">
@@ -75,6 +70,15 @@
             </div>
         </button> -->
         <app-category-card [category]='category'></app-category-card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4" *ngFor="let category of allChildCategories">
+        <div>
+            {{category.name}}
+            {{category.imgLink}}
+        </div>
     </div>
 </div>
 

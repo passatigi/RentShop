@@ -16,13 +16,19 @@ export class MainComponent implements OnInit {
   id: number ;
   categories?: Category[]; 
   childCategories?:  Category[]; 
+  allChildCategories: Category[] = []; 
   isCategoryChoose = false;
 
   constructor(private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe(categories => {
+      console.log(categories)
       this.categories = categories as Category[];
+      this.allChildCategories = [];
+      for (const category of this.categories) {
+        this.allChildCategories = this.allChildCategories.concat(category.childCategories);
+      }
     })
     
   }

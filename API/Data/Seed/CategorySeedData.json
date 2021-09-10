@@ -2,20 +2,21 @@
     {
         "ParentCategoryId":null,
         "Name":"Tourism and rest",
-        "ImgLink":"https://res.cloudinary.com/passah/image/upload/v1628175093/rentapp/category%20imgs/Tourism_and_rest_xmh0o9.png",
+        "ImgLink":"assets/category/tourism and rest.png",
         "ChildCategories": [
-            { "Name":"Tents","ImgLink":null},
-            { "Name":"Backpacks and bags","ImgLink":null},
-            { "Name":"Kayaks","ImgLink":null},
-            { "Name":"Sleeping bags","ImgLink":null},
-            { "Name":"Mountaineering equipment","ImgLink":null}
+            { "Name":"Tents","ImgLink":"https://www.fishcamp.by/images/detailed/1/%D0%BF%D0%B0%D0%BB%D0%B0%D1%82%D0%BA%D0%B8.jpg"},
+            { "Name":"Backpacks and bags","ImgLink":"https://shop.static.ingka.ikea.com/category-images/Category_bags-and-backpacks.jpg"},
+            { "Name":"Kayaks","ImgLink":"https://paddlingmag.com/wp-content/uploads/2020/05/Types-of-Kayaks.jpg"},
+            { "Name":"Sleeping bags","ImgLink":"https://www.thermarest.com/blog/wp-content/uploads/2019/04/Sleeping-Bag-Temperature-Ratings-Ben-Matthews-1600x1000-1.jpg"},
+            { "Name":"Mountaineering equipment","ImgLink":"https://www.outsideonline.com/wp-content/uploads/2020/10/22/wbg-2021-mountaineering_h.jpg"},
+            { "Name":"Generators","ImgLink":"https://spy.com/wp-content/uploads/2017/10/portable-generator-featured-image.jpg?w=958&h=599&crop=1"}
         ]
     },
-    {"ParentCategoryId":null,"Name":"Photo and video","ImgLink":"https://res.cloudinary.com/passah/image/upload/v1628176598/rentapp/category%20imgs/Photo_and_video_ufzp3x.png"},
-    {"ParentCategoryId":null,"Name":"Construction and repair","ImgLink":null},
-    {"ParentCategoryId":null,"Name":"Sports equipment","ImgLink":null},
-    {"ParentCategoryId":null,"Name":"Equipment for holidays","ImgLink":null},
-    {"ParentCategoryId":null,"Name":"Auto and moto","ImgLink":null},
-    {"ParentCategoryId":null,"Name":"Entertainments","ImgLink":null}
+    {"ParentCategoryId":null,"Name":"Photo and video","ImgLink":"assets/category/photo and video.png"},
+    {"ParentCategoryId":null,"Name":"Construction and repair","ImgLink":"assets/category/contructions.png"},
+    {"ParentCategoryId":null,"Name":"Sports equipment","ImgLink":"assets/category/sports.png"},
+    {"ParentCategoryId":null,"Name":"Equipment for holidays","ImgLink":"assets/category/holidays.png"},
+    {"ParentCategoryId":null,"Name":"Auto and moto","ImgLink":"assets/category/auto.png"},
+    {"ParentCategoryId":null,"Name":"Entertainments","ImgLink":"assets/category/entertainments.png"}
     
 ]
