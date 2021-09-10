@@ -2,7 +2,7 @@
 
 <div class="well well-lg card card-block card-header">
 
-        <form [formGroup]='addAddressForm' (ngSubmit)="addAddressForm.valid && addAddress()" autocomplete="off">
+        <form [formGroup]='addAddressForm' (ngSubmit)="addAddressForm.valid && this.addAddress()" autocomplete="off">
             <h2 class="text-center text-dark">Add Address</h2>
             <hr>
             <app-text-input formControlName='country' [label]='"Country"'></app-text-input>
@@ -19,8 +19,8 @@
             </div>
 
             <div class="form-group text-center mt-3">
-                <button [disabled]='!addAddressForm.valid' class="btn btn-dark mr-2" type="submit"
-                    (click)="this.addAddressForm?.reset()">Add address</button>
+                <button [disabled]='!addAddressForm.valid' class="btn btn-dark mr-2" type="submit">
+                    Add address</button>
                 <button class="btn btn-secondary mr-2" type="button"
                     (click)="this.addAddressForm?.reset()">Cancel</button>
             </div>

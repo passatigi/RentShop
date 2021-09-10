@@ -1,14 +1,14 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -16,8 +16,12 @@ namespace API.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
-        public DeliverymanController(DataContext dataContext, IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public DeliverymanController(DataContext dataContext, IMapper mapper,
+            IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _dataContext = dataContext;
 
@@ -27,60 +31,52 @@ namespace API.Controllers
         public async Task<ActionResult> EditScheduleDay(DeliverymanScheduleDto deliverymanSheduleDto)
         {
             var userId = User.GetUserId();
-            var schedule = await _dataContext.DeliverymanSchedules
-                            .FirstOrDefaultAsync(
-                                s => s.DeliverymanId == userId &&
-                                s.StartDelivery.Date == deliverymanSheduleDto.StartDelivery.Date
-                                );
-            
-            if(schedule == null)
+
+            var schedule = await _unitOfWork.DeliveryManRepository.GetDayScheduleAsync(
+                userId, deliverymanSheduleDto.StartDelivery
+            );
+
+            if (schedule == null)
             {
-                schedule = new DeliverymanSchedule { 
-                    DeliverymanId = userId };
+                schedule = new DeliverymanSchedule
+                {
+                    DeliverymanId = userId
+                };
             }
 
-            schedule.StartDelivery = deliverymanSheduleDto.StartDelivery;
-            schedule.EndDelivery = deliverymanSheduleDto.EndDelivery;
+            _mapper.Map(deliverymanSheduleDto, schedule);
+            _unitOfWork.DeliveryManRepository.EditSchedule(schedule);
 
-            if(schedule.Id == 0){
-                _dataContext.Add(schedule);
+            if (await _unitOfWork.Complete()) return Ok();
+
+            if (schedule.Id == 0)
+            {
+                _unitOfWork.DeliveryManRepository.AddSchedule(schedule);
             }
-            
-            await _dataContext.SaveChangesAsync();
 
-            return Ok(schedule);
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to edit schedule");
         }
 
         [HttpGet("schedule-month")]
-        public async Task<ActionResult<IEnumarable<DeliverymanScheduleDto>>> GetMonthShedule
-                                                                                ([FromQuery] short year,
-                                                                                [FromQuery] short month)
+        public async Task<ActionResult<IEnumerable<DeliverymanScheduleDto>>> GetMonthShedule
+            ([FromQuery] short year, [FromQuery] short month)
         {
             var userId = User.GetUserId();
             var date = DateTime.Parse($"1/{month}/{year}");
 
-            var schedule = await _dataContext.DeliverymanSchedules
-                .Where(s => s.DeliverymanId == userId && s.StartDelivery.Month == date.Month)
-                .ProjectTo<DeliverymanScheduleDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
-            
+            var schedule = await _unitOfWork.DeliveryManRepository.GetMonthScheduleAsync(userId, date);
+
             return Ok(schedule);
         }
 
-        
+
         [HttpGet("delivery-list")]
-        public async Task<ActionResult<IEnumarable<Order>>> GetDeliveryList(DateTime date)
+        public async Task<ActionResult<IEnumerable<Order>>> GetDeliveryList(DateTime date)
         {
             var userId = User.GetUserId();
-            var orders = await _dataContext.Orders.Where(
-                o => o.DeliverymanId == userId &&
-                o.RequiredDate.Date == date.Date || 
-                o.RequiredReturnDate.Date == date.Date)
-                .Include(o => o.Customer)
-                .Include(o => o.OrderProducts)
-                .ThenInclude(op => op.RealProduct)
-                .ProjectTo<OrderDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            var orders = await _unitOfWork.OrderRepository.GetOrderList(userId, date);
 
             return Ok(orders);
         }
@@ -88,14 +84,14 @@ namespace API.Controllers
         [HttpPut("delivery-list")]
         public async Task<ActionResult> UpdateOrderStatus(UpdateOrderStatusDto updateOrderStatusDto)
         {
-            var order = await _dataContext.Orders.FirstOrDefaultAsync(o => o.Id == updateOrderStatusDto.OrderId);
+            var order = await _unitOfWork.OrderRepository.GetOrderByIdAsync(updateOrderStatusDto.OrderId);
 
-            if(order == null) return NotFound();
+            if (order == null) return NotFound("Order not found");
 
             order.Status = updateOrderStatusDto.NewStatus;
-            if(order.Status == "Delivered")
+            if (order.Status == "Delivered")
                 order.ShippedDate = DateTime.UtcNow;
-            else if(order.Status == "Returned")
+            else if (order.Status == "Returned")
                 order.ReturnDate = DateTime.UtcNow;
 
             await _dataContext.SaveChangesAsync();
