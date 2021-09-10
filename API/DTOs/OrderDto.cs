@@ -32,7 +32,7 @@ namespace API.DTOs
 
         public ICollection<RealProductDto> OrderProducts { get; set; }
 
-        public int CustomeId { get; set; }
+        public int CustomerId { get; set; }
 
         //public AppUser Customer { get; set; }
 

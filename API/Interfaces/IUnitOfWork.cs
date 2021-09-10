@@ -9,6 +9,7 @@ namespace API.Interfaces
         ICategoryRepository CategoryRepository { get; }
         IDeliveryManRepository DeliveryManRepository { get; }
         IOrderRepository OrderRepository { get; }
+        IMessageRepository MessageRepository { get; }
         Task<bool> Complete();
         bool HasChanges();
     }

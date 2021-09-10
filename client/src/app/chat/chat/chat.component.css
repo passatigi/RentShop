@@ -1,0 +1,46 @@
+
+
+.chat{
+    height: 50vh;
+    min-height: 200px;
+    overflow-y: scroll;
+}
+
+
+.unread{
+    background-color: #F8F9FA;
+}
+.read{
+    background-color: white;
+}
+
+.sent {
+    margin-left: auto;
+
+}
+
+.message {
+    padding: 5px 0px;
+    display: flex;
+}
+
+.message-text {
+    padding: 2px 15px 5px 15px;
+    background-color: white;
+    border:  4px solid #F8F9FA;
+    border-radius: 6px;
+    max-width: 80vw;
+    word-wrap: break-word;
+}
+
+.show-new-messages-button {
+    width: 30%; 
+    position: absolute; 
+    left: 35%; 
+    bottom: 10px; 
+    z-index: 2; 
+    cursor: pointer;
+}
+
+
+

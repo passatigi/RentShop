@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using API.Entities;
-using API.Interfaces;
+using API.Data.Repositories;
+using API.Interfaces.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 
@@ -18,6 +19,8 @@ namespace API.Data
         public IOrderRepository OrderRepository => new OrderRepository(_context, _mapper);
         public IDeliveryManRepository DeliveryManRepository =>
             new DeliveryManRepository(_context, _mapper);
+        public IMessageRepository MessageRepository => 
+            new MessageRepository(_dataContext, _mapper);
         private readonly IMapper _mapper;
 
         public UnitOfWork(DataContext context, UserManager<AppUser> userManager,
