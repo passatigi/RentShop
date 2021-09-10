@@ -12,10 +12,10 @@ import { ProductsService } from 'src/app/_services/products.service';
 })
 export class ProductListComponent implements OnInit { 
   category: Category;
-  products: Product[] = [];
+  @Input() products: Product[] = [];
 
   constructor(private productService: ProductsService,
-    private categoryService: CategoryService,
+  private categoryService: CategoryService,
      private route: ActivatedRoute) {}
 
   ngOnInit(): void {

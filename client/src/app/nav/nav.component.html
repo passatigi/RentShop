@@ -32,10 +32,7 @@
               <a tooltip="Home" placement="bottom"
                 class="nav-link" alt="Home" routerLink='/'><img class="nav-img" src="assets/home.png" ></a>
             </li>
-            <li class="nav-item">
-              <a tooltip="Shopping cart" placement="bottom"
-                class="nav-link" routerLink='/cart'><img class="nav-img" src="assets/shopping-cart.png" alt="Shopping cart"></a>
-            </li>
+            
             <ng-container *ngIf="accountService.currentUser$ | async">
             <li class="nav-item">
               <a  tooltip="Orders" placement="bottom"
@@ -85,10 +82,17 @@
               </li>
             </ng-container>
           </ul>
-        <app-shopping-cart style="margin-right: 3%;" routerLink='/cart'></app-shopping-cart>
-        <form class="d-flex">
-          <input class="form-control " type="text" placeholder="Search">
-          <button class="btn btn-secondary" type="submit">Search</button>
+          
+            <a tooltip="Shopping cart" placement="bottom"
+              class="nav-link" routerLink='/cart'>
+              <span style="font-size: 25px;">{{rpCount}}</span>
+              <img class="nav-img" src="assets/shopping-cart.png" alt="Shopping cart"></a>
+         
+        <form   class="d-flex">
+          <input name="search" #search="ngModel" ngModel class="form-control" type="text" placeholder="Search">
+          <button routerLink='/search' [queryParams]='{string:search.value}'
+                  class="btn btn-secondary" 
+                  type="submit">Search</button>
         </form>
 
         

@@ -1,6 +1,6 @@
 
 
-<div class="text-center">
+<div *ngIf="category" class="text-center">
     <h2>{{category.name}}</h2>
 </div>
 <div *ngIf="products?.length < 1" class="text-center"> 

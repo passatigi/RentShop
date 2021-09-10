@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet("{searchstring}")]
         public async Task<ActionResult> Search(string searchString){
             var categories = await _dataContext.Categories
-                .Where(c => c.Name.Contains(searchString))
+                .Where(c => c.Name.Contains(searchString) && c.ParentCategory != null)
                 .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 

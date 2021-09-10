@@ -37,7 +37,7 @@
 
 <ng-container *ngIf="categories">
     <div class="row px-3 py-2">
-        <div    routerLink='category' 
+        <div    routerLink='/category' 
                 [queryParams]='{categoryid:category.id}'
                 class="col-12 col-lg-4 category-block" 
                 *ngFor="let category of categories">

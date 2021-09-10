@@ -19,9 +19,11 @@ import { MessageListComponent } from './chat/message-list/message-list.component
 import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
+  {path: 'search', component: SearchComponent},
   {path: 'product', component: ProductDetailComponent},
   {path: 'messages', component: MessageListComponent,
    canDeactivate: [StopHubConnectionGuard]},
