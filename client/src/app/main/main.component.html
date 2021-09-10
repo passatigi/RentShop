@@ -28,6 +28,7 @@
         margin-right: auto;
     }
     .btn-category-img {
+        margin-right:10px;
         width: 50px;
         height: 50px;
     }
@@ -43,17 +44,39 @@
         color:white;
         background-color: #363A3C;
     }
+    .mobile-block button{
+        
+        font-size: 25px;
+    }
     
+    .pc-block{
+        
+    }
 
+    @media (max-width: 1000px) { 
+        .mobile-block{
+            
+        }
+        .pc-block{
+            display: none
+        }
+        
 
-    
+    }
+    @media (min-width: 1000px) { 
+        .mobile-block{
+            display: none
+        }
+        .pc-block{
+            
+        }
+    }
 
-    
 </style>
 
-<div class="btn-group btn-block">
+<div class="pc-block btn-group btn-block">
     <button type="button" 
-            class="btn btn-outline-dark btn-category btn-active" 
+            class="btn btn-outline-dark btn-category" 
             [ngClass]='category.id === selectedParentCategry?.id ? "selected-button" : ""'
             *ngFor="let category of categories" 
             (click)="openCategory(category.id)">
@@ -62,6 +85,19 @@
         </div>
         <div>
             {{category.name}}
+        </div>
+    </button>
+</div>
+
+<div class="mobile-block text-left">
+    <button type="button" 
+            class="btn btn-outline-dark btn-category btn-block p-1" 
+            [ngClass]='category.id === selectedParentCategry?.id ? "selected-button" : ""'
+            *ngFor="let category of categories" 
+            (click)="openCategory(category.id)">
+        <div class="text-left p-2">
+            <img class="btn-category-img" src="{{category.imgLink}}" alt="{{category.name}}"> 
+            <span> {{category.name}} </span>
         </div>
     </button>
 </div>
