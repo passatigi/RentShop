@@ -1,7 +1,13 @@
 
-<div *ngIf="products?.length < 1"> No products ( ((( )))) </div>
+
 <div class="text-center">
     <h2>{{category.name}}</h2>
+</div>
+<div *ngIf="products?.length < 1" class="text-center"> 
+    <h1>
+        No products...
+    </h1>
+    
 </div>
 <div class="row">
     <div    *ngFor="let product of products" 
