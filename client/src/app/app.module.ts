@@ -63,6 +63,7 @@ import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { AddressEditComponent } from './profile/address-edit/address-edit.component';
+import { CategoryListComponent } from './_categories/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     ProfileComponent,
     AddressEditComponent,
     EditProfileComponent,
-    DeliveryListComponent
+    DeliveryListComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,

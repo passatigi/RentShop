@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
   categories?: Category[]; 
   childCategories?:  Category[]; 
   allChildCategories: Category[] = []; 
+  selectedParentCategry?: Category; 
   isCategoryChoose = false;
 
   constructor(private categoryService: CategoryService, private router: Router) { }
@@ -25,17 +26,23 @@ export class MainComponent implements OnInit {
     this.categoryService.getCategories().subscribe(categories => {
       console.log(categories)
       this.categories = categories as Category[];
-      this.allChildCategories = [];
-      for (const category of this.categories) {
-        this.allChildCategories = this.allChildCategories.concat(category.childCategories);
-      }
+      this.getRandomCategories(this.categories);
     })
     
   }
 
+  getRandomCategories(categories: Category[]){
+    let allChildCategories = [];
+      for (const category of categories) {
+        allChildCategories = allChildCategories.concat(category.childCategories);
+      }
+    this.allChildCategories = allChildCategories;
+  }
+
   openCategory(id: number){
     if(this.categories){
-      this.childCategories = this.categories.find(x => x.id === id)?.childCategories;
+      this.selectedParentCategry = this.categories.find(x => x.id === id);
+      this.childCategories = this.selectedParentCategry?.childCategories;
     }
   }
 }
