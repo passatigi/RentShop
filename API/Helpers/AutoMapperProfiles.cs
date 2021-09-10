@@ -61,6 +61,10 @@ namespace API.Helpers
                 
             CreateMap<ProductImg, ProductImgDto>();
 
+            CreateMap<UserUpdateDto,AppUser>();
+
+            CreateMap<AddressDto,Address>();
+
             CreateMap<DeliverymanSchedule, DeliverymanScheduleDto>();
 
             CreateMap<AppUser, UserDto>();

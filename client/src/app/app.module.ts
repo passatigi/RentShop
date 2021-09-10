@@ -60,6 +60,9 @@ import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-
 import { ChatComponent } from './chat/chat/chat.component';
 import { MessageListComponent } from './chat/message-list/message-list.component';
 import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
+import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { AddressEditComponent } from './profile/address-edit/address-edit.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +106,10 @@ import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
     DeliveryListComponent,
     ChatComponent,
     MessageListComponent
+    ProfileComponent,
+    AddressEditComponent,
+    EditProfileComponent,
+    DeliveryListComponent
   ],
   imports: [
     BrowserModule,

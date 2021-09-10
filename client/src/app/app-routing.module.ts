@@ -17,6 +17,8 @@ import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-sch
 import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
 import { MessageListComponent } from './chat/message-list/message-list.component';
 import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
+import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
   {path: 'admin', component: RegistrationComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'editProfile', component: EditProfileComponent},
   {
     path: 'admin', 
     runGuardsAndResolvers: 'always',

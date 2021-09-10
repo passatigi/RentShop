@@ -1,0 +1,32 @@
+
+
+<div class="well well-lg card card-block card-header">
+
+        <form [formGroup]='addAddressForm' (ngSubmit)="addAddressForm.valid && addAddress()" autocomplete="off">
+            <h2 class="text-center text-dark">Add Address</h2>
+            <hr>
+            <app-text-input formControlName='country' [label]='"Country"'></app-text-input>
+            <app-text-input formControlName='city' [label]='"City"'></app-text-input>
+            <app-text-input formControlName='houseAddress' [label]='"House Address"'></app-text-input>
+            <app-text-input formControlName='postalCode' [label]='"Postal Code"'></app-text-input>
+
+
+
+            <div class="row" *ngIf="validationErrors.length > 0">
+                <ul class="text-danger">
+                    <li *ngFor="let error of validationErrors">{{error}}</li>
+                </ul>
+            </div>
+
+            <div class="form-group text-center mt-3">
+                <button [disabled]='!addAddressForm.valid' class="btn btn-dark mr-2" type="submit"
+                    (click)="this.addAddressForm?.reset()">Add address</button>
+                <button class="btn btn-secondary mr-2" type="button"
+                    (click)="this.addAddressForm?.reset()">Cancel</button>
+            </div>
+
+            <p>Form value: {{addAddressForm.value | json}}</p>
+            <p>Form status: {{addAddressForm.status | json}}</p>
+        </form>
+
+    </div>
