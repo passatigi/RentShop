@@ -4,6 +4,7 @@ using API.Data.Repositories;
 using API.Interfaces.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using API.Interfaces;
 
 namespace API.Data
 {
@@ -20,7 +21,7 @@ namespace API.Data
         public IDeliveryManRepository DeliveryManRepository =>
             new DeliveryManRepository(_context, _mapper);
         public IMessageRepository MessageRepository => 
-            new MessageRepository(_dataContext, _mapper);
+            new MessageRepository(_context, _mapper);
         private readonly IMapper _mapper;
 
         public UnitOfWork(DataContext context, UserManager<AppUser> userManager,

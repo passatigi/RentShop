@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace API.Interfaces
+namespace API.Interfaces.Repositories
 {
     public interface IUserRepository
     {

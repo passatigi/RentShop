@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
-using API.Interfaces;
+using API.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data

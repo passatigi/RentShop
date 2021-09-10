@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Extensions;
-using API.Interfaces;
+using API.Interfaces.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
