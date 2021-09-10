@@ -34,7 +34,7 @@
             </li>
             
             <ng-container *ngIf="accountService.currentUser$ | async">
-            <li class="nav-item">
+            <li class="nav-item" *appHasRole='["Admin", "Customer"]'>
               <a  tooltip="Orders" placement="bottom"
               class="nav-link" href="/orders"><img class="nav-img" src="assets/orders.png" alt="Orders"></a>
             </li>
@@ -55,8 +55,6 @@
                 <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu mt-2"
                     role="menu" aria-labelledby="button-animated">
                   <li role="menuitem"><a class="dropdown-item" routerLink="/editProfile">Edit profile</a></li>
-                  <li role="menuitem"><a class="dropdown-item" href="#">Another action</a>
-                  </li>
                   <li role="menuitem"><a class="dropdown-item"  (click)='accountService.logout()'>Log out</a></li>
                 </ul>
               </div>
@@ -83,7 +81,7 @@
             </ng-container>
           </ul>
           
-            <a tooltip="Shopping cart" placement="bottom"
+            <a tooltip="Shopping cart" placement="bottom" *appHasRole='["Customer"]'
               class="nav-link" routerLink='/cart'>
               <span style="font-size: 25px;">{{rpCount}}</span>
               <img class="nav-img" src="assets/shopping-cart.png" alt="Shopping cart"></a>
