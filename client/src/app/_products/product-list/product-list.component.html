@@ -1,26 +1,36 @@
 
 <div *ngIf="products?.length < 1"> No products ( ((( )))) </div>
-<div>
-    <!-- <h2>{{product}}</h2> -->
+<div class="text-center">
+    <h2>{{category.name}}</h2>
 </div>
-<div *ngFor="let product of products" class="row">
-    <div class="col-12" style="max-width: 1000px; margin: 0 auto;">
-        <div class="row">
-            <div class="col-3">
-                <img style="width: 200px;" src="{{product.imgUrl}}" alt="">
+<div class="row">
+    <div    *ngFor="let product of products" 
+        class="p-2 border col-12 col-md-6 col-lg-4" 
+        style="cursor: pointer;"
+        routerLink='/product' [queryParams]='{id:product.id}'    
+        > 
+
+        <div>
+            <div class="d-flex justify-content-center">
+                <div style="width: 250px; height: 250px;">
+                    <img style="max-width: 250px; max-height: 250px;" class="p-2" src="{{product.imgUrl}}" alt="">
+                </div>
+               
             </div>
-            <div class="col-9">
-                <h3>
-                    {{product.name}}
-                </h3>
-                <h5>
-                    {{product.vendor}}
-                </h5>
-                <p>
-                    {{product.description}}
-                </p>
-                
+            <div class="d-flex justify-content-center" >
+                <div style="width: 450px;">
+                    <h3>
+                        {{product.name}}
+                    </h3>
+                    <h5>
+                        <i class="pr-2">Vendor:</i> {{product.vendor}}
+                    </h5>
+                    <p>
+                        <i class="pr-2">Description:</i> {{product.description}}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
