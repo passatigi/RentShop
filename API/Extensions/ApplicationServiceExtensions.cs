@@ -1,7 +1,9 @@
 using System;
 using API.Data;
+using API.Data.Repositories;
 using API.Helpers;
 using API.Interfaces;
+using API.Interfaces.Repositories;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +15,10 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<UnitOfWork>();
+
+
             services.AddScoped<ITokenService, TokenService>();
 
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));

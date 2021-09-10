@@ -1,0 +1,63 @@
+<div  style="max-width: 800px;" class="p-2 border">
+    <div class='mr-0"' style="position: relative;">
+        <div 
+            #scrollMe class="chat" 
+            (scroll)="onScroll()">
+            <div *ngIf="(messageService.messageThread$ | async)?.length === 0" class="text-center">
+                No messages yeat...
+            </div>
+            
+            <div *ngIf="messageService.startFrom === 0 && messageService.messagesCount !== 0" class="text-center">
+                No more messages :)
+            </div>
+            <div *ngIf="isLoadingThread" class="text-center m-3">
+                <img width="50" height="50" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading">
+            </div>
+
+            <div  #messageList *ngIf="(messageService.messageThread$ | async)?.length ?? 0 > 0">
+                <div    [ngClass]='!message.isRead && message.recipientId === recipientId ? "unread" : "read"'
+                        class='message' #messagesNgFor 
+                        *ngFor="let message of (messageService.messageThread$ | async)">
+
+                    <div    class="message-text"
+                            [ngClass]='message.recipientId === recipientId ? "sent" : "received"'>
+
+                        <small>
+                            <span>{{message.messageSent | date : "dd MMMM yyyy hh:mm"}}</span>
+                        </small>
+                        <br>
+                        {{message.content}}
+                    </div>
+                </div>
+            </div>
+
+            <div    *ngIf="!isBottomScrolled && isAnyNewMessages" (click)='scrollToBottom()'
+                    class="m-2 show-new-messages-button">
+
+                    <div>
+                        <div class="text-center border p-2 bg-light">
+                            Show new messages
+                        </div>
+                    </div>
+                    
+            </div>
+        </div>
+    </div>
+
+    <div class="py-2">
+        <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+            <div class="input-group">
+                <input 
+                name="messageContent"
+                required
+                [(ngModel)]="messageContent"
+                type="text" 
+                class="form-control input-sm" 
+                placeholder="Send a private message">
+                <div class="input-group-append">
+                    <button [disabled]="!messageForm.valid || loadingSend" class="btn btn-primary" type="submit">Send <i *ngIf="loadingSend" class="fa fa-spinner fa-spin"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

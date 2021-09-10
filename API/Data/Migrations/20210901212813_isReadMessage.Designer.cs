@@ -4,14 +4,16 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210901212813_isReadMessage")]
+    partial class isReadMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,24 +187,6 @@ namespace API.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("API.Entities.Connection", b =>
-                {
-                    b.Property<string>("ConnectionId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GroupName")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ConnectionId");
-
-                    b.HasIndex("GroupName");
-
-                    b.ToTable("Connections");
-                });
-
             modelBuilder.Entity("API.Entities.DeliverySchedule", b =>
                 {
                     b.Property<int>("Id")
@@ -225,7 +209,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("DeliverySchedules");
+                    b.ToTable("DeliverySchedule");
                 });
 
             modelBuilder.Entity("API.Entities.DeliverymanSchedule", b =>
@@ -277,16 +261,6 @@ namespace API.Data.Migrations
                     b.ToTable("Features");
                 });
 
-            modelBuilder.Entity("API.Entities.Group", b =>
-                {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Name");
-
-                    b.ToTable("Groups");
-                });
-
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -297,11 +271,11 @@ namespace API.Data.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("MessageSent")
+                    b.Property<DateTime?>("DateRead")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("MessageSent")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("RecipientId")
                         .HasColumnType("int");
@@ -309,12 +283,7 @@ namespace API.Data.Migrations
                     b.Property<int>("SenderId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("isRead")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.HasIndex("RecipientId");
 
@@ -601,13 +570,6 @@ namespace API.Data.Migrations
                     b.Navigation("ParentCategory");
                 });
 
-            modelBuilder.Entity("API.Entities.Connection", b =>
-                {
-                    b.HasOne("API.Entities.Group", null)
-                        .WithMany("Connections")
-                        .HasForeignKey("GroupName");
-                });
-
             modelBuilder.Entity("API.Entities.DeliverySchedule", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "Deliveryman")
@@ -651,12 +613,6 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
-                    b.HasOne("API.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("API.Entities.AppUser", "Recipient")
                         .WithMany("MessagesReceived")
                         .HasForeignKey("RecipientId")
@@ -668,8 +624,6 @@ namespace API.Data.Migrations
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Order");
 
                     b.Navigation("Recipient");
 
@@ -831,11 +785,6 @@ namespace API.Data.Migrations
                     b.Navigation("ChildCategories");
 
                     b.Navigation("Features");
-                });
-
-            modelBuilder.Entity("API.Entities.Group", b =>
-                {
-                    b.Navigation("Connections");
                 });
 
             modelBuilder.Entity("API.Entities.Order", b =>

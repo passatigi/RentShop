@@ -18,7 +18,10 @@ namespace API.Data
         public DbSet<Category> Categories  { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<DeliverymanSchedule> DeliverymanSchedules  { get; set; }
+        public DbSet<DeliverySchedule> DeliverySchedules  { get; set; }
         public DbSet<Message> Messages  { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Connection> Connections { get; set; }
         public DbSet<Order> Orders  { get; set; }
         public DbSet<OrderProduct> OrderProducts  { get; set; }
         public DbSet<Product> Products  { get; set; }
@@ -88,16 +91,20 @@ namespace API.Data
             .WithMany(c => c.Orders)
             .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Message>()
+            .HasOne(m => m.Order)
+            .WithMany(o => o.Messages)
+            .OnDelete(DeleteBehavior.NoAction);
             
 
              builder.Entity<Message>()
-            .HasOne(u => u.Recipient)
-            .WithMany(m => m.MessagesReceived)
+            .HasOne(m => m.Recipient)
+            .WithMany(u => u.MessagesReceived)
             .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Message>()
-            .HasOne(u => u.Sender)
-            .WithMany(m => m.MessagesSent)
+            .HasOne(m => m.Sender)
+            .WithMany(u => u.MessagesSent)
             .OnDelete(DeleteBehavior.Restrict);
 
 

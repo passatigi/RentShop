@@ -15,12 +15,16 @@ import { OrdersListComponent } from './_orders/orders-list/orders-list.component
 import { DeliverymanGuard } from './_guards/deliveryman.guard';
 import { MonthDeliverymanScheduleComponent } from './deliveryman/deliveryman-schedule/month-deliveryman-schedule/month-deliveryman-schedule.component';
 import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
+import { MessageListComponent } from './chat/message-list/message-list.component';
+import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'product', component: ProductDetailComponent},
+  {path: 'messages', component: MessageListComponent,
+   canDeactivate: [StopHubConnectionGuard]},
   {path: 'category', component: ProductListComponent},
   {path: 'orders', component: OrdersListComponent},
   {path: 'cart', component: CartDetaisComponent},

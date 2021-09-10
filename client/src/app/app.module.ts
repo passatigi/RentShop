@@ -57,6 +57,9 @@ import { FixedPositionatedComponent } from './auxiliary-components/fixed-positio
 import { NgxDraggableDomModule } from 'ngx-draggable-dom';
 import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-schedule/deliveryman-edit-day-schedule/deliveryman-edit-day-schedule.component';
 import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
+import { ChatComponent } from './chat/chat/chat.component';
+import { MessageListComponent } from './chat/message-list/message-list.component';
+import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { AddressEditComponent } from './profile/address-edit/address-edit.component';
@@ -101,6 +104,8 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     FixedPositionatedComponent,
     DeliverymanEditDayScheduleComponent,
     DeliveryListComponent,
+    ChatComponent,
+    MessageListComponent
     ProfileComponent,
     AddressEditComponent,
     EditProfileComponent,
