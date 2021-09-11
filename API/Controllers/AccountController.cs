@@ -40,7 +40,8 @@ namespace API.Controllers
             if(!IsValidEmail(userUpdateDto.Email)) return BadRequest("Wrong email");
 
             if(await _unitOfWork.UserRepository.FindUserAsync(userUpdateDto.Email)
-                != null) return BadRequest("User with this email already exists");
+                != null && await _unitOfWork.UserRepository.FindUserAsync(userUpdateDto.Email)
+                != user) return BadRequest("User with this email already exists");
 
             _mapper.Map(userUpdateDto, user);
             _unitOfWork.UserRepository.UpdateUser(user);
@@ -156,8 +157,7 @@ namespace API.Controllers
 
             var user = _mapper.Map<AppUser>(registerDto);
             user.Email = registerDto.Email.ToLower();
-            var emailParts = registerDto.Email.ToLower().Split('@');
-            user.UserName = emailParts[0] + emailParts[1];
+
             var result = await _unitOfWork.UserRepository.CreateUserAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);

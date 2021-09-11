@@ -105,7 +105,7 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     DeliverymanEditDayScheduleComponent,
     DeliveryListComponent,
     ChatComponent,
-    MessageListComponent
+    MessageListComponent,
     ProfileComponent,
     AddressEditComponent,
     EditProfileComponent,
