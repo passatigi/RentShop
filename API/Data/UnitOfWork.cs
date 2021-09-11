@@ -22,6 +22,9 @@ namespace API.Data
             new DeliveryManRepository(_context, _mapper);
         public IMessageRepository MessageRepository => 
             new MessageRepository(_context, _mapper);
+
+        public IProductRepository ProductRepository => 
+            new ProductRepository(_context, _mapper);
         private readonly IMapper _mapper;
 
         public UnitOfWork(DataContext context, UserManager<AppUser> userManager,

@@ -11,6 +11,7 @@ namespace API.Interfaces
         IDeliveryManRepository DeliveryManRepository { get; }
         IOrderRepository OrderRepository { get; }
         IMessageRepository MessageRepository { get; }
+        IProductRepository ProductRepository { get; }
         Task<bool> Complete();
         bool HasChanges();
     }
