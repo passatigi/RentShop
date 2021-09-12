@@ -16,7 +16,7 @@ namespace API.Data
         public IUserRepository UserRepository => new UserRepository(_context, _userManager,
             _signInManager);
 
-        public ICategoryRepository CategoryRepository => new CategoryRepository(_context);
+        public ICategoryRepository CategoryRepository => new CategoryRepository(_context,_mapper);
         public IOrderRepository OrderRepository => new OrderRepository(_context, _mapper);
         public IDeliveryManRepository DeliveryManRepository =>
             new DeliveryManRepository(_context, _mapper);
@@ -25,6 +25,9 @@ namespace API.Data
 
         public IProductRepository ProductRepository => 
             new ProductRepository(_context, _mapper);
+
+        public IAdminRepository AdminRepository => 
+            new AdminRepository(_context, _mapper);
         private readonly IMapper _mapper;
 
         public UnitOfWork(DataContext context, UserManager<AppUser> userManager,

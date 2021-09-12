@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Interfaces.Repositories
@@ -14,5 +15,7 @@ namespace API.Interfaces.Repositories
             int id);
 
         Task<RealProductSchedule> GetRealProductShedule(int id);
+        void AddProduct(Product product);
+        void UpdateProduct(Product product);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Entities;
 using API.Interfaces.Repositories;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -45,6 +46,15 @@ namespace API.Data.Repositories
                 .Where(p => p.Id == id)
                 .Include(rp => rp.OrderProducts).ThenInclude(op => op.Order)
                 .ProjectTo<RealProductSchedule>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+        }
+
+        public void AddProduct(Product product){
+            _context.Products.Add(product);
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            _context.Entry(product).State = EntityState.Modified;
         }
     }
 }
