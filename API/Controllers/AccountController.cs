@@ -68,7 +68,7 @@ namespace API.Controllers
                 return BadRequest("Wrong password!");
 
             if((await _unitOfWork.UserRepository.ChangePasswordAsync(user, currentPassword, newPassword))
-                .Succeeded) return Ok(newPassword);
+                .Succeeded) return Ok();
 
             return BadRequest("Failed to change password");
         }
@@ -81,8 +81,6 @@ namespace API.Controllers
             if(user==null) return NotFound("User not found");
 
            var addresses = await _unitOfWork.UserRepository.GetAddressesAsync(user.Id);
-
-           if(addresses?.Count == 0) return Ok("User hasn't added any addresses");
 
            return Ok(addresses);
         }
