@@ -13,6 +13,7 @@ namespace API.Interfaces
         IMessageRepository MessageRepository { get; }
         IProductRepository ProductRepository { get; }
         IAdminRepository AdminRepository { get; }
+        IPhotoRepository PhotoRepository { get; }
         Task<bool> Complete();
         bool HasChanges();
     }

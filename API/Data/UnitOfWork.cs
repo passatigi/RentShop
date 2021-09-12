@@ -28,6 +28,9 @@ namespace API.Data
 
         public IAdminRepository AdminRepository => 
             new AdminRepository(_context, _mapper);
+
+        public IPhotoRepository PhotoRepository => 
+            new PhotoRepository(_context, _mapper);
         private readonly IMapper _mapper;
 
         public UnitOfWork(DataContext context, UserManager<AppUser> userManager,
