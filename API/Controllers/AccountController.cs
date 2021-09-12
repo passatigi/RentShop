@@ -17,14 +17,11 @@ namespace API.Controllers
     {
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-
         private readonly IUnitOfWork _unitOfWork;
-        private readonly DataContext _context;
 
-        public AccountController(DataContext context,
-            ITokenService tokenService, IMapper mapper, IUnitOfWork unitOfWork)
+        public AccountController(ITokenService tokenService, IMapper mapper, 
+            IUnitOfWork unitOfWork)
         {
-            _context = context;
             _tokenService = tokenService;
             _mapper = mapper;
             _unitOfWork = unitOfWork;

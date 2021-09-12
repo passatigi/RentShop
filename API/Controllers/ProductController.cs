@@ -10,16 +10,13 @@ namespace API.Controllers
 {
     public class ProductController : BaseApiController
     {
-        private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductController(DataContext dataContext, IMapper mapper,
-            IUnitOfWork unitOfWork)
+        public ProductController(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _dataContext = dataContext;
         }
 
         [HttpGet]

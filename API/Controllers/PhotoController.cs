@@ -1,31 +1,26 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
     public class PhotoController : BaseApiController
     {
         private readonly IPhotoService _photoService;
-        private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PhotoController(IPhotoService photoService, DataContext dataContext, IMapper mapper,
+        public PhotoController(IPhotoService photoService, IMapper mapper,
             IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _dataContext = dataContext;
             _photoService = photoService;
 
         }

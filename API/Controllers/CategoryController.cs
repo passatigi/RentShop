@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
@@ -11,15 +10,12 @@ namespace API.Controllers
 {
     public class CategoryController : BaseApiController
     {
-        private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(DataContext dataContext, IMapper mapper,
-            IUnitOfWork unitOfWork)
+        public CategoryController(IMapper mapper, IUnitOfWork unitOfWork)
         { 
             _mapper = mapper;
-            _dataContext = dataContext;
             _unitOfWork = unitOfWork;
         }
 

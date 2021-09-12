@@ -13,16 +13,13 @@ namespace API.Controllers
 {
     public class DeliverymanController : BaseApiController
     {
-        private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DeliverymanController(DataContext dataContext, IMapper mapper,
-            IUnitOfWork unitOfWork)
+        public DeliverymanController(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _dataContext = dataContext;
 
         }
 
@@ -93,9 +90,8 @@ namespace API.Controllers
             else if (order.Status == "Returned")
                 order.ReturnDate = DateTime.UtcNow;
 
-            await _dataContext.SaveChangesAsync();
-
-            return Ok();
+            if (await _unitOfWork.Complete()) return Ok();
+            return BadRequest("Failed to update order status");
         }
 
     }

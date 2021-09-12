@@ -16,8 +16,10 @@ namespace API.Data
         public IUserRepository UserRepository => new UserRepository(_context, _userManager,
             _signInManager);
 
-        public ICategoryRepository CategoryRepository => new CategoryRepository(_context,_mapper);
-        public IOrderRepository OrderRepository => new OrderRepository(_context, _mapper);
+        public ICategoryRepository CategoryRepository => 
+            new CategoryRepository(_context,_mapper);
+        public IOrderRepository OrderRepository => 
+            new OrderRepository(_context, _mapper);
         public IDeliveryManRepository DeliveryManRepository =>
             new DeliveryManRepository(_context, _mapper);
         public IMessageRepository MessageRepository => 
