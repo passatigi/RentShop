@@ -27,10 +27,12 @@ namespace API.Controllers
         return Ok(dtos);
     }
 
+
     [HttpPost]
     public async Task<ActionResult<CategoryDto>> AddCategory(CreateCategoryDto categoryDto)
     {
         Category category = new Category
+
         {
             ParentCategoryId = categoryDto.ParentCategoryId,
             ImgLink = categoryDto.ImgLink,

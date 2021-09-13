@@ -36,7 +36,6 @@ import { AddRealProductComponent } from './admin/realProduct/add-real-product/ad
 import { RealProductFormComponent } from './admin/realProduct/real-product-form/real-product-form.component';
 import { EditRealProductsComponent } from './admin/product/edit-real-products/edit-real-products.component';
 import { EditRealProductComponent } from './admin/realProduct/edit-real-product/edit-real-product.component';
-import { ShoppingCartComponent } from './_cart/shopping-cart/shopping-cart.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { CardItemComponent } from './_cart/card-item/card-item.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -63,6 +62,8 @@ import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { AddressEditComponent } from './profile/address-edit/address-edit.component';
+import { CategoryListComponent } from './_categories/category-list/category-list.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,6 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     RealProductFormComponent,
     EditRealProductsComponent,
     EditRealProductComponent,
-    ShoppingCartComponent,
     CartDetaisComponent,
     CardItemComponent,
     CalendarComponent,
@@ -109,7 +109,9 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     ProfileComponent,
     AddressEditComponent,
     EditProfileComponent,
-    DeliveryListComponent
+    DeliveryListComponent,
+    CategoryListComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,83 +1,39 @@
-<style>
-    .mainCategoriesBox {
-            display: flex;
-            justify-content: center;
-            font-size: 17px;
-    }
-    .secondaryCategoriesBox {
-        margin-top: 10px;
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-        font-size: 17px;
-    }
-    .categoryBox{
-        border: 1px solid black ;
-        padding: 5px;
-    }
-    .categoryImg{
-        width: 50px;
-        height: 50px;
-    }
-    .category{
-        margin: 10px;
-    }
-    .center{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
-
-
-
-<!-- style="filter: invert()" -->
-<h1 class="m-3">Choose product category</h1>
-<div class="btn-group btn-block">
-    <button type="button" class="btn  btn-outline-dark" *ngFor="let category of categories" (click)="openCategory(category.id)">
-        <span>
+<div class="pc-block btn-group btn-block">
+    <button type="button" 
+            class="btn btn-outline-dark btn-category" 
+            [ngClass]='category.id === selectedParentCategry?.id ? "selected-button" : ""'
+            *ngFor="let category of categories" 
+            (click)="openCategory(category.id)">
+        <div>
+            <img class="btn-category-img" src="{{category.imgLink}}" alt="{{category.name}}">
+        </div>
+        <div>
             {{category.name}}
-        </span>
+        </div>
     </button>
 </div>
 
-<!-- <div class="mainCategoriesBox">
-        <div style="cursor: pointer;" class="categoryBox" *ngFor="let category of categories" (click)="openCategory(category.id)">
-            <div>
-                <img class="categoryImg center" 
-                src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" alt="{{category.name}}">
-            </div>
-            <div>
-                <span>
-                    {{category.name}}
-                </span>
-            </div>
-            
+<div class="mobile-block text-left">
+    <button type="button" 
+            class="btn btn-outline-dark btn-category btn-block p-1" 
+            [ngClass]='category.id === selectedParentCategry?.id ? "selected-button" : ""'
+            *ngFor="let category of categories" 
+            (click)="openCategory(category.id)">
+        <div class="text-left p-2">
+            <img class="btn-category-img" src="{{category.imgLink}}" alt="{{category.name}}"> 
+            <span> {{category.name}} </span>
         </div>
-</div> -->
-
-
-
-<div class="row">
-    <div style="cursor: pointer;" class=" m-2 col-12 col-md-4 col-lg-2" *ngFor="let category of childCategories">
-        <!-- <button 
-            type="button" 
-            class="btn  btn-outline-dark" 
-            style="width: 20%" 
-            routerLink='category' 
-            [queryParams]='{categoryid:category.id}'>
-            <div>
-                <img 
-                    class="categoryImg" 
-                    src="{{category.imgLink ?? 'https://sun9-78.userapi.com/impg/P6wSD4iKNg6-eBo9vEDIC2ZkxreKNuMpq_Ougg/NcfVBB2ciOg.jpg?size=500x311&quality=96&sign=3831d1a965160bd440910f0750f61857&type=album'}}" 
-                    alt="{{category.name}}">
-                {{category.name}}
-            </div>
-        </button> -->
-        <app-category-card [category]='category'></app-category-card>
-    </div>
+    </button>
 </div>
 
-<ng-container *ngIf="isAdmin">
-    <app-category-admin [categories]='categories' [childCategories]='childCategories'></app-category-admin>
+<ng-container *ngIf="childCategories">
+    <app-category-list [categories]='childCategories'> </app-category-list>
 </ng-container>
+
+<ng-container *ngIf="allChildCategories && !selectedParentCategry">
+    <app-category-list [categories]='allChildCategories'> </app-category-list>
+</ng-container>
+
+<!-- <ng-container *ngIf="isAdmin">
+    <app-category-admin [categories]='categories' [childCategories]='childCategories'></app-category-admin>
+</ng-container> -->
