@@ -10,6 +10,9 @@ namespace API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto, Category>();
+            CreateMap<DeliverymanScheduleDto, DeliverymanSchedule>();
+            CreateMap<DeliverymanSchedule, DeliverymanScheduleDto>();
 
             CreateMap<RegisterDto, AppUser>();
 

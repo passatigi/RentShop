@@ -55,7 +55,6 @@ namespace API.Extensions
                     }
                 }; 
             });
-            services.AddScoped<IAccountService, AccountService>(); 
 
             services.AddAuthorization(opt => {
                 opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));

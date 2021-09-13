@@ -56,7 +56,7 @@ export class EditProfileComponent implements OnInit {
 
   updateUserInfo(){
     this.accountService.updateUserInfo(this.profileEditForm?.value).subscribe(()=>{
-      this.profileEditForm.reset(this.user);
+      this.profileEditForm.reset();
       this.toastr.success('Profile updated successfully');
     }) 
   }

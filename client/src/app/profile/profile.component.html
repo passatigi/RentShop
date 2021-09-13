@@ -20,7 +20,7 @@
                 <div>
                     <strong>Addresses:</strong>
                     <div>
-                        <p *ngIf="addresses?.length == 0">
+                        <p *ngIf="addresses === null">
                             You don't have addresses
                         </p>
                         <ul #scrollMe style="overflow: scroll; height:350px;" [scrollTop]="scrollMe.scrollHeight"

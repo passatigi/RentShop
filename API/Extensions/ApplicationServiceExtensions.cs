@@ -1,4 +1,3 @@
-using System;
 using API.Data;
 using API.Data.Repositories;
 using API.Helpers;
@@ -15,14 +14,14 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMessageRepository, MessageRepository>();
-            services.AddScoped<UnitOfWork>();
-
 
             services.AddScoped<ITokenService, TokenService>();
 
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
+            
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
