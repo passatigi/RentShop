@@ -1,0 +1,51 @@
+<style>
+    .category-background {
+        position: relative;
+        height: 300px;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        font-family: 'Open Sans Condensed';
+        filter: brightness(0.5);
+    }
+    .category-block:hover {
+        cursor: pointer;
+    }
+
+    .category-block:hover .category-background {
+        filter: brightness(1);
+        transition: filter 1.15s ease-in-out;
+    }
+
+    .category-block-name {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        font-size: 40px;
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        
+        z-index: 100;
+    }
+
+    .col-4, .col-lg-4{
+        padding: 1px;
+    }
+</style>
+
+<ng-container *ngIf="categories">
+    <div class="row px-3 py-2">
+        <div    routerLink='category' 
+                [queryParams]='{categoryid:category.id}'
+                class="col-12 col-lg-4 category-block" 
+                *ngFor="let category of categories">
+            <div class="category-block-name">
+                {{category.name}}
+            </div>
+            <div class="category-background" style="margin: 0px; padding: 0px;" [ngStyle]="{'background-image': 'url(' + category.imgLink + ')'}">
+            </div>
+        </div>
+    </div>
+</ng-container>
