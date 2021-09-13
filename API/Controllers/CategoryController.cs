@@ -37,7 +37,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{categoryId}")]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll(int categoryId)
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetById(int categoryId)
         {
             var category = await _dataContext.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);              
             var dto = _mapper.Map<CategoryDto>(category);

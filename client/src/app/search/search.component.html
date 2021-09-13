@@ -1,0 +1,17 @@
+<div *ngIf="resultLoaded" class="text-center">
+    <h2>{{searchString}} search result </h2>
+</div>
+
+<div *ngIf="categories?.length > 0 ">
+    <div class="text-center">
+        <h2>Categories</h2>
+    </div>
+    
+    <app-category-list [categories]='categories'></app-category-list>
+</div>
+<div *ngIf="products?.length > 0">
+    <div class="text-center">
+        <h2>Products</h2>
+    </div>
+    <app-product-list [products]='products'></app-product-list>
+</div>
