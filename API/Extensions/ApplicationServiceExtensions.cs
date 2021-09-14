@@ -26,14 +26,14 @@ namespace API.Extensions
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             
-             services.AddDbContext<DataContext>(options =>
-               options.UseSqlite("Data Source=Database.db"));
+            //  services.AddDbContext<DataContext>(options =>
+            //    options.UseSqlite("Data Source=Database.db"));
 
-            // services.AddDbContext<DataContext>(options =>
-            // {
-            //     string connStr = config.GetConnectionString("DefaultConnection");
-            //     options.UseSqlServer(connStr);
-            // });
+            services.AddDbContext<DataContext>(options =>
+            {
+                string connStr = config.GetConnectionString("DefaultConnection");
+                options.UseSqlServer(connStr);
+            });
 
             return services;
         }
