@@ -1,18 +1,24 @@
+import { Address } from "./address";
 import { RealProduct } from "./realProduct";
+import { User } from "./user";
 
 export interface OrderDto {
     id: number;
-    orderProducts: RealProduct[];
     orderDate: Date;
     requiredDate: Date;
-    shippedDate: Date;
+    shippedDate?: Date;
     requiredReturnDate: Date;
-    returnDate: Date;
+    returnDate?: Date;
     status: string;
     comments: string;
-    customeId: number;
+    deliveryman: User;
+    customer: User;
+    shippedAddress: Address;
+    returnAddress: Address;
+    orderProducts: RealProduct[];
+    returnAddressId: number;
+    shippedAddressId: number;
+    customerId: number;
     deliverymanId: number;
-    adressId: number;
-    shippedAdress: string;
-    returnAdress: string;
+    totalPrice: number;
 }

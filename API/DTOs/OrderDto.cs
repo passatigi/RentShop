@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-
 namespace API.DTOs
 {
     public class OrderDto
     {
         public int Id { get; set; }
+        public double TotalPrice { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime RequiredDate { get; set; }
         public DateTime? ShippedDate { get; set; }

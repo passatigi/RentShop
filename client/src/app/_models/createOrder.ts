@@ -5,7 +5,8 @@ import { OrderProduct } from "./orderProduct";
         requiredDate: Date;
         requiredReturnDate: Date;
         comments: string;
-        customeId: number;
-        shippedAdress: string;
-        returnAdress: string;
+        customerId: number;
+        shippedAddressId: number;
+        returnAddressId: number;
+        totalPrice: number;
     }
