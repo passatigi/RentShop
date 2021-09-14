@@ -56,7 +56,7 @@ namespace API.Controllers
             return Ok(orders);
         }
 
-        [HttpPost]
+        [HttpPost("new")]
         public async Task<ActionResult> AddOrder(Order order)
         {
             order.OrderDate = DateTime.UtcNow;
