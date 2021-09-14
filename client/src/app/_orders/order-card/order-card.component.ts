@@ -20,7 +20,6 @@ export class OrderCardComponent implements OnInit {
     this.productService.getProductById(this.orderDto.orderProducts[0].productId).subscribe( product => {
       this.product = product;
     })
-    this.orderDto.totalPrice = 7;
   }
 
 }

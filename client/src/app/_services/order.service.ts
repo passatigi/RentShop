@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CreateOrder } from '../_models/createOrder';
@@ -20,8 +20,6 @@ export class OrderService {
 
 
   addOrder(order: CreateOrder){
-    console.log(JSON.stringify(order));
-    let q = 1;
-    return this.http.post(this.baseUrl + 'order/new', order);
+    return this.http.post(this.baseUrl + 'order/new', order)
   }
 }
