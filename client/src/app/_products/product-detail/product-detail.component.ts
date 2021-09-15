@@ -14,6 +14,8 @@ import { SelectProductService } from 'src/app/_services/select-product.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
+  currentImage?: string;
+  itemsPerSlide = 5;
 
   @Input() realProduct: RealProduct;
 
@@ -65,8 +67,12 @@ export class ProductDetailComponent implements OnInit {
   loadProduct(id: number){
     this.productService.getProductById(id).subscribe(product =>{
       this.product = product;
-      this.galleryImages = this.getImages();
+      if(product.productImgsLinks[0])
+        this.currentImage = product.productImgsLinks[0];
     });
+  }
+  setPhoto(link: string){
+    this.currentImage = link;
   }
 
 

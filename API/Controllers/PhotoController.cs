@@ -33,8 +33,6 @@ namespace API.Controllers
                             .ProjectTo<ProductImgDto>(_mapper.ConfigurationProvider)
                             .ToListAsync();
 
-            if(imgs?.Count == 0) return NotFound();
-
             return Ok(imgs);
         }
 
