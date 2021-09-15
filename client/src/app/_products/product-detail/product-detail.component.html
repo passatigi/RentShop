@@ -1,3 +1,5 @@
+
+
 <ng-container  *ngIf="product"> 
     <div  *appHasRole='["Admin"]' >
         <button 
@@ -44,29 +46,48 @@
 
             <div class="p-2 mt-3">
                 <h2>{{product.name}}</h2>
-                <h5>
-                    Category: {{product.categoryName}}
-                </h5>
-                <h3>
-                    <strong>Vendor: </strong>{{product.vendor}}
-                </h3>
-                <h3>
-                    <strong>Description: </strong>{{product.description}}
-                </h3>
+                <table class="table mt-4" style="font-size: 25px;"> 
+                    <tr>
+                        <td width="20%">
+                            Category
+                        </td>
+                        <td width="80%">
+                            {{product.categoryName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Vendor
+                        </td>
+                        <td>
+                            {{product.vendor}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Description
+                        </td>
+                        <td>
+                            {{product.description}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="p-2 mt-1">
+                <h2 >Features</h2>
             </div>
             
-
-            <table  class="table border p-2" >
+            <table id="features-table" class="table p-2" >
                 <tr>
                     <th style="width: 50%;">Feature</th>
                     <th style="width: 50%;">Value</th>
                 </tr>
                 <tr *ngFor="let feature of product.productFeatures">
-                    <td>{{feature.name}}</td>
-                    <td style="max-width: 300px;">
-                        <div>
+                    <td>
+                        {{feature.name}}
+                    </td>
+                    <td>
                             {{feature.value}}
-                        </div>
                     </td>
                 </tr>
             </table>
