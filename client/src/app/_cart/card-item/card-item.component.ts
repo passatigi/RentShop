@@ -124,8 +124,12 @@ export class CardItemComponent implements OnInit {
       totalPrice : this.item.rentPrice * this.countDays()
     }
 
-    this.orderService.addOrder(newOrder);
-    this.remove();
+    this.orderService.addOrder(newOrder).subscribe((res: Response) => {
+      this.remove();
+    },
+    (error) => {
+      console.log(error.error)
+    });
   }
 
   addDisabledDays(){
