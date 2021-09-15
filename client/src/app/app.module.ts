@@ -64,6 +64,7 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 import { AddressEditComponent } from './profile/address-edit/address-edit.component';
 import { CategoryListComponent } from './_categories/category-list/category-list.component';
 import { SearchComponent } from './search/search.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -133,7 +134,8 @@ import { SearchComponent } from './search/search.component';
     FileUploadModule,
     TimepickerModule.forRoot(),
     ModalModule.forRoot(),
-    NgxDraggableDomModule
+    NgxDraggableDomModule,
+    CarouselModule.forRoot()
   ],
   exports: [
     NgxGalleryModule

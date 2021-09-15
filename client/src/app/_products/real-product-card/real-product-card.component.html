@@ -1,7 +1,6 @@
-<div class="card mb-3" >
-    <p></p>
-    <div class="row mb-4">
-        <div class="col">
+<div>
+    <div>
+        <div>
             <p>
                 <strong>SerialNumber: </strong>{{realProduct.serialNumber}}
             </p>
@@ -13,19 +12,22 @@
             </h4>
         </div>
 
-
-        <div class="col">
-            <p>
-                <strong>Available dates</strong>
-            </p>
+        <div>
+            <strong>Available dates</strong>
             <div>
-                <app-calendar [item] = "item" ></app-calendar>
+                <app-calendar class="m-1" [item] = "item"> </app-calendar>
             </div>
         </div>
 
-        <div class="col" style="margin-right: 2%;">
+        <div *appHasRole='["Customer"]'>
             <div>
-                <button type="button" class="btn btn-info" (click)="add(realProduct)" style="margin-top: 40%;">Add to cart</button>
+                <button 
+                    type="button" 
+                    class="btn btn-block btn-info" 
+                    (click)="add(realProduct)" 
+                >
+                    Add to cart
+                </button>
             </div>
         </div>
     </div>

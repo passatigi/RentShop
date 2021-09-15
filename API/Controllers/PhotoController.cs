@@ -29,8 +29,6 @@ namespace API.Controllers
         {
             var imgs = await _unitOfWork.PhotoRepository.GetImagesAsync(productId);
 
-            if(imgs?.Count == 0) return NotFound();
-
             return Ok(imgs);
         }
 
