@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Address } from '../_models/address';
 import { User } from '../_models/user';
@@ -13,7 +14,7 @@ export class ProfileComponent implements OnInit {
   appUser: User;
   addresses: Address[]
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private toastr: ToastrService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.appUser = user);
   }
 
@@ -28,7 +29,10 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAddress(id:number){
-    this.accountService.deleteAddress(id)
+    this.accountService.deleteAddress(id).subscribe(() => {
+      this.addresses = this.addresses.filter(x => x.id !== id);
+      this.toastr.success("Successfully deleted");
+    })
   }
 
 }
