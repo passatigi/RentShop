@@ -5,8 +5,18 @@
                 [queryParams]="{'id': product.id}"
                 type="button" 
                 class="btn btn-outline-danger p-2"
-                style="position: absolute; right: 5px; z-index: 30;" >Edit product</button>
+                style="position: absolute; right: 10px; top:10vh; z-index: 30;" >Edit product</button>
     </div>
+
+    <ng-container *appHasRole='["Customer"]'>
+        <div  *ngIf="!isScrolled">
+            <button (click)='scroll(target)'
+                    type="button" 
+                    class="btn btn-outline-primary"
+                    style="position: absolute; left: 10px; top:10vh; z-index: 30; opacity: 0.5;" >Rent it</button>
+        </div>
+    </ng-container>
+    
 
     <div class="row" >
         <div class="col-12 offset-lg-1 col-lg-4">
@@ -61,14 +71,25 @@
 
     </div>
 
-    <div class="col-12 offset-lg-1 col-lg-4 m-2" *ngFor='let realProduct of product.realProducts'>
-        <div class="row">
-            <app-real-product-card 
-            class="col-12 col-md-4 col-lg-3"
-            [realProduct] = "realProduct" 
-            [product] = "product">
-        </app-real-product-card>
+    <div>
+        <h3 class="p-4" style="background-color: #F8F9FA;">Rent product</h3>
+    </div>
+
+    <div class="m-2 row" #target>
+        
+        <div 
+            class="col-12 col-md-4 col-lg-3  p-1" 
+            *ngFor='let realProduct of product.realProducts'>
+
+            <div class="p-3 border">
+                <app-real-product-card 
+                class=""
+                [realProduct] = "realProduct" 
+                [product] = "product">
+                </app-real-product-card>
+            </div>
         </div>
     </div>
+    
 
 </ng-container>

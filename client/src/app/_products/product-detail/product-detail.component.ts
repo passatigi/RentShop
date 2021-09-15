@@ -92,14 +92,10 @@ export class ProductDetailComponent implements OnInit {
     this.selectProductService.add(item);
   }
 
-  // get count() {
-  //   return this.selectProductService.items.filter(i => i.id == this.realProduct.id).length;
-  // }
+  isScrolled = false;
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+    this.isScrolled = true;
+  }
 
-
-  // remove() {
-  //   if (this.count > 0) {
-  //     this.selectProductService.remove(this.realProduct)
-  //   }
-  // }
 }
