@@ -82,6 +82,11 @@ namespace API.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Order>()
+                .HasOne(o => o.DeliverymanReturn)
+                .WithMany(d => d.DeliverymanReturnOrders)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Order>()
                 .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
                 .OnDelete(DeleteBehavior.NoAction);
@@ -109,11 +114,6 @@ namespace API.Data
             builder.Entity<DeliverymanSchedule>()
                 .HasOne(s => s.Deliveryman)
                 .WithMany(m => m.DeliverymanShedules)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<DeliverySchedule>()
-                .HasOne(s => s.Deliveryman)
-                .WithMany(m => m.DeliverySchedules)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.ApplyUtcDateTimeConverter();

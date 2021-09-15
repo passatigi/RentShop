@@ -24,6 +24,9 @@ namespace API.Entities
         public int DeliverymanId { get; set; }
         public AppUser Deliveryman { get; set; }
 
+        public int DeliverymanReturnId { get; set; }
+        public AppUser DeliverymanReturn { get; set; }
+
         public int CustomerId { get; set; }
         public AppUser Customer { get; set; }
 
