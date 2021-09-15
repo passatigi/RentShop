@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { map, take } from 'rxjs/operators';
 import { Address } from '../_models/address';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   register(model: User){
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
@@ -51,6 +52,7 @@ export class AccountService {
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(undefined)
+    this.router.navigateByUrl('/');
   }
 
   getDecodedToken(token: any) {
