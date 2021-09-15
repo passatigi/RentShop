@@ -60,7 +60,7 @@ export class AccountService {
   }
 
   getUserAddresses(email:string){
-    return this.http.get<Address[]>(this.baseUrl + 'account/getAddresses/'+ email )
+    return this.http.get<Address[]>(this.baseUrl + 'account/getAddresses');
   }
 
   addAddress(address: Address){

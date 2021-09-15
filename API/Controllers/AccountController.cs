@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -70,14 +71,12 @@ namespace API.Controllers
             return BadRequest("Failed to change password");
         }
 
-        [HttpGet("getAddresses/{email}")]
-        public async Task<ActionResult<IEnumerable<Address>>> GetUserAddresses(string email)
+        [HttpGet("getAddresses")]
+        public async Task<ActionResult<IEnumerable<Address>>> GetUserAddresses()
         {
-           var user = await _unitOfWork.UserRepository.FindUserAsync(email);
+           var userId = User.GetUserId();
 
-            if(user==null) return NotFound("User not found");
-
-           var addresses = await _unitOfWork.UserRepository.GetAddressesAsync(user.Id);
+           var addresses = await _unitOfWork.UserRepository.GetAddressesAsync(userId);
 
            return Ok(addresses);
         }
