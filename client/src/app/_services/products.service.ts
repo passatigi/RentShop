@@ -15,7 +15,7 @@ export class ProductsService {
 
   getProductsByCaregoryId(id: number){
     let httpParams = new HttpParams().set('CategoryId', id);
-    return this.http.get<Product[]>(this.baseUrl + 'Product', {params: httpParams});
+    return this.http.get<Product[]>(this.baseUrl + 'product/category/' + id);
   }
 
   getProductById(id: number){
