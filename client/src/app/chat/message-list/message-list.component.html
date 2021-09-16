@@ -15,7 +15,7 @@
     <div *ngIf="orderId && recipientId" class="col-12 col-md-6">
         <h2>Order: {{orderId}}</h2>
         <app-chat [orderId]='orderId' [recipientId]='recipientId'></app-chat>
-        <div *ngIf="order"> 
+        <!-- <div *ngIf="order"> 
             <table class="table border mt-3">
                 <tr>
                     <td>Serial number</td>
@@ -31,7 +31,7 @@
                     </tr>
                 </ng-container>
             </table>
-        </div>
+        </div> -->
     </div>
     <div *ngIf="recipient" class="col-12 col-md-3 text-center mt-3">
         {{recipient.fullName}}
@@ -40,6 +40,9 @@
             {{recipient.email}} 
             <br>
             {{recipient.phoneNumber}}
+        </div>
+        <div *ngIf="order">
+            <app-order-card [orderDto]='order'></app-order-card>
         </div>
     </div>
     <div *ngIf="!orderId && !recipientId" class="col-12 col-md-6 text-center">
