@@ -1,24 +1,33 @@
-import { OrderProduct } from "./orderProduct";
+import { Address } from "./address";
 import { RealProduct } from "./realProduct";
 import { User } from "./user";
 
 export interface Order {
-    id: number
-    orderDate: string
-    requiredDate: Date
-    shippedDate?: Date
-    requiredReturnDate: Date
-    returnDate?: Date
-    status: string
-    comments: string
-    deliveryman: User
-    customer: User
-    shippedAdress: string
-    returnAdress: string
-    realProducts: RealProduct[]
+    id?: number;
+    orderDate?: Date;
 
-    totalPrice?: number;
+    requiredDate: Date;
+    shippedDate?: Date;
     
-    orderProducts: OrderProduct[];
-}
+    requiredReturnDate: Date;
+    returnDate?: Date;
 
+    status?: string;
+    comments?: string;
+
+    
+    shippedAddressId: number;
+    shippedAddress?: Address;
+    returnAddressId: number;
+    returnAddress?: Address;
+
+    deliverymanId?: number;
+    deliveryman?: User;
+    deliverymanReturnId?: number;
+    deliverymanReturn?: User;
+    customerId: number;
+    customer?: User;
+    
+    orderProducts: RealProduct[];
+    totalPrice?: number;
+}

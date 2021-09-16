@@ -61,7 +61,7 @@ export class DeliveryListComponent implements OnInit {
       this.changeStringsToDates(order);
       const diffDays = Math.round(Math.abs((order.requiredReturnDate.getTime() - order.requiredDate.getTime()) / this.oneDay));
       let dayPrice = 0;
-      for (const product of order.realProducts) {
+      for (const product of order.orderProducts) {
         dayPrice += product.rentPrice;
       }
       order.totalPrice = dayPrice * diffDays;

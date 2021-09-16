@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderDto } from 'src/app/_models/orderDto';
+import { Order } from 'src/app/_models/order';
 import { Product } from 'src/app/_models/product';
 import { ProductsService } from 'src/app/_services/products.service';
 
@@ -11,7 +11,7 @@ import { ProductsService } from 'src/app/_services/products.service';
 })
 export class OrderCardComponent implements OnInit {
 
-  @Input() orderDto: OrderDto;
+  @Input() orderDto: Order;
   product: Product;
   isCollapsed = true;
   
