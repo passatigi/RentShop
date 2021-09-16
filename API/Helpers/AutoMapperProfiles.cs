@@ -51,9 +51,7 @@ namespace API.Helpers
 
             CreateMap<AddProductFeatureDto, ProductFeature>();
 
-            CreateMap<OrderDto, Order>();
-
-            CreateMap<Order, OrderDto>();
+            
 
             CreateMap<OrderProduct, RealProductDto>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(f => f.RealProduct.Id))
@@ -77,6 +75,8 @@ namespace API.Helpers
             CreateMap<Order, OrderDto>()
                 .ForMember(dest => dest.OrderProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.RealProduct)));
 
+            CreateMap<OrderDto, Order>()
+            .ForMember(dest => dest.OrderProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => new {RealProductId = op.Id})));
 
             CreateMap<Message, MessageDto>();
             

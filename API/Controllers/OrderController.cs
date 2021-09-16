@@ -56,23 +56,24 @@ namespace API.Controllers
         }
 
         [HttpPost("new")]
-        public async Task<ActionResult> AddOrder(Order order)
+        public async Task<ActionResult> AddOrder(OrderDto orderDto)
         {
-            order.OrderDate = DateTime.UtcNow;
-            order.Status = "Avaiting delivery";
-            order.DeliverymanId = 5;
+            orderDto.OrderDate = DateTime.UtcNow;
+            orderDto.Status = "Avaiting delivery";
+            orderDto.DeliverymanId = 5;
 
 
-            var deliverymens = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == order.OrderDate.Date).ToListAsync();
-            if (deliverymens.Count == 0) return BadRequest("No delivery on start day");
+            var deliverymen = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == orderDto.RequiredDate.Date).ToListAsync();
+            if (deliverymen.Count == 0) return BadRequest("No delivery on start day");
 
-            var deliverymensReturn = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == order.OrderDate.Date).ToListAsync();
-            if (deliverymensReturn.Count == 0) return BadRequest("No delivery on last day");
+            var deliverymenReturn = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == orderDto.RequiredReturnDate.Date).ToListAsync();
+            if (deliverymenReturn.Count == 0) return BadRequest("No delivery on last day");
             
             var rand = new Random();
-            order.DeliverymanId = deliverymens.ElementAt(rand.Next(0, deliverymens.Count - 1)).Id;
-            order.DeliverymanReturnId = deliverymensReturn.ElementAt(rand.Next(0, deliverymensReturn.Count - 1)).Id;
+            orderDto.DeliverymanId = deliverymen.ElementAt(rand.Next(0, deliverymen.Count - 1)).Id;
+            orderDto.DeliverymanReturnId = deliverymenReturn.ElementAt(rand.Next(0, deliverymenReturn.Count - 1)).Id;
 
+            var order =  _mapper.Map<Order>(orderDto);
             _dataContext.Orders.Add(order);
 
             if (await _dataContext.SaveChangesAsync() > 0) return Ok();

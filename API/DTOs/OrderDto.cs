@@ -5,8 +5,8 @@ namespace API.DTOs
 {
     public class OrderDto
     {
-        public int Id { get; set; }
-        public double TotalPrice { get; set; }
+        public int? Id { get; set; }
+        public double? TotalPrice { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime RequiredDate { get; set; }
         public DateTime? ShippedDate { get; set; }
@@ -21,11 +21,11 @@ namespace API.DTOs
         public AddressDto ReturnAddress { get; set; }
         public ICollection<RealProductDto> OrderProducts { get; set; }
       
-        public int ReturnAddressId { get; set; }
-        public int ShippedAddressId { get; set; }
-        public int CustomerId { get; set; }
+        public int? ReturnAddressId { get; set; }
+        public int? ShippedAddressId { get; set; }
+        public int? CustomerId { get; set; }
 
-        public int DeliverymanId { get; set; }
-        public int DeliverymanReturnId { get; set; }
+        public int? DeliverymanId { get; set; }
+        public int? DeliverymanReturnId { get; set; }
     }
 }
