@@ -12,6 +12,7 @@ export interface OrderDto {
     status: string;
     comments: string;
     deliveryman: User;
+    deliverymanReturn: User;
     customer: User;
     shippedAddress: Address;
     returnAddress: Address;
@@ -20,5 +21,6 @@ export interface OrderDto {
     shippedAddressId: number;
     customerId: number;
     deliverymanId: number;
+    deliverymanReturnId: number;
     totalPrice: number;
 }

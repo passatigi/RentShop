@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -14,9 +18,11 @@ namespace API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        public DataContext _dataContext { get; }
 
-        public AdminHelperController(IMapper mapper, IUnitOfWork unitOfWork)
+        public AdminHelperController(IMapper mapper, IUnitOfWork unitOfWork, DataContext dataContext)
         {
+            _dataContext = dataContext;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
 
@@ -124,6 +130,18 @@ namespace API.Controllers
             return BadRequest("Failed to update product");
 
             
+        }
+
+        [HttpGet("search-orders/{searchString}")]
+        public async Task<ActionResult<OrderDto>> SearchOrders(string searchString){
+             var orders = await _dataContext.Orders
+                .Include(p => p.OrderProducts)
+                .ThenInclude(s => s.RealProduct)
+                .Where(o => o.Id.ToString().Contains(searchString))
+                .ProjectTo<OrderDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return Ok(orders);
         }
     }
 }

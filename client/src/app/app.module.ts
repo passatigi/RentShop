@@ -65,6 +65,7 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
 import { CategoryListComponent } from './_categories/category-list/category-list.component';
 import { SearchComponent } from './search/search.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { SearchOrdersComponent } from './admin/orders/search-orders/search-orders.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     EditProfileComponent,
     DeliveryListComponent,
     CategoryListComponent,
-    SearchComponent
+    SearchComponent,
+    SearchOrdersComponent
   ],
   imports: [
     BrowserModule,

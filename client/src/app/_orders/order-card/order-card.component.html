@@ -71,7 +71,12 @@
                 <a  routerLink="/messages" 
                     [queryParams]="{'recipientId': orderDto.deliverymanId , 'orderId': orderDto.id}"
                     class="btn btn-sm btn-flash-border-success">
-                    Chat
+                    Chat with delivery deliveryman
+                </a>
+                <a  routerLink="/messages" 
+                    [queryParams]="{'recipientId': orderDto.deliverymanReturnId , 'orderId': orderDto.id}"
+                    class="btn btn-sm btn-flash-border-success">
+                    Chat with return deliveryman
                 </a>
             </div>
         </div>
