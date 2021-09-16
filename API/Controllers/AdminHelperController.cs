@@ -39,7 +39,7 @@ namespace API.Controllers
         {
             var feature = _mapper.Map<Feature>(featureDto);
             _unitOfWork.AdminRepository.AddFeature(feature);
-            if (await _unitOfWork.Complete()) return Ok(_mapper.Map<FeatureDto>(feature));
+            if (await _unitOfWork.Complete()) return Ok(feature);
             return BadRequest("Failed to add feature");
         }
 
@@ -51,7 +51,7 @@ namespace API.Controllers
 
             _unitOfWork.AdminRepository.AddRealProduct(realProduct);
 
-            if (await _unitOfWork.Complete()) return Ok(realProduct);
+            if (await _unitOfWork.Complete()) return Ok(realProduct.Id);
             return BadRequest("Failed to add real product");
         }
         [HttpPut("real-products")]
@@ -75,7 +75,7 @@ namespace API.Controllers
 
             _unitOfWork.ProductRepository.AddProduct(product);
 
-            if (await _unitOfWork.Complete()) return Ok(product);
+            if (await _unitOfWork.Complete()) return Ok(product.Id);
 
             return BadRequest("Failed to add product");
         }
