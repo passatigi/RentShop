@@ -19,9 +19,11 @@ namespace API.DTOs
         public AddressDto ShippedAddress { get; set; }
         public AddressDto ReturnAddress { get; set; }
         public ICollection<RealProductDto> OrderProducts { get; set; }
+      
         public int ReturnAddressId { get; set; }
         public int ShippedAddressId { get; set; }
         public int CustomerId { get; set; }
+
         public int DeliverymanId { get; set; }
     }
 }

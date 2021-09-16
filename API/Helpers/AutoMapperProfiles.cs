@@ -10,6 +10,9 @@ namespace API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<CategoryDto, Category>();
+            CreateMap<DeliverymanScheduleDto, DeliverymanSchedule>();
+            CreateMap<DeliverymanSchedule, DeliverymanScheduleDto>();
 
             CreateMap<RegisterDto, AppUser>();
 
@@ -70,6 +73,13 @@ namespace API.Helpers
             CreateMap<AppUser, UserDto>();
 
             CreateMap<Address, AddressDto>();
+
+            CreateMap<Order, OrderDto>()
+                .ForMember(dest => dest.RealProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.RealProduct)));
+
+
+            CreateMap<Message, MessageDto>();
+            
         }
     }
 }

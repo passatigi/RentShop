@@ -94,6 +94,22 @@ export class DeliveryListComponent implements OnInit {
     }
   }
 
+
+
+  isChangable(order: Order){
+    if(order.requiredDate.toDateString() === this.date.toDateString() 
+      && order.status === 'Awaiting delivery'){
+
+      return true;
+    }
+    else if(order.requiredReturnDate.toDateString() === this.date.toDateString() 
+            && order.status === 'Delivered'){
+
+      return true;
+    }
+    return false;
+  }
+
   isCompleted(order: Order){
     if(order.requiredDate.toDateString() === this.date.toDateString() && order.status !== 'Awaiting delivery'){
       return true;

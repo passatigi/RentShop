@@ -39,13 +39,11 @@ export class AddressEditComponent implements OnInit {
   addAddress(){
     this.accountService.addAddress(this.addAddressForm?.value)
         .subscribe(response => {
+          this.addAddressForm?.reset();
           let address = response as Address;
           console.log(address);
           this.addresses.push(address);
           this.toastr.success('Address added successfully');
-
-          this.addAddressForm?.reset();
-          
     })
   }
 }

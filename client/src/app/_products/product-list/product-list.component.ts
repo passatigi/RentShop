@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
+import { Category } from 'src/app/_models/category';
 import { Product } from 'src/app/_models/product';
+import { CategoryService } from 'src/app/_services/category.service';
 import { ProductsService } from 'src/app/_services/products.service';
 
 @Component({
@@ -8,22 +10,33 @@ import { ProductsService } from 'src/app/_services/products.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
-  id: number; 
-  products: Product[] = [];
+export class ProductListComponent implements OnInit { 
+  category: Category;
+  @Input() products: Product[] = [];
 
-  constructor(private productService: ProductsService, private route: ActivatedRoute) {}
+  constructor(private productService: ProductsService,
+  private categoryService: CategoryService,
+     private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe( params => {
-      this.id = params['categoryid'];
+      let id = parseInt(params['categoryid']);
+      this.getCategory(id);
     })
-    this.loadProducts(this.id);
+    
+  }
+  getCategory(categoryId: number){
+    this.categoryService.getCategory(categoryId).subscribe((category) => {
+      this.category = category;
+      this.loadProducts(category.id);
+    }) 
   }
 
-  loadProducts(id: number){
-    this.productService.getProductsByCaregoryId(id).subscribe(products => {
+  loadProducts(categoryId: number){
+    this.productService.getProductsByCaregoryId(categoryId).subscribe(products => {
       this.products = products;
+      console.log(products)
     })
+    
   }
 }

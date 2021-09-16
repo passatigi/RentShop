@@ -31,6 +31,8 @@ namespace API
                 
                 await seeder.SeedUsers(userManager, roleManager);
                 await seeder.SeedData(context);
+                context.Connections.RemoveRange(context.Connections);
+                await context.SaveChangesAsync();
             }
             catch(Exception ex){
                 var logger = services.GetRequiredService<ILogger<Program>>();

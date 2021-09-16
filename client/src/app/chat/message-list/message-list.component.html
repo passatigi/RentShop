@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-12 col-md-3" style="max-height: 80vh; cursor: pointer;">
+        <div *ngFor="let message of messageThreadList" 
+            class="border"
+            (click)='openChat(message)'
+            >
+            <div class="p-2 border border-bottom">
+            <strong>Order: {{message.orderId}}</strong> , {{message.messageSent | date: 'short'}}
+            </div>
+            <div class="p-2" style="font-size: large;">
+                {{message.content}}
+            </div>
+        </div>
+    </div>
+    <div *ngIf="orderId && recipientId" class="col-12 col-md-6">
+        <h2>Order: {{orderId}}</h2>
+        <app-chat [orderId]='orderId' [recipientId]='recipientId'></app-chat>
+        <div *ngIf="order"> 
+            <table class="table border mt-3">
+                <tr>
+                    <td>Serial number</td>
+                    <td>Rent price</td>
+                    <td>Condition</td>
+                </tr>
+                <ng-container  *ngFor="let realProduct of order.realProducts">
+                    <tr class='real-product'
+                        routerLink='/product' [queryParams]='{id:realProduct.productId}'>
+                        <td>{{realProduct.serialNumber}}</td>
+                        <td>{{realProduct.rentPrice}}</td>
+                        <td>{{realProduct.condition}}</td>
+                    </tr>
+                </ng-container>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="recipient" class="col-12 col-md-3 text-center mt-3">
+        {{recipient.fullName}}
+        <strong>Contacts:</strong> 
+        <div class="p-2">
+            {{recipient.email}} 
+            <br>
+            {{recipient.phoneNumber}}
+        </div>
+    </div>
+    <div *ngIf="!orderId && !recipientId" class="col-12 col-md-6 text-center">
+        <div class="p-5 bg-light">
+            choise chat to start messaging
+        </div>
+    </div>
+</div>

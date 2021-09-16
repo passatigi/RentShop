@@ -36,7 +36,6 @@ import { AddRealProductComponent } from './admin/realProduct/add-real-product/ad
 import { RealProductFormComponent } from './admin/realProduct/real-product-form/real-product-form.component';
 import { EditRealProductsComponent } from './admin/product/edit-real-products/edit-real-products.component';
 import { EditRealProductComponent } from './admin/realProduct/edit-real-product/edit-real-product.component';
-import { ShoppingCartComponent } from './_cart/shopping-cart/shopping-cart.component';
 import { CartDetaisComponent } from './_cart/cart-detais/cart-detais.component';
 import { CardItemComponent } from './_cart/card-item/card-item.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -57,9 +56,15 @@ import { FixedPositionatedComponent } from './auxiliary-components/fixed-positio
 import { NgxDraggableDomModule } from 'ngx-draggable-dom';
 import { DeliverymanEditDayScheduleComponent } from './deliveryman/deliveryman-schedule/deliveryman-edit-day-schedule/deliveryman-edit-day-schedule.component';
 import { DeliveryListComponent } from './deliveryman/delivery-schedule/delivery-list/delivery-list.component';
+import { ChatComponent } from './chat/chat/chat.component';
+import { MessageListComponent } from './chat/message-list/message-list.component';
+import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { AddressEditComponent } from './profile/address-edit/address-edit.component';
+import { CategoryListComponent } from './_categories/category-list/category-list.component';
+import { SearchComponent } from './search/search.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -86,7 +91,6 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     RealProductFormComponent,
     EditRealProductsComponent,
     EditRealProductComponent,
-    ShoppingCartComponent,
     CartDetaisComponent,
     CardItemComponent,
     CalendarComponent,
@@ -101,10 +105,14 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     FixedPositionatedComponent,
     DeliverymanEditDayScheduleComponent,
     DeliveryListComponent,
+    ChatComponent,
+    MessageListComponent,
     ProfileComponent,
     AddressEditComponent,
     EditProfileComponent,
-    DeliveryListComponent
+    DeliveryListComponent,
+    CategoryListComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -126,7 +134,8 @@ import { AddressEditComponent } from './profile/address-edit/address-edit.compon
     FileUploadModule,
     TimepickerModule.forRoot(),
     ModalModule.forRoot(),
-    NgxDraggableDomModule
+    NgxDraggableDomModule,
+    CarouselModule.forRoot()
   ],
   exports: [
     NgxGalleryModule
