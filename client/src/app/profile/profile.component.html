@@ -23,19 +23,19 @@
                         <p *ngIf="addresses === null">
                             You don't have addresses
                         </p>
-                        <ul #scrollMe style="overflow: scroll; height:350px;" [scrollTop]="scrollMe.scrollHeight"
+                        <ul style="overflow: scroll; height:350px;"
                             class="chat">
                             <li *ngFor="let address of addresses">
                                 <div class="card-body row align-items-center">
-                                    <div class="col-3">
+                                    <div class="col-6">
                                         <p>{{address.country}}</p>
                                         <p>{{address.city}}</p>
                                         <p>{{address.houseAddress}}</p>
                                         <p>{{address.postalCode}}</p>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-6">
                                         <button class="btn btn-danger" type="submit" 
-                                            (click)="this.deleteAddress(address.id)">Delete Address</button>
+                                            (click)="deleteAddress(address.id)">Delete Address</button>
                                     </div>
                                 </div>
                             </li>
@@ -47,6 +47,6 @@
     </div>
 
     <div class="col-6">
-        <app-address-edit></app-address-edit>
+        <app-address-edit [addresses]='addresses'></app-address-edit>
     </div>
 </div>

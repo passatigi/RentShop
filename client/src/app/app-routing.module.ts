@@ -40,7 +40,6 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AdminGuard],
     children: [
-      {path: 'main', component: AdminComponent},
       {path: 'add-product', component: AddProductComponent},
       {path: 'edit-product', component: EditProductComponent},
     ]

@@ -1,40 +1,119 @@
-<div class="row mb-4" *ngIf="product">
-    <div style="margin-left: 40%; margin-bottom: 15px;">
-        <h3>{{product.name}}</h3>
-    </div>
-    <div class="col-2"></div>
-    <div class="col-3">
-        <div class="card">
-            <ngx-gallery 
-            [options]="galleryOptions" 
-            [images]="galleryImages" 
-            style="display: inline-block; margin-bottom: 20px;">
-            </ngx-gallery>
-        </div>
-    </div>
-    <div class="col-1"></div>
-    <div class="col-4">
-        <div>
-            <button routerLink="/admin/edit-product" [queryParams]="{'id': product.id}"
-                    type="button" class="btn btn-block btn-outline-danger" >Edit product</button>
-        </div>
-        <p>
-            <strong>Vendor: </strong>{{product.vendor}}
-        </p>
-        <p>
-            <strong>Description: </strong>{{product.description}}
-        </p>
-        <p>
-            <strong>Category name: </strong>{{product.categoryName}}
-        </p>
-        <div *ngFor='let feature of product.productFeatures'>
-            <p>
-                <strong>{{feature.name}}: </strong>{{feature.value}}
-            </p>
-        </div>
-        <div *ngFor='let realProduct of product.realProducts'>
-            <app-real-product-card [realProduct] = "realProduct" [product] = "product"></app-real-product-card>
-        </div>
+
+
+<ng-container  *ngIf="product"> 
+    <div  *appHasRole='["Admin"]' >
+        <button 
+                routerLink="/admin/edit-product" 
+                [queryParams]="{'id': product.id}"
+                type="button" 
+                class="btn btn-outline-danger p-2"
+                style="position: absolute; right: 10px; top:10vh; z-index: 30;" >Edit product</button>
     </div>
 
-</div>
+    <ng-container *appHasRole='["Customer"]'>
+        <div  *ngIf="!isScrolled">
+            <button (click)='scroll(target)'
+                    type="button" 
+                    class="btn btn-outline-primary"
+                    style="position: absolute; left: 10px; top:10vh; z-index: 30; opacity: 0.5;" >Rent it</button>
+        </div>
+    </ng-container>
+    
+
+    <div class="row" >
+        <div class="col-12 offset-lg-1 col-lg-4">
+            <div class="px-md-5 py-md-1" *ngIf="product.productImgsLinks.length > 0">
+                <div *ngIf="currentImage" class="p-0" style="height: 50vh;">
+                    <img src="{{currentImage}}" style="display: block; max-width: 100%; max-height: 100%; margin: 0 auto">
+                </div>
+
+                <div class="row">
+                    <div    class="col-3 p-0"
+                            *ngFor="let img of product.productImgsLinks">
+                        <img class="p-1"
+                            (click)='setPhoto(img)'
+                            src="{{img}}" 
+                            style="display: block; width: 100%; margin-top: 10%; cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="product.productImgsLinks.length === 0">
+                <img src="assets/orders.png" style="display: block; max-width: 100%; max-height: 100%; margin: 0 auto; opacity: 0.5;">
+            </div>
+        
+        </div>
+        <div class="col-12 col-lg-6">
+
+            <div class="p-2 mt-3">
+                <h2>{{product.name}}</h2>
+                <table class="table mt-4" style="font-size: 25px;"> 
+                    <tr>
+                        <td width="20%">
+                            Category
+                        </td>
+                        <td width="80%">
+                            {{product.categoryName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Vendor
+                        </td>
+                        <td>
+                            {{product.vendor}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Description
+                        </td>
+                        <td>
+                            {{product.description}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="p-2 mt-1">
+                <h2 >Features</h2>
+            </div>
+            
+            <table id="features-table" class="table p-2" >
+                <tr>
+                    <th style="width: 50%;">Feature</th>
+                    <th style="width: 50%;">Value</th>
+                </tr>
+                <tr *ngFor="let feature of product.productFeatures">
+                    <td>
+                        {{feature.name}}
+                    </td>
+                    <td>
+                            {{feature.value}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div>
+        <h3 class="p-4" style="background-color: #F8F9FA;">Rent product</h3>
+    </div>
+
+    <div class="m-2 row" #target>
+        
+        <div 
+            class="col-12 col-md-4 col-lg-3  p-1" 
+            *ngFor='let realProduct of product.realProducts'>
+
+            <div class="p-3 border">
+                <app-real-product-card 
+                class=""
+                [realProduct] = "realProduct" 
+                [product] = "product">
+                </app-real-product-card>
+            </div>
+        </div>
+    </div>
+    
+
+</ng-container>

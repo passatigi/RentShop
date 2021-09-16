@@ -27,6 +27,14 @@ namespace API.Controllers
         return Ok(dtos);
     }
 
+    [HttpGet("{categoryId}")]
+    public async Task<ActionResult<IEnumerable<CategoryDto>>> GetById(int categoryId)
+    {
+        var category = await _unitOfWork.CategoryRepository.GetCategoryAsync(categoryId);              
+        var dto = _mapper.Map<CategoryDto>(category);
+        return Ok(dto);
+    }
+
 
     [HttpPost]
     public async Task<ActionResult<CategoryDto>> AddCategory(CreateCategoryDto categoryDto)

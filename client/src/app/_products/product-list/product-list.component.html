@@ -11,12 +11,13 @@
 </div>
 <div class="row">
     <div    *ngFor="let product of products" 
-        class="p-2 border col-12 col-md-6 col-lg-4" 
-        style="cursor: pointer;"
-        routerLink='/product' [queryParams]='{id:product.id}'    
+        class="p-2  col-12 col-md-6 col-lg-4" 
         > 
 
-        <div>
+        <div class="p-2 border"
+            style="cursor: pointer;"
+            routerLink='/product' [queryParams]='{id:product.id}'    
+        >
             <div class="d-flex justify-content-center">
                 <div style="width: 250px; height: 250px;">
                     <img style="max-width: 250px; max-height: 250px;" class="p-2" src="{{product.imgUrl}}" alt="">

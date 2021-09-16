@@ -27,7 +27,7 @@
         <ng-container *ngFor="let order of orders" >
             <tr class="order-string" [ngClass]="isCompleted(order) ? 'delivery-completed' : ''" (click)='openInfo(order.id)'>
                 <td>{{order.id}}</td>
-                <td>{{order.status}}</td>
+                <td>{{order.status}} ({{ (order.requiredDate.toDateString() === date.toDateString() ? 'Deliver' : 'Return') }})</td>
                 <td>{{order.comments}}</td>
                 <td>{{order.customer.fullName}}</td>
                 <td>{{order.requiredDate.toDateString() === date.toDateString() ? order.shippedAdress : order.returnAdress}}</td>
@@ -68,7 +68,7 @@
                     <div style='font-size: 30px;'>
                         {{order.totalPrice}}
                     </div>
-                    <div *ngIf="!isCompleted(order)">
+                    <div *ngIf="isChangable(order)">
                         <button (click)='submitOrder(order)'
                                 type="button" class="btn btn-primary">
                             Submit

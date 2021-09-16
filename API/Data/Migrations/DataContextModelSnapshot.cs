@@ -16,7 +16,7 @@ namespace API.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("API.Entities.Address", b =>
@@ -26,7 +26,7 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AppUserId")
+                    b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -570,7 +570,9 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.AppUser", null)
                         .WithMany("Addresses")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Entities.AppUserRole", b =>
@@ -652,9 +654,9 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
                     b.HasOne("API.Entities.Order", "Order")
-                        .WithMany()
+                        .WithMany("Messages")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("API.Entities.AppUser", "Recipient")
@@ -840,6 +842,8 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Order", b =>
                 {
+                    b.Navigation("Messages");
+
                     b.Navigation("OrderProducts");
                 });
 

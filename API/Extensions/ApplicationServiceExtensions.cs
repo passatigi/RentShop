@@ -24,6 +24,9 @@ namespace API.Extensions
             
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            
+            //  services.AddDbContext<DataContext>(options =>
+            //    options.UseSqlite("Data Source=Database.db"));
 
             services.AddDbContext<DataContext>(options =>
             {

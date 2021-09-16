@@ -19,10 +19,10 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory([FromQuery] GetCategoryPageDto categoryPageDto)
+        [HttpGet("category/{id}")]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory(int id)
         {
-            return await _unitOfWork.ProductRepository.GetProductsByCategory(categoryPageDto.CategoryId);
+            return await _unitOfWork.ProductRepository.GetProductsByCategory(id);
         }
 
         [HttpGet("detail/{id}")]
