@@ -6,6 +6,9 @@ namespace API.Entities
     public class Order
     {
         public int Id { get; set; }
+
+        public double TotalPrice { get; set; }
+        
         public DateTime OrderDate { get; set; }
 
         public DateTime RequiredDate { get; set; }
@@ -15,16 +18,23 @@ namespace API.Entities
         public DateTime? ReturnDate { get; set; }
 
         public string Status { get; set; }
+
         public string Comments { get; set; }
 
         public int DeliverymanId { get; set; }
         public AppUser Deliveryman { get; set; }
 
+        public int DeliverymanReturnId { get; set; }
+        public AppUser DeliverymanReturn { get; set; }
+
         public int CustomerId { get; set; }
         public AppUser Customer { get; set; }
 
-        public string ShippedAdress { get; set; }
-        public string ReturnAdress { get; set; }
+        public int ShippedAddressId { get; set; }
+        public Address ShippedAddress { get; set; }
+
+        public int ReturnAddressId { get; set; }
+        public Address ReturnAddress { get; set; }
 
         public ICollection<OrderProduct> OrderProducts { get; set; }
         public ICollection<Message> Messages { get; set; }

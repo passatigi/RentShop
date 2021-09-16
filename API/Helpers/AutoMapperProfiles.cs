@@ -56,7 +56,7 @@ namespace API.Helpers
             CreateMap<Order, OrderDto>();
 
             CreateMap<OrderProduct, RealProductDto>()
-                // .ForMember(dest => dest.Id, opt => opt.MapFrom(f => f.RealProduct.Id))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(f => f.RealProduct.Id))
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(f => f.RealProduct.ProductId))
                 .ForMember(dest => dest.SerialNumber, opt => opt.MapFrom(f => f.RealProduct.SerialNumber))
                 .ForMember(dest => dest.Condition, opt => opt.MapFrom(f => f.RealProduct.Condition))
@@ -71,6 +71,8 @@ namespace API.Helpers
             CreateMap<DeliverymanSchedule, DeliverymanScheduleDto>();
 
             CreateMap<AppUser, UserDto>();
+
+            CreateMap<Address, AddressDto>();
 
             CreateMap<Order, OrderDto>()
                 .ForMember(dest => dest.RealProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.RealProduct)));

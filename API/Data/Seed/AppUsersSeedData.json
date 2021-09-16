@@ -40,5 +40,25 @@
     "UserName": "User",
     "Email": "customer@m",
     "PhoneNumber": "+375 29 222 23 23"
+  },
+  {
+    "FullName": "Anton",
+    "Addresses": [
+        {
+            "Country": "Belarus",
+            "City": "Minsk",
+            "HouseAddress": "street Lenina 1",
+            "PostalCode": "000007"
+        },
+        {
+            "Country": "Belarus",
+            "City": "Brest",
+            "HouseAddress": "street GG 23",
+            "PostalCode": "000001"
+        }
+    ],
+    "UserName": "anton",
+    "Email": "anton@gmail.com",
+    "PhoneNumber": "+375 29 111 11 11"
   }
 ]

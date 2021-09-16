@@ -14,14 +14,11 @@ namespace API.Entities
 
         public ICollection<Order> Orders { get; set; }
         public ICollection<Order> DeliverymanOrders { get; set; }
-
+        public ICollection<Order> DeliverymanReturnOrders { get; set; }
 
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }
 
         public ICollection<DeliverymanSchedule> DeliverymanShedules { get; set; }
-        public ICollection<DeliverySchedule> DeliverySchedules { get; set; }
-
-       // more collections later public ICollection<Address> Addresses { get; set; }
     }
 }

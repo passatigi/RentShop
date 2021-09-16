@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
-using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +15,6 @@ namespace API.Controllers
     public class OrderController : BaseApiController
     {
         private readonly DataContext _dataContext;
-
         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
@@ -64,11 +62,22 @@ namespace API.Controllers
             order.Status = "Avaiting delivery";
             order.DeliverymanId = 5;
 
+
+            var deliverymens = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == order.OrderDate.Date).ToListAsync();
+            if (deliverymens.Count == 0) return BadRequest("No delivery on start day");
+
+            var deliverymensReturn = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == order.OrderDate.Date).ToListAsync();
+            if (deliverymensReturn.Count == 0) return BadRequest("No delivery on last day");
+            
+            var rand = new Random();
+            order.DeliverymanId = deliverymens.ElementAt(rand.Next(0, deliverymens.Count - 1)).Id;
+            order.DeliverymanReturnId = deliverymensReturn.ElementAt(rand.Next(0, deliverymensReturn.Count - 1)).Id;
+
             _dataContext.Orders.Add(order);
 
-            await _dataContext.SaveChangesAsync();
+            if (await _dataContext.SaveChangesAsync() > 0) return Ok();
 
-            return Ok();
+            return BadRequest("An error occurred while adding an order. Try this later");
         }
 
         [HttpPut]
@@ -76,9 +85,9 @@ namespace API.Controllers
         {
             _dataContext.Entry(order).State = EntityState.Modified;
 
-            await _dataContext.SaveChangesAsync();
+            if (await _dataContext.SaveChangesAsync() > 0) return Ok();
 
-            return Ok();
+            return BadRequest("An error occurred while updating the order. Try this later");
         }
     }
 }

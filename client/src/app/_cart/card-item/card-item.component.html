@@ -1,96 +1,94 @@
-<div class="card mb-3" style="width: 100%;" *ngIf="show">
-    <p></p>
-    <div class="row mb-4">
-        <div class="col-3">
-            <img src="{{item.productImgLink}}" alt="{{item.name}}" class="card-img-top" style="object-fit:cover; height: 240px; width: 200px;">
-        </div>
+<div class="container-fluid " *ngIf='show'>
+    <div class="col d-flex justify-content-start card-strip">
+        <img class="comp-logo mr-4 mb-3" src="{{item.productImgLink}}">
 
-
-        <div class="col-3">
-            <div routerLink='/product' [queryParams]='{id:item.productId}'>
-                <h6>
-                    <strong>{{item.name}}</strong>
-                </h6>
+        <div class="info">
+            <div class="row px-3 mb-2">
+                <h4 class="dark-text mr-4" style="text-align: center;"><strong>{{item.name}}</strong></h4>
+                <p class="mt-1 mr-4 extended-title">{{item.serialNumber}}</p>
             </div>
-            <p>
-                <strong>Id: </strong>{{item.id}}
-            </p>
-            <p>
-                <strong>Vendor: </strong>{{item.vendor}}
-            </p>
-            <p>
-                <strong>Serial number: </strong>{{item.serialNumber}}
-            </p>
-            <p>
-                <strong>Condition: </strong>{{item.condition}}
-            </p>
-            <p>
-                <strong>Rent Price: {{item.rentPrice}}</strong>
-            </p>
-        </div>
-
-        <div class="col" style="margin-right: 2%;">
-            <div>
-                <button type="button" class="btn btn-info mt-4" (click)='remove()' >Delete</button>
+            <div class="row px-3">
+                <p class="mb-1"><span class="fa fa-clock-o"><strong>Vendor:</strong> {{item.vendor}}</span></p>
             </div>
+            <div class="row px-3">
+                <h6 class="green-block">{{item.condition}}</h6>
+            </div>
+        </div>
+        <div class="v-line ml-auto"></div>
+        <div class="price mt-3">
+            
+            <div class="row " style="text-align: center;">
+                <h6>Rent price</h6>
+                <h4 class="blue-text mr-2">$ {{item.rentPrice}}</h4>
+            </div>
+            <div class="btn btn-orange mt-2" 
+                (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" 
+                aria-controls="collapseBasic">Create order</div>
+            <div class="btn btn ml-4 mt-2" style="color: cadetblue;" 
+                (click)="remove()">Remove</div>
+        </div>
+    </div>
 
-            <button type="button" class="btn btn-primary mt-4" (click)="isCollapsed = !isCollapsed"
-                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Create Order
-            </button>
-            <p></p>
-            <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
-                <div class="well well-lg card card-block card-header">
-                    <form [formGroup]='myForm' (ngSubmit)="myForm.valid && addOrder()" autocomplete="off">
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" 
-                                    class="form-control mb-3" 
-                                    placeholder="First day" 
-                                    bsDatepicker formControlName="requiredDate" 
+    <div >
+        <div class="col card-strip" id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+            <div class="row well well-lg">
+                <div class="col-8">
+                    <div class="ml-5 mr-5">
+                        <form [formGroup]='myForm' (ngSubmit)="myForm.valid && addOrder()" autocomplete="off">
+                            <div class="mb-3">
+                                <input 
+                                    type="text" 
+                                    class="form-control"
+                                    [class.is-invalid]='myForm.controls.range.touched && myForm.controls.range.invalid'
+                                    placeholder="Daterangepicker" 
+                                    bsDaterangepicker formControlName="range"
                                     [minDate] = "minDate"
-                                    [datesDisabled]="disabledDates"/>
-                                    <div *ngIf="this.myForm.controls.requiredDate.invalid" class="invalid-feedback">qq</div>
-                                <p *ngIf="myForm.value.start" class="code-">{{myForm.value.start | date}}</p>
-
+                                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                                    [datesDisabled]="disabledDates" />
+                                    <div *ngIf="myForm.controls.range.errors?.required" class="invalid-feedback ml-2">
+                                        Please enter a lease
+                                    </div>
+                                    <div *ngIf = 'error' class="invalid-feedback ml-2">
+                                        {{error}}
+                                    </div>
                             </div>
-        
-                            <div class="col">
-                                <input type="text" 
-                                    class="form-control mb-3" 
-                                    preview   placeholder="Last day" 
-                                    bsDatepicker formControlName="requiredReturnDate"
-                                    [minDate] = "minDate"
-                                    [datesDisabled]="disabledDates"/>
-                                <p *ngIf="myForm.value.end" class="code-preview">{{myForm.value.end | date}}</p>
-                                <p *ngIf = "myForm.value.end">
-                                    {{myForm.errors}}
-                                </p>
-                                <div *ngIf="this.myForm.controls.requiredReturnDate.invalid" class="invalid-feedback">qq</div>
-                            </div>
-
-                            <app-text-input [formControl]='myForm.controls["shippedAdress"]' 
-                            [label]='"Shipped adress"'>
-                            </app-text-input>
-
-                            <app-text-input [formControl]='myForm.controls["returnAdress"]' 
-                            [label]='"Return adress"'>
-                            </app-text-input>
-
+    
+                            <select class="form-select mb-3" formControlName="shippedAddress">
+                                <option value="" disabled selected>Shipped address</option>
+                                <option *ngFor="let address of addresses" [ngValue]="address">
+                                    {{address.city}}, {{address.houseAddress}}, {{address.postalCode}}, {{address.country}}
+                                </option>
+                            </select> 
+    
+                            <select class="form-select mb-3" formControlName="returnAddress">
+                                <option value="" disabled selected>Return address</option>
+                                <option *ngFor="let address of addresses" [ngValue]="address">
+                                    {{address.city}}, {{address.houseAddress}}, {{address.postalCode}}, {{address.country}}
+                                </option>
+                            </select> 
+            
                             <app-text-input [formControl]='myForm.controls["comments"]' 
-                            [label]='"Comments"'>
+                                [label]='"Comments"'>
                             </app-text-input>
-
-                            <p>Form value: {{myForm.value | json}}</p>
-                            <p>Form: {{myForm.status}}</p>
-                            <div *ngIf = 'error'>{{error}}</div>
-
-                            <button [disabled]='!myForm.valid' class="btn btn-success mr-2" type="submit">Add order</button>
+    
+                            <button [disabled]='!myForm.valid' 
+                                class="btn btn-success mr-2" 
+                                type="submit"
+                                style="margin-left: 40%;">Add order</button>
+    
+                        </form>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="price" style="margin-left:35%; margin-top:25%" *ngIf='!daysIsNaN(countDays()) && countDays() != 0 && !myForm.controls.range.errors'>
+                        <p class="mb-0">Total price</p>
+                        <div class="row px-3">
+                            <h4 class="blue-text mr-2">$ {{item.rentPrice*countDays()}}</h4>
                         </div>
-
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

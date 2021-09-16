@@ -1,4 +1,12 @@
 
+<div class="container">
+    <div class="row">
+        <div class="col-4" *ngFor='let order of orders'>
+                <app-order-card [orderDto] = 'order'  style="margin-right: 0px;"></app-order-card>
+        </div>
+    </div>
+</div>
+
 <div class="container" *ngIf="orders?.length > 0">
     <div *ngFor='let order of orders'>
         <app-order-card [orderDto] = 'order'></app-order-card>
@@ -8,3 +16,4 @@
 <div class="container" *ngIf="orders.length == 0">
     <h1>You don't have any orders.</h1>
 </div>
+
