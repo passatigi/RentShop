@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Extensions;
+using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,10 @@ namespace API.Controllers
     public class MessageController : BaseApiController
     {
         private readonly IMapper _mapper;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly DataContext _dataContext;
 
-        public MessageController(UnitOfWork unitOfWork, IMapper mapper, DataContext dataContext)
+        public MessageController(IUnitOfWork unitOfWork, IMapper mapper, DataContext dataContext)
         {
             _dataContext = dataContext;
             _unitOfWork = unitOfWork;

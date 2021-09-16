@@ -7,6 +7,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,9 @@ namespace API.SignalR
     public class MessageHub : Hub
     {
         private readonly IMapper _mapper;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly DataContext _dataContext;
-        public MessageHub(UnitOfWork unitOfWork, IMapper mapper, DataContext dataContext)
+        public MessageHub(IUnitOfWork unitOfWork, IMapper mapper, DataContext dataContext)
         {
             _dataContext = dataContext;
             _unitOfWork = unitOfWork;

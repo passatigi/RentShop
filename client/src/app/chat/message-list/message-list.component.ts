@@ -45,10 +45,11 @@ export class MessageListComponent implements OnInit {
       (queryParam: any) => {
           this.orderId =  parseInt(queryParam['orderId']) ;
           this.recipientId = parseInt(queryParam['recipientId']);
+          console.log(this.orderId, this.recipientId)
+          this.getThreadInfo();
       });
 
-    console.log(this.orderId, this.recipientId)
-    this.getThreadInfo();
+    
   }
 
 
@@ -75,9 +76,10 @@ export class MessageListComponent implements OnInit {
   }
 
   getThreadInfo(){
-    this.messageService.getMessageThreadInfo(this.recipientId, this.orderId).subscribe((obj) => {
-      this.order = obj.order;
-      this.recipient = obj.recipient;
-    })
+    if(this.recipientId && this.orderId)
+      this.messageService.getMessageThreadInfo(this.recipientId, this.orderId).subscribe((obj) => {
+        this.order = obj.order;
+        this.recipient = obj.recipient;
+      })
   }
 }

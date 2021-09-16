@@ -14,20 +14,6 @@
     "PhoneNumber": "+375 29 234 23 23"
   },
   {
-    "FullName": "Alexei Putik",
-    "Addresses": [
-        {
-            "Country": "Belarus",
-            "City": "Minsk",
-            "HouseAddress": "street Pobeditelei 4 km",
-            "PostalCode": "240045"
-        }
-    ],
-    "UserName": "AlexeiPutik",
-    "Email": "alexeiputik@gmail.com",
-    "PhoneNumber": "+375 29 345 43 23"
-  },
-  {
     "FullName": "User",
     "Addresses": [
         {
