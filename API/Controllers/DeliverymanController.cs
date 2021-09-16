@@ -27,30 +27,23 @@ namespace API.Controllers
         public async Task<ActionResult> EditScheduleDay(DeliverymanScheduleDto deliverymanSheduleDto)
         {
             var userId = User.GetUserId();
-
-            var schedule = await _unitOfWork.DeliveryManRepository.GetDayScheduleAsync(
-                userId, deliverymanSheduleDto.StartDelivery
-            );
-
-            if (schedule == null)
+            var schedule =  await _unitOfWork.DeliveryManRepository.GetDayScheduleAsync(
+                userId, deliverymanSheduleDto.StartDelivery);
+            
+            if(schedule == null)
             {
-                schedule = new DeliverymanSchedule
-                {
-                    DeliverymanId = userId
-                };
+                schedule = new DeliverymanSchedule { 
+                    DeliverymanId = userId };
             }
 
-            _mapper.Map(deliverymanSheduleDto, schedule);
-            _unitOfWork.DeliveryManRepository.EditSchedule(schedule);
+            schedule.StartDelivery = deliverymanSheduleDto.StartDelivery;
+            schedule.EndDelivery = deliverymanSheduleDto.EndDelivery;
 
-            if (await _unitOfWork.Complete()) return Ok();
-
-            if (schedule.Id == 0)
-            {
+            if(schedule.Id == 0){
                 _unitOfWork.DeliveryManRepository.AddSchedule(schedule);
             }
-
-            if (await _unitOfWork.Complete()) return Ok();
+            
+            if (await _unitOfWork.Complete()) return Ok(schedule);
 
             return BadRequest("Failed to edit schedule");
         }
