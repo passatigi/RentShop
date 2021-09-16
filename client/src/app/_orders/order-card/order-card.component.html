@@ -68,6 +68,11 @@
                 </div>
             </ol>
             <div class="widget-49-meeting-action">
+                <a  routerLink="/messages" *appHasRole='["Admin"]' 
+                    [queryParams]="{'recipientId': orderDto.deliverymanId , 'orderId': orderDto.id}"
+                    class="btn btn-sm btn-flash-border-success">
+                    Edit order
+                </a>
                 <a  routerLink="/messages" 
                     [queryParams]="{'recipientId': orderDto.deliverymanId , 'orderId': orderDto.id}"
                     class="btn btn-sm btn-flash-border-success">
