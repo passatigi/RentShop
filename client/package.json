@@ -24,7 +24,7 @@
     "@kolkov/ngx-gallery": "^1.2.3",
     "@microsoft/signalr": "^5.0.9",
     "bootstrap": "^4.5.3",
-    "font-awesome": "^4.7.0",=
+    "font-awesome": "^4.7.0",
     "bootswatch": "^5.1.1",
     "moment": "^2.29.1",
     "ng2-file-upload": "^1.4.0",

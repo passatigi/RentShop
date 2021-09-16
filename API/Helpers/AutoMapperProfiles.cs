@@ -75,7 +75,7 @@ namespace API.Helpers
             CreateMap<Address, AddressDto>();
 
             CreateMap<Order, OrderDto>()
-                .ForMember(dest => dest.RealProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.RealProduct)));
+                .ForMember(dest => dest.OrderProducts, opt => opt.MapFrom(p => p.OrderProducts.Select(op => op.RealProduct)));
 
 
             CreateMap<Message, MessageDto>();

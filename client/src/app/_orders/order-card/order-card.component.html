@@ -1,104 +1,80 @@
 
-                <div class="card card-margin">
-                    <div class="card-header no-border">
-                        <h5 class="card-title">Order №{{orderDto.id}}</h5>
-                    </div>
-                    <div class="card-body pt-0">
-                        <div class="widget-49">
-                            <div class="widget-49-title-wrapper">
-                                <div class="widget-49-date-success">
-                                    <span class="widget-49-date-day">{{ orderDto.orderDate | date : 'd' }}</span>
-                                    <span class="widget-49-date-month">{{ orderDto.orderDate | date : 'MMM' }}</span>
-                                </div>
-                                <div class="widget-49-meeting-info">
-                                    <span class="widget-49-pro-title"><strong>{{product.name}}</strong></span>
-                                    <span class="widget-49-meeting-time">{{this.orderDto.orderProducts[0].serialNumber}}</span>
-                                </div>
-                            </div>
-                            <ol class="widget-49-meeting-points">
-                                <li class="widget-49-meeting-item">
-                                    <span>
-                                        <strong>Status: </strong>{{orderDto.status}}
-                                    </span>
-                                </li>
-                                <li class="widget-49-meeting-item">
-                                    <span>
-                                        <strong>Required date: </strong>{{ orderDto.requiredDate | date : 'yyyy-MM-dd' }}
-                                    </span>
-                                </li>
-                                <li class="widget-49-meeting-item">
-                                    <span>
-                                        <strong>Required return date: </strong>{{ orderDto.requiredReturnDate | date : 'yyyy-MM-dd' }}
-                                    </span>
-                                </li>
-
-
-                                <li class="widget-49-meeting-item">
-                                    <span>
-                                        <h6>
-                                            <strong>Total price: {{orderDto.totalPrice}}</strong>
-                                        </h6>
-                                    </span>
-                                </li>
-                                
-                                <li type="button" 
-                                    (click)="isCollapsed = !isCollapsed"
-                                    [attr.aria-expanded]="!isCollapsed" 
-                                    aria-controls="collapseBasic">More</li>
-                                <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
-                                        <ol class="widget-49-meeting-points" >
-                                            <li class="widget-49-meeting-item">
-                                                <span *ngIf ="orderDto.comments">
-                                                    <strong>Comments:</strong> {{orderDto.comments}}
-                                                </span>
-                                            </li>
-                                            <li class="widget-49-meeting-item">
-                                                <span>
-                                                    <strong>Shipped address: </strong>
-                                                    {{orderDto.shippedAddress.country}}, {{orderDto.shippedAddress.city}}, {{orderDto.shippedAddress.houseAddress}}, {{orderDto.shippedAddress.postalCode}}
-                                                </span>
-                                            </li>
-                                            <li class="widget-49-meeting-item">
-                                                <span>
-                                                    <strong>Return address: </strong>
-                                                    {{orderDto.returnAddress.country}}, {{orderDto.returnAddress.city}}, {{orderDto.returnAddress.houseAddress}}, {{orderDto.returnAddress.postalCode}}
-                                                </span>
-                                            </li>
-                                        </ol>
-                                </div>
-                            </ol>
-                            <div class="widget-49-meeting-action">
-                                <a href="#" class="btn btn-sm btn-flash-border-success">Click</a>
-                            </div>
-                        </div>
-                    </div>
+<div class="card card-margin" *ngIf="orderDto">
+    <div class="card-header no-border">
+        <h5 class="card-title">Order №{{orderDto.id}}</h5>
+    </div>
+    <div class="card-body pt-0">
+        <div class="widget-49">
+            <div class="widget-49-title-wrapper">
+                <div class="widget-49-date-success">
+                    <span class="widget-49-date-day">{{ orderDto.orderDate | date : 'd' }}</span>
+                    <span class="widget-49-date-month">{{ orderDto.orderDate | date : 'MMM' }}</span>
                 </div>
+                <div class="widget-49-meeting-info">
+                    <span *ngIf="product" class="widget-49-pro-title"><strong>{{product.name}}</strong></span>
+                    <span class="widget-49-meeting-time">{{this.orderDto.orderProducts[0].serialNumber}}</span>
+                </div>
+            </div>
+            <ol class="widget-49-meeting-points">
+                <li class="widget-49-meeting-item">
+                    <span>
+                        <strong>Status: </strong>{{orderDto.status}}
+                    </span>
+                </li>
+                <li class="widget-49-meeting-item">
+                    <span>
+                        <strong>Required date: </strong>{{ orderDto.requiredDate | date : 'yyyy-MM-dd' }}
+                    </span>
+                </li>
+                <li class="widget-49-meeting-item">
+                    <span>
+                        <strong>Required return date: </strong>{{ orderDto.requiredReturnDate | date : 'yyyy-MM-dd' }}
+                    </span>
+                </li>
 
-    <div class="card-body p-1">
-        <h5 class="card-title text-center mb-1">
-            <strong>Order number </strong>{{orderDto.id}}
-        </h5>
-        <p>
-            <strong>Order date: </strong>{{orderDto.orderDate}}
-        </p>
-        <p>
-            <strong>Required Date: </strong>{{orderDto.requiredDate}}
-        </p>
-        <p>
-            <strong>Status: </strong>{{orderDto.status}}
-        </p>
-        <p>
-            <strong>Comments: </strong>{{orderDto.comments}}
-        </p>
-        <div *ngFor = 'let product of orderDto.orderProducts'>
-            <p>
-                <strong>Serial number: </strong>{{product.serialNumber}}
-            </p>
+
+                <li class="widget-49-meeting-item">
+                    <span>
+                        <h6>
+                            <strong>Total price: {{orderDto.totalPrice}}</strong>
+                        </h6>
+                    </span>
+                </li>
+                
+                <li type="button" 
+                    (click)="isCollapsed = !isCollapsed"
+                    [attr.aria-expanded]="!isCollapsed" 
+                    aria-controls="collapseBasic">More</li>
+                <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+                        <ol class="widget-49-meeting-points" >
+                            <li class="widget-49-meeting-item">
+                                <span *ngIf ="orderDto.comments">
+                                    <strong>Comments:</strong> {{orderDto.comments}}
+                                </span>
+                            </li>
+                            <li class="widget-49-meeting-item">
+                                <span>
+                                    <strong>Shipped address: </strong>
+                                    {{orderDto.shippedAddress.country}}, {{orderDto.shippedAddress.city}}, {{orderDto.shippedAddress.houseAddress}}, {{orderDto.shippedAddress.postalCode}}
+                                </span>
+                            </li>
+                            <li class="widget-49-meeting-item">
+                                <span>
+                                    <strong>Return address: </strong>
+                                    {{orderDto.returnAddress.country}}, {{orderDto.returnAddress.city}}, {{orderDto.returnAddress.houseAddress}}, {{orderDto.returnAddress.postalCode}}
+                                </span>
+                            </li>
+                        </ol>
+                </div>
+            </ol>
+            <div class="widget-49-meeting-action">
+                <a  routerLink="/messages" 
+                    [queryParams]="{'recipientId': orderDto.deliverymanId , 'orderId': orderDto.id}"
+                    class="btn btn-sm btn-flash-border-success">
+                    Chat
+                </a>
+            </div>
         </div>
-        <button routerLink="/messages" 
-                [queryParams]="{'recipientId': orderDto.deliverymanId , 'orderId': orderDto.id}"
-
-        type="button" class="btn btn-outline-primary">Chat with deliveryman</button>
-    </div> 
+    </div>
 </div>
 

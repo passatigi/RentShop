@@ -47,6 +47,7 @@ namespace API.Controllers
             var order = await _dataContext.Orders
             .ProjectTo<OrderDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(u => u.Id == orderId);
+            
             if(order == null) return NotFound("Cannot find order");
 
             if(order.CustomerId == userId || order.DeliverymanId == userId || User.IsInRole("Admin")) {

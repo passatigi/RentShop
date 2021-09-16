@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210915192734_InitialCreate")]
+    [Migration("20210916112850_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int?>("AppUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -205,31 +205,6 @@ namespace API.Data.Migrations
                     b.ToTable("Connections");
                 });
 
-            modelBuilder.Entity("API.Entities.DeliverySchedule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DeliverymanId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("isShipping")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeliverymanId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("DeliverySchedules");
-                });
-
             modelBuilder.Entity("API.Entities.DeliverymanSchedule", b =>
                 {
                     b.Property<int>("Id")
@@ -341,6 +316,9 @@ namespace API.Data.Migrations
                     b.Property<int>("DeliverymanId")
                         .HasColumnType("int");
 
+                    b.Property<int>("DeliverymanReturnId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -350,14 +328,14 @@ namespace API.Data.Migrations
                     b.Property<DateTime>("RequiredReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ReturnAdress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ReturnAddressId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ShippedAdress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ShippedAddressId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ShippedDate")
                         .HasColumnType("datetime2");
@@ -365,11 +343,20 @@ namespace API.Data.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("DeliverymanId");
+
+                    b.HasIndex("DeliverymanReturnId");
+
+                    b.HasIndex("ReturnAddressId");
+
+                    b.HasIndex("ShippedAddressId");
 
                     b.ToTable("Orders");
                 });
@@ -572,9 +559,7 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.AppUser", null)
                         .WithMany("Addresses")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("API.Entities.AppUserRole", b =>
@@ -610,25 +595,6 @@ namespace API.Data.Migrations
                     b.HasOne("API.Entities.Group", null)
                         .WithMany("Connections")
                         .HasForeignKey("GroupName");
-                });
-
-            modelBuilder.Entity("API.Entities.DeliverySchedule", b =>
-                {
-                    b.HasOne("API.Entities.AppUser", "Deliveryman")
-                        .WithMany("DeliverySchedules")
-                        .HasForeignKey("DeliverymanId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Deliveryman");
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("API.Entities.DeliverymanSchedule", b =>
@@ -694,9 +660,33 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("API.Entities.AppUser", "DeliverymanReturn")
+                        .WithMany("DeliverymanReturnOrders")
+                        .HasForeignKey("DeliverymanReturnId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Address", "ReturnAddress")
+                        .WithMany("ReturnOrders")
+                        .HasForeignKey("ReturnAddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Address", "ShippedAddress")
+                        .WithMany("ShippedOrders")
+                        .HasForeignKey("ShippedAddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Customer");
 
                     b.Navigation("Deliveryman");
+
+                    b.Navigation("DeliverymanReturn");
+
+                    b.Navigation("ReturnAddress");
+
+                    b.Navigation("ShippedAddress");
                 });
 
             modelBuilder.Entity("API.Entities.OrderProduct", b =>
@@ -806,6 +796,13 @@ namespace API.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("API.Entities.Address", b =>
+                {
+                    b.Navigation("ReturnOrders");
+
+                    b.Navigation("ShippedOrders");
+                });
+
             modelBuilder.Entity("API.Entities.AppRole", b =>
                 {
                     b.Navigation("UserRoles");
@@ -817,9 +814,9 @@ namespace API.Data.Migrations
 
                     b.Navigation("DeliverymanOrders");
 
-                    b.Navigation("DeliverymanShedules");
+                    b.Navigation("DeliverymanReturnOrders");
 
-                    b.Navigation("DeliverySchedules");
+                    b.Navigation("DeliverymanShedules");
 
                     b.Navigation("MessagesReceived");
 
