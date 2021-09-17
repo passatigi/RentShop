@@ -118,7 +118,6 @@ export class CardItemComponent implements OnInit {
       requiredDate : this.myForm?.controls.range.value[0],
       requiredReturnDate : this.myForm?.controls.range.value[1],
       comments : this.myForm?.controls.comments?.value,
-      customerId : this.myForm?.controls.shippedAddress.value.appUserId,
       shippedAddressId : this.myForm?.controls.shippedAddress.value.id,
       returnAddressId : this.myForm?.controls.returnAddress.value.id,
       totalPrice : this.item.rentPrice * this.countDays()

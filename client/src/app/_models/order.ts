@@ -25,7 +25,7 @@ export interface Order {
     deliveryman?: User;
     deliverymanReturnId?: number;
     deliverymanReturn?: User;
-    customerId: number;
+    customerId?: number;
     customer?: User;
     
     orderProducts: RealProduct[];

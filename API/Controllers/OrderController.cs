@@ -62,20 +62,27 @@ namespace API.Controllers
             var order =  _mapper.Map<Order>(orderDto);
 
             order.OrderDate = DateTime.UtcNow;
-            order.Status = "Avaiting delivery";
-            order.DeliverymanId = 5;
+            order.Status = "Awaiting delivery";
             order.CustomerId = User.GetUserId();
 
 
-            var deliverymen = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == order.RequiredDate.Date).ToListAsync();
-            if (deliverymen.Count == 0) return BadRequest("No delivery on start day");
+            var deliverymenIds = await _dataContext.DeliverymanSchedules
+                    .Where(p => p.StartDelivery.Date == order.RequiredDate.Date)
+                    .Select(ds => ds.DeliverymanId)
+                    .ToListAsync();
+            if (deliverymenIds.Count == 0) return BadRequest("No delivery on start day");
 
-            var deliverymenReturn = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == order.RequiredReturnDate.Date).ToListAsync();
-            if (deliverymenReturn.Count == 0) return BadRequest("No delivery on last day");
+            var deliverymenReturnIds = await _dataContext.DeliverymanSchedules
+                .Where(p => p.StartDelivery.Date == order.RequiredReturnDate.Date)
+                .Select(ds => ds.DeliverymanId)
+                .ToListAsync();
+            if (deliverymenReturnIds.Count == 0) return BadRequest("No delivery on last day");
             
             var rand = new Random();
-            order.DeliverymanId = deliverymen.ElementAt(rand.Next(0, deliverymen.Count - 1)).Id;
-            order.DeliverymanReturnId = deliverymenReturn.ElementAt(rand.Next(0, deliverymenReturn.Count - 1)).Id;
+            order.DeliverymanId = deliverymenIds
+                .ElementAt(rand.Next(0, deliverymenIds.Count - 1));
+            order.DeliverymanReturnId = deliverymenReturnIds
+                .ElementAt(rand.Next(0, deliverymenReturnIds.Count - 1));
 
             
             _dataContext.Orders.Add(order);
