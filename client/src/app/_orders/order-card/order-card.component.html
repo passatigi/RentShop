@@ -1,34 +1,34 @@
 
-<div class="card card-margin" *ngIf="orderDto">
+<div class="card card-margin" *ngIf="order">
     <div class="card-header no-border">
-        <h5 class="card-title">Order №{{orderDto.id}}</h5>
+        <h5 class="card-title">Order №{{order.id}}</h5>
     </div>
     <div class="card-body pt-0">
         <div class="widget-49">
             <div class="widget-49-title-wrapper">
                 <div class="widget-49-date-success">
-                    <span class="widget-49-date-day">{{ orderDto.orderDate | date : 'd' }}</span>
-                    <span class="widget-49-date-month">{{ orderDto.orderDate | date : 'MMM' }}</span>
+                    <span class="widget-49-date-day">{{ order.orderDate | date : 'd' }}</span>
+                    <span class="widget-49-date-month">{{ order.orderDate | date : 'MMM' }}</span>
                 </div>
                 <div class="widget-49-meeting-info">
                     <span *ngIf="product" class="widget-49-pro-title"><strong>{{product.name}}</strong></span>
-                    <span class="widget-49-meeting-time">{{this.orderDto.orderProducts[0].serialNumber}}</span>
+                    <span class="widget-49-meeting-time">{{this.order.orderProducts[0].serialNumber}}</span>
                 </div>
             </div>
             <ol class="widget-49-meeting-points">
                 <li class="widget-49-meeting-item">
                     <span>
-                        <strong>Status: </strong>{{orderDto.status}}
+                        <strong>Status: </strong>{{order.status}}
                     </span>
                 </li>
                 <li class="widget-49-meeting-item">
                     <span>
-                        <strong>Required date: </strong>{{ orderDto.requiredDate | date : 'yyyy-MM-dd' }}
+                        <strong>Required date: </strong>{{ order.requiredDate | date : 'yyyy-MM-dd' }}
                     </span>
                 </li>
                 <li class="widget-49-meeting-item">
                     <span>
-                        <strong>Required return date: </strong>{{ orderDto.requiredReturnDate | date : 'yyyy-MM-dd' }}
+                        <strong>Required return date: </strong>{{ order.requiredReturnDate | date : 'yyyy-MM-dd' }}
                     </span>
                 </li>
 
@@ -36,7 +36,7 @@
                 <li class="widget-49-meeting-item">
                     <span>
                         <h6>
-                            <strong>Total price: {{orderDto.totalPrice}}</strong>
+                            <strong>Total price: {{order.totalPrice}}</strong>
                         </h6>
                     </span>
                 </li>
@@ -48,38 +48,38 @@
                 <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
                         <ol class="widget-49-meeting-points" >
                             <li class="widget-49-meeting-item">
-                                <span *ngIf ="orderDto.comments">
-                                    <strong>Comments:</strong> {{orderDto.comments}}
+                                <span *ngIf ="order.comments">
+                                    <strong>Comments:</strong> {{order.comments}}
                                 </span>
                             </li>
                             <li class="widget-49-meeting-item">
                                 <span>
                                     <strong>Shipped address: </strong>
-                                    {{orderDto.shippedAddress.country}}, {{orderDto.shippedAddress.city}}, {{orderDto.shippedAddress.houseAddress}}, {{orderDto.shippedAddress.postalCode}}
+                                    {{order.shippedAddress.country}}, {{order.shippedAddress.city}}, {{order.shippedAddress.houseAddress}}, {{order.shippedAddress.postalCode}}
                                 </span>
                             </li>
                             <li class="widget-49-meeting-item">
                                 <span>
                                     <strong>Return address: </strong>
-                                    {{orderDto.returnAddress.country}}, {{orderDto.returnAddress.city}}, {{orderDto.returnAddress.houseAddress}}, {{orderDto.returnAddress.postalCode}}
+                                    {{order.returnAddress.country}}, {{order.returnAddress.city}}, {{order.returnAddress.houseAddress}}, {{order.returnAddress.postalCode}}
                                 </span>
                             </li>
                         </ol>
                 </div>
             </ol>
             <div class="widget-49-meeting-action">
-                <a  routerLink="/messages" *appHasRole='["Admin"]' 
-                    [queryParams]="{'recipientId': orderDto.deliverymanId , 'orderId': orderDto.id}"
+                <a  *appHasRole='["Admin"]' 
+                    (click)='edit()'
                     class="btn btn-sm btn-flash-border-success">
                     Edit order
                 </a>
                 <a  routerLink="/messages" 
-                    [queryParams]="{'recipientId': orderDto.deliverymanId , 'orderId': orderDto.id}"
+                    [queryParams]="{'recipientId': order.deliverymanId , 'orderId': order.id}"
                     class="btn btn-sm btn-flash-border-success">
                     Chat with delivery deliveryman
                 </a>
                 <a  routerLink="/messages" 
-                    [queryParams]="{'recipientId': orderDto.deliverymanReturnId , 'orderId': orderDto.id}"
+                    [queryParams]="{'recipientId': order.deliverymanReturnId , 'orderId': order.id}"
                     class="btn btn-sm btn-flash-border-success">
                     Chat with return deliveryman
                 </a>

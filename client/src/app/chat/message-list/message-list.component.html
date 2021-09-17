@@ -42,7 +42,7 @@
             {{recipient.phoneNumber}}
         </div>
         <div *ngIf="order">
-            <app-order-card [orderDto]='order'></app-order-card>
+            <app-order-card [order]='order'></app-order-card>
         </div>
     </div>
     <div *ngIf="!orderId && !recipientId" class="col-12 col-md-6 text-center">

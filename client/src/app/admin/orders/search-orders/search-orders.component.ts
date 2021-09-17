@@ -9,6 +9,7 @@ import { OrderService } from 'src/app/_services/order.service';
 })
 export class SearchOrdersComponent implements OnInit {
   orders: Order[] = [];
+  orderEdit?: Order;
 
   constructor(private orderService: OrderService) { }
 
@@ -20,6 +21,10 @@ export class SearchOrdersComponent implements OnInit {
     this.orderService.getOrdersBySearchString(searchString).subscribe((orders) => {
       this.orders = <Order[]>orders;
     })
+  }
+
+  updateOrder(orderId: number){
+    this.orderEdit = this.orders.filter(x => x.id === orderId)[0];
   }
 
 }

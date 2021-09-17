@@ -66,6 +66,7 @@ import { CategoryListComponent } from './_categories/category-list/category-list
 import { SearchComponent } from './search/search.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { SearchOrdersComponent } from './admin/orders/search-orders/search-orders.component';
+import { UpdateOrderComponent } from './admin/orders/update-order/update-order.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { SearchOrdersComponent } from './admin/orders/search-orders/search-order
     DeliveryListComponent,
     CategoryListComponent,
     SearchComponent,
-    SearchOrdersComponent
+    SearchOrdersComponent,
+    UpdateOrderComponent
   ],
   imports: [
     BrowserModule,
