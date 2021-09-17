@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, Self} from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Address } from 'src/app/_models/address';
 import { CartItem } from 'src/app/_models/cartItem';
 import { Order } from 'src/app/_models/order';
@@ -36,7 +38,9 @@ export class CardItemComponent implements OnInit {
     private dateService: DateService,
     private formBuilder: FormBuilder,
     private orderService: OrderService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private toastr: ToastrService,
+    private router: Router
     ) {}
 
   ngOnInit(): void {
@@ -124,7 +128,11 @@ export class CardItemComponent implements OnInit {
     }
 
     this.orderService.addOrder(newOrder).subscribe((res: Response) => {
+      this.toastr.success("Order successfully added!");
       this.remove();
+      if(this.selectProductService.length == 0){
+        this.router.navigateByUrl('orders');
+      }
     },
     (error) => {
       console.log(error.error)
