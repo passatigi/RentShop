@@ -34,7 +34,8 @@ namespace API.Controllers
                 .FromSqlRaw(
                 "SELECT * from [dbo].[Messages] " + 
                 "where Id = any (SELECT MAX(Id) FROM [dbo].[Messages] " + 
-                $" Where [SenderId] = {userId} or [RecipientId] = {userId} GROUP by [OrderId] ) ")
+                $" Where [SenderId] = {userId} or [RecipientId] = {userId} GROUP by [OrderId] )")
+                .OrderByDescending(m => m.MessageSent)
                 .ToListAsync();
 
             return Ok(messages);    

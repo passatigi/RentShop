@@ -20,6 +20,7 @@ import { StopHubConnectionGuard } from './_guards/stop-hub-connection.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { SearchComponent } from './search/search.component';
+import { SearchOrdersComponent } from './admin/orders/search-orders/search-orders.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
     children: [
       {path: 'add-product', component: AddProductComponent},
       {path: 'edit-product', component: EditProductComponent},
+      {path: 'orders', component: SearchOrdersComponent}
     ]
   },
   {

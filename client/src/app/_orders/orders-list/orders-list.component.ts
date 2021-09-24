@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderDto } from 'src/app/_models/orderDto';
+import { Order } from 'src/app/_models/order';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { OrderService } from 'src/app/_services/order.service';
@@ -11,7 +11,7 @@ import { OrderService } from 'src/app/_services/order.service';
 })
 export class OrdersListComponent implements OnInit {
 
-  orders: OrderDto[] = [];
+  orders: Order[] = [];
 
   user: User;
 

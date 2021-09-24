@@ -34,11 +34,11 @@ namespace API.Data.Repositories
         {
             var messages = _dataContext.Messages
             .Where(
-                m => m.OrderId == orderId &&
-                m.RecipientId == currentId
+                m => m.OrderId == orderId 
+                && (m.RecipientId == currentId
                 && m.SenderId == recipientId
                 || m.RecipientId == recipientId
-                && m.SenderId == currentId
+                && m.SenderId == currentId)
             ).AsQueryable();
 
             var unreadMessages = messages.Where(m => m.isRead == false && m.RecipientId == currentId)

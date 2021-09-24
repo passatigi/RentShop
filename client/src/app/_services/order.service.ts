@@ -1,8 +1,8 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateOrder } from '../_models/createOrder';
-import { OrderDto } from '../_models/orderDto';
+
+import { Order } from '../_models/order';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,15 @@ export class OrderService {
   }
 
   getOrdersByUserId(userId: number){
-    return this.http.get<OrderDto[]>(this.baseUrl + 'order/list/' + userId)
+    return this.http.get<Order[]>(this.baseUrl + 'order/list/' + userId)
+  }
+
+  getOrdersBySearchString(searchString: string){
+    return this.http.get<Order[]>(this.baseUrl + 'adminhelper/search-orders/' + searchString)
   }
 
 
-  addOrder(order: CreateOrder){
+  addOrder(order: Order){
     return this.http.post(this.baseUrl + 'order/new', order)
   }
 }

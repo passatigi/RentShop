@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
@@ -56,23 +57,34 @@ namespace API.Controllers
         }
 
         [HttpPost("new")]
-        public async Task<ActionResult> AddOrder(Order order)
+        public async Task<ActionResult> AddOrder(OrderDto orderDto)
         {
+            var order =  _mapper.Map<Order>(orderDto);
+
             order.OrderDate = DateTime.UtcNow;
-            order.Status = "Avaiting delivery";
-            order.DeliverymanId = 5;
+            order.Status = "Awaiting delivery";
+            order.CustomerId = User.GetUserId();
 
 
-            var deliverymens = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == order.OrderDate.Date).ToListAsync();
-            if (deliverymens.Count == 0) return BadRequest("No delivery on start day");
+            var deliverymenIds = await _dataContext.DeliverymanSchedules
+                    .Where(p => p.StartDelivery.Date == order.RequiredDate.Date)
+                    .Select(ds => ds.DeliverymanId)
+                    .ToListAsync();
+            if (deliverymenIds.Count == 0) return BadRequest("No delivery on start day");
 
-            var deliverymensReturn = await _dataContext.DeliverymanSchedules.Where(p => p.StartDelivery.Date == order.OrderDate.Date).ToListAsync();
-            if (deliverymensReturn.Count == 0) return BadRequest("No delivery on last day");
+            var deliverymenReturnIds = await _dataContext.DeliverymanSchedules
+                .Where(p => p.StartDelivery.Date == order.RequiredReturnDate.Date)
+                .Select(ds => ds.DeliverymanId)
+                .ToListAsync();
+            if (deliverymenReturnIds.Count == 0) return BadRequest("No delivery on last day");
             
             var rand = new Random();
-            order.DeliverymanId = deliverymens.ElementAt(rand.Next(0, deliverymens.Count - 1)).Id;
-            order.DeliverymanReturnId = deliverymensReturn.ElementAt(rand.Next(0, deliverymensReturn.Count - 1)).Id;
+            order.DeliverymanId = deliverymenIds
+                .ElementAt(rand.Next(0, deliverymenIds.Count - 1));
+            order.DeliverymanReturnId = deliverymenReturnIds
+                .ElementAt(rand.Next(0, deliverymenReturnIds.Count - 1));
 
+            
             _dataContext.Orders.Add(order);
 
             if (await _dataContext.SaveChangesAsync() > 0) return Ok();

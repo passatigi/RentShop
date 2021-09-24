@@ -30,7 +30,7 @@
                 <td>{{order.status}} ({{ (order.requiredDate.toDateString() === date.toDateString() ? 'Deliver' : 'Return') }})</td>
                 <td>{{order.comments}}</td>
                 <td>{{order.customer.fullName}}</td>
-                <td>{{order.requiredDate.toDateString() === date.toDateString() ? order.shippedAdress : order.returnAdress}}</td>
+                <td>{{order.requiredDate.toDateString() === date.toDateString() ? order.shippedAddress.houseAddress : order.returnAddress.houseAddress}}</td>
                 <td class="">
                     {{isCompleted(order) ? '+' : '-'}}
                 </td>
@@ -43,7 +43,7 @@
                             <td>Rent price</td>
                             <td>Condition</td>
                         </tr>
-                        <ng-container  *ngFor="let realProduct of order.realProducts">
+                        <ng-container  *ngFor="let realProduct of order.orderProducts">
                             <tr class='real-product'
                                 routerLink='/product' [queryParams]='{id:realProduct.productId}'>
                                 <td>{{realProduct.serialNumber}}</td>

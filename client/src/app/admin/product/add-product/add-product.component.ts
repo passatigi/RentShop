@@ -1,4 +1,6 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminProduct } from 'src/app/_models/adminModels/adminProduct';
 import { AdminProductFeature } from 'src/app/_models/adminModels/adminProductFeature';
@@ -23,7 +25,7 @@ export class AddProductComponent implements OnInit {
 
   constructor(private helperService: AdminHelperService, private toastr: ToastrService, 
     
-    public devHelp: DeveloperHelpService) { }
+    public devHelp: DeveloperHelpService, private router: Router) { }
 
   ngOnInit(): void {
     this.newProduct.productFeatures = [];
@@ -42,13 +44,19 @@ export class AddProductComponent implements OnInit {
   }
 
   addNewProduct(){
+    if(!this.newProduct.categoryId){
+      this.toastr.info("Set product category")
+      return;
+    }
+    if(!this.newProduct.name){
+      this.toastr.info("Set product name")
+      return;
+    }
     console.log(this.newProduct)
     this.helperService.addProduct(this.newProduct).subscribe((id) => {
       this.isSuccessfullyAdded = true;
-      if(this.newProduct)
-        this.newProduct.id = <number>id;
-      console.log(id)
-      this.toastr.success("Product successfully added!")
+      this.toastr.success("Product successfully added!");
+      this.router.navigateByUrl('/admin/edit-product?id=' + id);
     })
   }
 

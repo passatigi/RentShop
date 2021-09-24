@@ -78,6 +78,7 @@ export class MessageListComponent implements OnInit {
   getThreadInfo(){
     if(this.recipientId && this.orderId)
       this.messageService.getMessageThreadInfo(this.recipientId, this.orderId).subscribe((obj) => {
+        console.log(obj)
         this.order = obj.order;
         this.recipient = obj.recipient;
       })

@@ -55,9 +55,13 @@
             </li>
             
             <ng-container *ngIf="accountService.currentUser$ | async">
-            <li class="nav-item" *appHasRole='["Admin", "Customer"]'>
+            <li class="nav-item" *appHasRole='["Customer"]'>
               <a  tooltip="Orders" placement="bottom"
               class="nav-link" href="/orders"><img class="nav-img" src="assets/orders.png" alt="Orders"></a>
+            </li>
+            <li class="nav-item" *appHasRole='["Admin"]'>
+              <a  tooltip="Orders" placement="bottom"
+              class="nav-link" href="/admin/orders"><img class="nav-img" src="assets/orders.png" alt="Orders"></a>
             </li>
             <li class="nav-item mobile-collapsed">
               <a tooltip="Messages" placement="bottom"

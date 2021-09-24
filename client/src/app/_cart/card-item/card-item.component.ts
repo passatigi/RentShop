@@ -1,9 +1,11 @@
 import { Component, Input, OnInit, Self} from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Address } from 'src/app/_models/address';
 import { CartItem } from 'src/app/_models/cartItem';
-import { CreateOrder } from 'src/app/_models/createOrder';
-import { OrderProduct } from 'src/app/_models/orderProduct';
+import { Order } from 'src/app/_models/order';
+import { RealProduct } from 'src/app/_models/realProduct';
 import { Segment } from 'src/app/_models/segment';
 import { AccountService } from 'src/app/_services/account.service';
 import { DateService } from 'src/app/_services/date.service';
@@ -36,7 +38,9 @@ export class CardItemComponent implements OnInit {
     private dateService: DateService,
     private formBuilder: FormBuilder,
     private orderService: OrderService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private toastr: ToastrService,
+    private router: Router
     ) {}
 
   ngOnInit(): void {
@@ -107,25 +111,28 @@ export class CardItemComponent implements OnInit {
   }
 
   addOrder(){
-    let orderProducts: OrderProduct[] = [];
-    let orderProduct: OrderProduct = {
-      realProductId: this.item.id
+    let orderProducts: RealProduct[] = [];
+    let orderProduct: RealProduct = {
+      id: this.item.id
     }
     orderProducts.push(orderProduct);
 
-    let newOrder: CreateOrder = {
+    let newOrder: Order = {
       orderProducts : orderProducts,
       requiredDate : this.myForm?.controls.range.value[0],
       requiredReturnDate : this.myForm?.controls.range.value[1],
       comments : this.myForm?.controls.comments?.value,
-      customerId : this.myForm?.controls.shippedAddress.value.appUserId,
       shippedAddressId : this.myForm?.controls.shippedAddress.value.id,
       returnAddressId : this.myForm?.controls.returnAddress.value.id,
       totalPrice : this.item.rentPrice * this.countDays()
     }
 
     this.orderService.addOrder(newOrder).subscribe((res: Response) => {
+      this.toastr.success("Order successfully added!");
       this.remove();
+      if(this.selectProductService.length == 0){
+        this.router.navigateByUrl('orders');
+      }
     },
     (error) => {
       console.log(error.error)

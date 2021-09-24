@@ -35,7 +35,9 @@ export class DeliveryListComponent implements OnInit {
       this.date.setHours(15, 0, 0);
 
       this.deliveryService.getDeliveryList(this.date).subscribe((list) => {
-        this.getTotalPrices(list);
+        for (const order of list) {
+          this.changeStringsToDates(order);
+        }
         this.orders = list;
         console.log(this.orders);
         
@@ -56,17 +58,7 @@ export class DeliveryListComponent implements OnInit {
     }
   }
 
-  getTotalPrices(orders: Order[]){
-    for (const order of orders) {
-      this.changeStringsToDates(order);
-      const diffDays = Math.round(Math.abs((order.requiredReturnDate.getTime() - order.requiredDate.getTime()) / this.oneDay));
-      let dayPrice = 0;
-      for (const product of order.realProducts) {
-        dayPrice += product.rentPrice;
-      }
-      order.totalPrice = dayPrice * diffDays;
-    }
-  }
+
 
   openInfo(orderId: number){
     let el = this.document.getElementById("hidden-info-" + orderId);

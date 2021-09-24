@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { CreateCategory } from '../_models/createCategory';
+
 import { Category } from '../_models/category';
 
 
@@ -21,7 +21,7 @@ export class CategoryService {
     return this.http.get<Category>(this.baseUrl + 'category/' + categoryId);
   }
 
-  addCategory(createCategory: CreateCategory){
+  addCategory(createCategory: Category){
     return this.http.post(this.baseUrl + 'category', createCategory);
   }
 

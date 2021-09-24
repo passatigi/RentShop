@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RealProductSchedule } from '../_models/realproductschedule';
+import { RealProductSchedule } from '../_models/realProductSchedule';
 
 @Injectable({
   providedIn: 'root'
